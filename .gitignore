@@ -1,0 +1,57 @@
+# ---- 构建产物 ----
+target/
+build-verify/
+build-verify-*/
+out/
+*.class
+
+# 依赖 classpath 导出文件（由 mvn dependency:build-classpath 生成）
+cp.txt
+
+# ---- 运行时数据（绝不提交）----
+# 本地运行产生的日志、会话数据、资源缓存与自制内容
+build/server-profiles/
+build/asset-cache/
+build/custom-cdn/
+logs/
+*.log
+
+# 本地配置（含数据库连接串与密码）
+config.json
+application-local.yml
+application-local.properties
+.env
+.env.*
+
+# 数据库与转储
+*.db
+*.sqlite
+*.sqlite3
+*.sql.gz
+*.dump
+
+# 抓包、密钥与证书
+capture/
+*.pcap
+*.pcapng
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+# ---- IDE / 编辑器 ----
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+*.swp
+
+# ---- 操作系统 ----
+.DS_Store
+Thumbs.db
+desktop.ini

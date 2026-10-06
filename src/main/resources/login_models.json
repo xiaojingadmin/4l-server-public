@@ -1,0 +1,87 @@
+{
+ "CommonGetHeaderAnnounsResponse": [
+  "AnnounceType",
+  "DHeaderAnnouncementsId",
+  "Text",
+  "TransitionScene",
+  "TransitionValue"
+ ],
+ "ConnectRequest": [
+  "IdToken",
+  "PlatformType",
+  "PlayerId",
+  "Provider"
+ ],
+ "ConnectResponse": [
+  "DeviceSpecificId",
+  "PlayerId",
+  "PlayerLevel",
+  "PlayerName",
+  "SessionToken"
+ ],
+ "HomeGetHomeResponse": [
+  "BeginnerMissionStatus",
+  "ExpiredLimitedGachaTicketIdConfirmList",
+  "FinishedSimpleTutorialList",
+  "HasDailyTicket",
+  "HasGrandPrixPlayableCount",
+  "HighlightedBadgeInfo",
+  "IsFinishTutorial",
+  "IsFirstHome",
+  "IsLoginBonus",
+  "IsNotWatchedAdvFromCurrentSeason",
+  "LatestNewsId",
+  "MembershipPendingList",
+  "MembershipUpdateConfirmList",
+  "PlanList",
+  "ProfileInfo",
+  "QuestQuitInfo",
+  "RefundCode",
+  "StandardQuestAreasId",
+  "StandardQuestStagesId"
+ ],
+ "RegisterApproveTermsRequest": [
+  "PlatformType"
+ ],
+ "RegisterApproveTermsResponse": [
+  "DeviceSpecificId",
+  "PlayerId",
+  "SessionToken",
+  "Type"
+ ],
+ "RegisterGetTermsResponse": [
+  "Terms"
+ ],
+ "RegisterSetNewUserRequest": [
+  "Name",
+  "PlatformType"
+ ],
+ "RegisterSetNewUserResponse": [
+  "DeviceSpecificId",
+  "PlayerId",
+  "SessionToken"
+ ],
+ "RegisterSetUserDataRequest": [
+  "Name"
+ ],
+ "RegisterSetUserDataResponse": [
+  "Result"
+ ],
+ "UserLoginRequest": [
+  "DeviceSpecificId",
+  "PlayerId",
+  "_Version"
+ ],
+ "UserLoginResponse": [
+  "IsLoginBonusReceive",
+  "IsTermUpdate",
+  "IsTutorial",
+  "ItemStoreProductIdList",
+  "MembershipProductIdList",
+  "PushDeviceToken",
+  "SessionToken",
+  "SiscaProductIdList",
+  "TutorialsStatusList",
+  "Type"
+ ]
+}

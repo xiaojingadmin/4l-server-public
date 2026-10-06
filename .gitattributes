@@ -1,0 +1,23 @@
+# 统一按 LF 存储，避免 Windows/Linux 之间的行尾差异污染 diff。
+* text=auto eol=lf
+
+# 二进制资源不要做行尾转换。
+*.jar binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.ttf binary
+*.otf binary
+
+# 生成的资源目录较大，diff 无意义。
+src/main/resources/client_defaults/*.json -diff
+src/main/resources/wire_models.json -diff
+src/main/resources/model_fields.json -diff
+
+# 协议与主表数据用 UTF-8。
+*.java text working-tree-encoding=UTF-8
+*.json text working-tree-encoding=UTF-8
+*.sql text working-tree-encoding=UTF-8
+*.yml text working-tree-encoding=UTF-8

@@ -1,0 +1,455 @@
+{
+ "AccountApi": [
+  "AccountConnectWithHttpInfo",
+  "AccountDeleteConnectDataWithHttpInfo",
+  "AccountDeleteWithHttpInfo",
+  "AccountGetConnectDataWithHttpInfo",
+  "AccountGetConnectUserWithHttpInfo",
+  "AccountSetConnectDataWithHttpInfo"
+ ],
+ "ActivityRecordApi": [
+  "ActivityRecordGetTopWithHttpInfo",
+  "ActivityRecordNotifyMonthDisplayedWithHttpInfo",
+  "ActivityRecordPlayAdvDataWithHttpInfo",
+  "ActivityRecordSetWatchableStatusWithHttpInfo"
+ ],
+ "AnnounceApi": [
+  "AnnounceDetailWithHttpInfo",
+  "AnnouncesListWithHttpInfo"
+ ],
+ "ArchiveApi": [
+  "ArchiveGetArchiveListWithHttpInfo",
+  "ArchiveGetChannelListWithHttpInfo",
+  "ArchiveGetChannelMovieListWithHttpInfo",
+  "ArchiveGetFesArchiveDataWithHttpInfo",
+  "ArchiveGetFesTimelineDataWithHttpInfo",
+  "ArchiveGetHomeWithHttpInfo",
+  "ArchiveGetRankingListWithHttpInfo",
+  "ArchiveGetSeasonListWithHttpInfo",
+  "ArchiveGetWithArchiveDataWithHttpInfo",
+  "ArchiveGetWithStationDataWithHttpInfo",
+  "ArchiveGetWithStationListWithHttpInfo",
+  "ArchiveSetCancelRecommendChannelWithHttpInfo",
+  "ArchiveSetFesCameraWithHttpInfo",
+  "ArchiveSetPurchaseTicketWithHttpInfo",
+  "ArchiveSetRecommendChannelWithHttpInfo",
+  "ArchiveWithliveGiftWithHttpInfo",
+  "ArchiveWithliveInfoWithHttpInfo",
+  "ArchiveWithlivePrizeWithHttpInfo",
+  "ArchiveWithliveStarsPostWithHttpInfo"
+ ],
+ "BoxEventApi": [
+  "BoxEventGetTopInfoWithHttpInfo",
+  "BoxEventSetDropBoxWithHttpInfo",
+  "BoxEventSetSpecialRewardWithHttpInfo"
+ ],
+ "CardApi": [
+  "CardGetDisplayDataWithHttpInfo",
+  "CardSetDisplayDataWithHttpInfo"
+ ],
+ "ChapterPointApi": [
+  "ChapterCategoryInfoWithHttpInfo",
+  "ChapterClaimPointRewardWithHttpInfo",
+  "ChapterGetPointRewardsListWithHttpInfo",
+  "ChapterGetPointRewardsWithHttpInfo",
+  "ChapterHomeWithHttpInfo",
+  "ChapterReceiveWithHttpInfo"
+ ],
+ "CircleApi": [
+  "CircleGetChatLogListWithHttpInfo",
+  "CircleGetDetailWithHttpInfo",
+  "CircleGetInfoWithHttpInfo",
+  "CircleGetInviteAndJoinInfoWithHttpInfo",
+  "CircleGetInviteListWithHttpInfo",
+  "CircleGetListWithHttpInfo",
+  "CircleSetApproveInviteWithHttpInfo",
+  "CircleSetApproveJoinWithHttpInfo",
+  "CircleSetCancelInviteWithHttpInfo",
+  "CircleSetCancelJoinWithHttpInfo",
+  "CircleSetChatMessageWithHttpInfo",
+  "CircleSetCreateWithHttpInfo",
+  "CircleSetDismissalWithHttpInfo",
+  "CircleSetDissolutionWithHttpInfo",
+  "CircleSetDonationWithHttpInfo",
+  "CircleSetExpulsionWithHttpInfo",
+  "CircleSetInviteWithHttpInfo",
+  "CircleSetItemRequestWithHttpInfo",
+  "CircleSetJoinWithHttpInfo",
+  "CircleSetOutWithHttpInfo",
+  "CircleSetPositionWithHttpInfo",
+  "CircleSetRejectInviteWithHttpInfo",
+  "CircleSetRejectJoinWithHttpInfo",
+  "CircleSetSettingWithHttpInfo",
+  "CircleSetTransferLeaderWithHttpInfo",
+  "CircleTopGetInfoWithHttpInfo"
+ ],
+ "CollectionApi": [
+  "CollectionGetCharacterInfoWithHttpInfo",
+  "CollectionGetEmojiListWithHttpInfo",
+  "CollectionGetGallaryListWithHttpInfo",
+  "CollectionGetMusicListWithHttpInfo",
+  "CollectionGetStickerListWithHttpInfo",
+  "CollectionSetGallaryDataWithHttpInfo",
+  "CollectionSetMusicPlayWithHttpInfo"
+ ],
+ "CommonApi": [
+  "CommonGetHeaderAnnounsWithHttpInfo"
+ ],
+ "FesliveApi": [
+  "FesliveCircleChatCommentWithHttpInfo",
+  "FesliveClapWithHttpInfo",
+  "FesliveCommentWithHttpInfo",
+  "FesliveConnectTokenWithHttpInfo",
+  "FesliveEnqueteWithHttpInfo",
+  "FesliveEnterWithHttpInfo",
+  "FesliveGetGiftShopListWithHttpInfo",
+  "FesliveGetListWithHttpInfo",
+  "FesliveGiftPtRankingsWithHttpInfo",
+  "FesliveGiftWithHttpInfo",
+  "FesliveGrandPrixRankingWithHttpInfo",
+  "FesliveLiveAnnouncementWithHttpInfo",
+  "FesliveLiveInfoWithHttpInfo",
+  "FesliveLiveSubinfoWithHttpInfo",
+  "FesliveLobbyAnnouncementWithHttpInfo",
+  "FesliveLobbyCommentWithHttpInfo",
+  "FesliveLobbyGiftWithHttpInfo",
+  "FesliveLobbyInfoWithHttpInfo",
+  "FesliveLobbyMessageCardWithHttpInfo",
+  "FesliveLobbySubinfoWithHttpInfo",
+  "FesliveLobbyWithHttpInfo",
+  "FesliveMessageCardWithHttpInfo",
+  "FesliveOutQuestLiveRankingWithHttpInfo",
+  "FeslivePenlightColorWithHttpInfo",
+  "FeslivePrizeWithHttpInfo",
+  "FesliveSetCameraWithHttpInfo",
+  "FesliveSetFlowerStandWithHttpInfo",
+  "FesliveSetPrizeWithHttpInfo"
+ ],
+ "FollowApi": [
+  "FollowGetFollowerListWithHttpInfo",
+  "FollowGetListWithHttpInfo",
+  "FollowLiveChatGroupListWithHttpInfo",
+  "FollowRecommendListWithHttpInfo",
+  "FollowSearchIdWithHttpInfo",
+  "FollowSetFollowWithHttpInfo",
+  "FollowSetFriendCardWithHttpInfo"
+ ],
+ "FriendApi": [
+  "FriendGetListWithHttpInfo",
+  "FriendGetRequestListWithHttpInfo",
+  "FriendSearchNameWithHttpInfo",
+  "FriendSearchPlayersIdWithHttpInfo",
+  "FriendSearchRecommendWithHttpInfo",
+  "FriendSetApprovalRequestAllWithHttpInfo",
+  "FriendSetApprovalRequestWithHttpInfo",
+  "FriendSetBreakOffWithHttpInfo",
+  "FriendSetRefuseRequestAllWithHttpInfo",
+  "FriendSetRequestCancelWithHttpInfo",
+  "FriendSetRequestWithHttpInfo",
+  "FriendUpdateRequestViewHistoryWithHttpInfo"
+ ],
+ "GachaApi": [
+  "GachaConfirmTicketExpiredTimeWithHttpInfo",
+  "GachaGetExchangeCardHavingListWithHttpInfo",
+  "GachaGetGuaranteePointListWithHttpInfo",
+  "GachaGetHistoryWithHttpInfo",
+  "GachaGetSeriesListWithHttpInfo",
+  "GachaSetGuaranteePointExchangeWithHttpInfo",
+  "GachaSetPrizeReceiveWithHttpInfo",
+  "GachaSetPurchaseWithHttpInfo",
+  "GachaSetSelectTicketExchangeWithHttpInfo"
+ ],
+ "GachaWebApi": [
+  "GachaGetExchangeCardListWithHttpInfo",
+  "GachaGetLotteryChanceWithHttpInfo"
+ ],
+ "GiftShopApi": [
+  "GiftShopSetPurchaseWithHttpInfo"
+ ],
+ "GpPrizeExchangeApi": [
+  "GpPrizeExchangeGetListWithHttpInfo",
+  "GpPrizeExchangeSetPurchaseWithHttpInfo"
+ ],
+ "HomeApi": [
+  "HomeGetCustomSettingWithHttpInfo",
+  "HomeGetHomeWithHttpInfo",
+  "HomeGetLoginBonusWithHttpInfo",
+  "HomeGetWallpaperSettingWithHttpInfo",
+  "HomeNotifyWallpaperSettingWithHttpInfo",
+  "HomeSetClockSettingWithHttpInfo",
+  "HomeSetCurrentWallpaperSettingWithHttpInfo",
+  "HomeSetShowRetireWithHttpInfo",
+  "HomeSetWallpaperSettingWithHttpInfo"
+ ],
+ "InQuestLiveApi": [
+  "InQuestLiveGetLiveInfoWithHttpInfo",
+  "InQuestLiveSetFinishWithHttpInfo",
+  "InQuestLiveSetRetireWithHttpInfo",
+  "InQuestLiveSetStartWithHttpInfo",
+  "InQuestLiveSkipQuestWithHttpInfo"
+ ],
+ "ItemExchangeApi": [
+  "ItemExchangeGetLimitBreakMaterialConvertListWithHttpInfo",
+  "ItemExchangeGetListNewWithHttpInfo",
+  "ItemExchangeGetListWithHttpInfo",
+  "ItemExchangeSetLimitBreakMaterialConvertWithHttpInfo",
+  "ItemExchangeSetPurchaseWithHttpInfo"
+ ],
+ "ItemStoreApi": [
+  "ItemStoreGetListWithHttpInfo"
+ ],
+ "JewelShopApi": [
+  "JewelShopGetBirthdayWithHttpInfo",
+  "JewelShopGetListWithHttpInfo",
+  "JewelShopGetMembershipListWithHttpInfo",
+  "JewelShopSetBirthdayWithHttpInfo",
+  "JewelShopSetMembershipPurchaseWithHttpInfo",
+  "JewelShopSetPurchaseWithHttpInfo"
+ ],
+ "MissionApi": [
+  "BeginnerMissionGetListWithHttpInfo",
+  "BeginnerMissionSetBannerRewardWithHttpInfo",
+  "BeginnerMissionSetRewardAllWithHttpInfo",
+  "BeginnerMissionSetRewardWithHttpInfo",
+  "MissionGetListWithHttpInfo",
+  "MissionReceiveCommonMissionRewardWithHttpInfo",
+  "StepUpBeginnerMissionGetListWithHttpInfo",
+  "StepUpBeginnerMissionSetRewardWithHttpInfo"
+ ],
+ "OutQuestLiveApi": [
+  "OutQuestLiveGetAreaSelectWithHttpInfo",
+  "OutQuestLiveGetClearStatusListWithHttpInfo",
+  "OutQuestLiveGetLiveSettingWithHttpInfo",
+  "OutQuestLiveGetPlayReportWithHttpInfo",
+  "OutQuestLiveGetQuestListWithHttpInfo",
+  "OutQuestLiveGetQuestTopWithHttpInfo",
+  "OutQuestLiveGetResultWithHttpInfo",
+  "OutQuestLiveGetStageDataWithHttpInfo",
+  "OutQuestLiveGetStageSelectWithHttpInfo",
+  "OutQuestLiveGetStaminaRecoveryInfoWithHttpInfo",
+  "OutQuestLiveRecoveryStaminaWithHttpInfo",
+  "OutQuestLiveSetLiveSettingWithHttpInfo",
+  "SetAreaSelectViewHistWithHttpInfo"
+ ],
+ "OutQuestLiveDailyApi": [
+  "OutQuestLiveDailyGetRecoveryChallengeCountWithHttpInfo",
+  "OutQuestLiveDailyGetReleaseTicketWithHttpInfo",
+  "OutQuestLiveDailyGetStageDataWithHttpInfo",
+  "OutQuestLiveDailyGetStageListWithHttpInfo",
+  "OutQuestLiveDailyGetStageSelectWithHttpInfo",
+  "OutQuestLiveDailyRecoveryChallengeCountWithHttpInfo",
+  "OutQuestLiveDailySetReleaseWithHttpInfo"
+ ],
+ "OutQuestLiveDreamApi": [
+  "OutQuestLiveDreamGetMemberSelectWithHttpInfo",
+  "OutQuestLiveDreamGetResultWithHttpInfo",
+  "OutQuestLiveDreamNotifyMemberReleaseConfirmWithHttpInfo",
+  "OutQuestLiveDreamSetCardWithHttpInfo"
+ ],
+ "OutQuestLiveGradeApi": [
+  "OutQuestLiveGradeGetLiveListWithHttpInfo",
+  "OutQuestLiveGradeGetQuestListWithHttpInfo",
+  "OutQuestLiveGradeGetRankListWithHttpInfo",
+  "OutQuestLiveGradeGetRankingListWithHttpInfo",
+  "OutQuestLiveGradeGetResultWithHttpInfo",
+  "OutQuestLiveGradeGetStageDataWithHttpInfo",
+  "OutQuestLiveGradeGetStageListWithHttpInfo",
+  "OutQuestLiveGradeSetQuestActionWithHttpInfo",
+  "OutQuestLiveGradeSetQuestAddSkillWithHttpInfo",
+  "OutQuestLiveGradeSetQuestRetireWithHttpInfo",
+  "OutQuestLiveGradeSetQuestStartWithHttpInfo",
+  "OutQuestLiveGradeSetRewardWithHttpInfo"
+ ],
+ "OutQuestLiveGradeChallengeApi": [
+  "OutQuestLiveGradeChallengeGetQuestListWithHttpInfo",
+  "OutQuestLiveGradeChallengeGetRankingListWithHttpInfo",
+  "OutQuestLiveGradeChallengeGetResultWithHttpInfo"
+ ],
+ "OutQuestLiveGrandPrixApi": [
+  "OutQuestLiveGrandPrixGetHistoryWithHttpInfo",
+  "OutQuestLiveGrandPrixGetRankingListWithHttpInfo",
+  "OutQuestLiveGrandPrixGetResultWithHttpInfo",
+  "OutQuestLiveGrandPrixGetStageDataWithHttpInfo",
+  "OutQuestLiveGrandPrixGetStageListWithHttpInfo",
+  "OutQuestLiveGrandPrixGetStageSelectWithHttpInfo",
+  "OutQuestLiveGrandPrixGetTopInfoWithHttpInfo"
+ ],
+ "OutQuestLiveMusicLearningApi": [
+  "OutQuestLiveMusicLearningGetMusicSelectWithHttpInfo",
+  "OutQuestLiveMusicLearningGetResultWithHttpInfo",
+  "OutQuestLiveMusicLearningSetMusicWithHttpInfo"
+ ],
+ "OutQuestLiveRaidEventApi": [
+  "OutQuestLiveRaidEventGetResultWithHttpInfo",
+  "OutQuestLiveRaidEventGetStageDataWithHttpInfo",
+  "OutQuestLiveRaidEventGetStageListWithHttpInfo",
+  "OutQuestLiveRaidEventGetStaminaRecoveryInfoWithHttpInfo",
+  "OutQuestLiveRaidEventGetTopInfoWithHttpInfo",
+  "OutQuestLiveRaidEventGetUserDreamsWithHttpInfo",
+  "OutQuestLiveRaidEventRecoveryStaminaWithHttpInfo",
+  "OutQuestLiveRaidEventSetJoinMessageWithHttpInfo",
+  "OutQuestLiveRaidEventSetRewardWithHttpInfo",
+  "OutQuestLiveRaidEventSetUserDreamWithHttpInfo"
+ ],
+ "PetalExchangeApi": [
+  "PetalExchangeGetListWithHttpInfo",
+  "PetalExchangeSetPurchaseWithHttpInfo"
+ ],
+ "PresentBoxApi": [
+  "PresentBoxGetHistoryWithHttpInfo",
+  "PresentBoxGetListWithHttpInfo",
+  "PresentBoxItemDetailWithHttpInfo",
+  "PresentBoxSetItemAllWithHttpInfo",
+  "PresentBoxSetItemWithHttpInfo"
+ ],
+ "ProfileApi": [
+  "ProfileDeleteMyDesignWithHttpInfo",
+  "ProfileGetFanLevelInfoWithHttpInfo",
+  "ProfileGetFanLevelRankingWithHttpInfo",
+  "ProfileGetInfoWithHttpInfo",
+  "ProfileGetMuteListWithHttpInfo",
+  "ProfileGetMyDesignCardListWithHttpInfo",
+  "ProfileGetMyDesignIconListWithHttpInfo",
+  "ProfileGetMyDesignIconWithHttpInfo",
+  "ProfileGetProfileCardWithHttpInfo",
+  "ProfileGetProfileIconWithHttpInfo",
+  "ProfileSetBirthdayWithHttpInfo",
+  "ProfileSetCommentWithHttpInfo",
+  "ProfileSetMuteCancelWithHttpInfo",
+  "ProfileSetMuteWithHttpInfo",
+  "ProfileSetMyDesignCardWithHttpInfo",
+  "ProfileSetMyDesignIconWithHttpInfo",
+  "ProfileSetMyDesignNameWithHttpInfo",
+  "ProfileSetNameWithHttpInfo",
+  "ProfileSetProfileCardWithHttpInfo",
+  "ProfileSetProfileIconWithHttpInfo",
+  "ProfileSetReportWithHttpInfo",
+  "ProfileUseFanLevelPointStocksWithHttpInfo"
+ ],
+ "RegisterApi": [
+  "RegisterApproveTermsWithHttpInfo",
+  "RegisterGetTermsWithHttpInfo",
+  "RegisterSetApproveTermsWithHttpInfo",
+  "RegisterSetNewUserWithHttpInfo",
+  "RegisterSetUserDataWithHttpInfo"
+ ],
+ "RhythmGameApi": [
+  "RhythmGameHomeWithHttpInfo",
+  "RhythmGameReceiveClassMissionWithHttpInfo",
+  "RhythmGameReceiveTotalMissionWithHttpInfo",
+  "RhythmGameSetMusicWithHttpInfo"
+ ],
+ "RhythmGameDeckApi": [
+  "RhythmGameDeckModifyDeckListWithHttpInfo",
+  "RhythmGameDeckSetDeckNameWithHttpInfo",
+  "RhythmGameDeckSetResetDeckWithHttpInfo"
+ ],
+ "RhythmGameGrandPrixApi": [
+  "RhythmGameGrandPrixSetCenterWithHttpInfo",
+  "RhythmGameGrandPrixSetDeckWithHttpInfo",
+  "RhythmGameGrandPrixSetFinishLiveWithHttpInfo",
+  "RhythmGameGrandPrixSetPositionWithHttpInfo",
+  "RhythmGameGrandPrixSetResetWithHttpInfo",
+  "RhythmGameGrandPrixSetRetireLiveWithHttpInfo",
+  "RhythmGameGrandPrixSetStartLiveWithHttpInfo",
+  "RhythmGameGrandPrixTopWithHttpInfo"
+ ],
+ "RhythmGameLiveApi": [
+  "RhythmGameLiveSetFinishWithHttpInfo",
+  "RhythmGameLiveSetRetireWithHttpInfo",
+  "RhythmGameLiveSetStartWithHttpInfo"
+ ],
+ "SelectTicketExchangeApi": [
+  "SelectTicketExchangeGetListWithHttpInfo"
+ ],
+ "SerialCodeApi": [
+  "SerialCodeSetExchangeWithHttpInfo"
+ ],
+ "ShopApi": [
+  "ShopCheckPurchaseWithHttpInfo",
+  "ShopGetListWithHttpInfo"
+ ],
+ "SiscaStoreApi": [
+  "SiscaStoreGetListWithHttpInfo",
+  "SiscaStoreSetPurchaseWithHttpInfo"
+ ],
+ "StickerExchangeApi": [
+  "StickerExchangeGetListWithHttpInfo",
+  "StickerExchangeSetPurchaseWithHttpInfo"
+ ],
+ "TutorialApi": [
+  "TutorialSetStepWithHttpInfo"
+ ],
+ "UserApi": [
+  "UserCardCheckEvolutionWithHttpInfo",
+  "UserCardCheckLimitBreakWithHttpInfo",
+  "UserCardCheckSkillLevelUpWithHttpInfo",
+  "UserCardCheckStyleLevelUpWithHttpInfo",
+  "UserCardEvolutionWithHttpInfo",
+  "UserCardGetDetailRentalWithHttpInfo",
+  "UserCardGetDetailWithHttpInfo",
+  "UserCardGetListWithHttpInfo",
+  "UserCardLimitBreakWithHttpInfo",
+  "UserCardRhythmGameSkillLevelUpWithHttpInfo",
+  "UserCardSkillLevelUpWithHttpInfo",
+  "UserCardStyleLevelUpWithHttpInfo",
+  "UserDeckGetCardListWithHttpInfo",
+  "UserDeckGetListWithHttpInfo",
+  "UserDeckModifyDeckListWithHttpInfo",
+  "UserDeckNotifyAutoDeckWithHttpInfo",
+  "UserDeckRemoveSideStyleWithHttpInfo",
+  "UserDeckSetCopyDeckWithHttpInfo",
+  "UserDeckSetDeckWithHttpInfo",
+  "UserDeckSetDeleteDeckWithHttpInfo",
+  "UserDeckSetPositionWithHttpInfo",
+  "UserDeckSetSideStyleWithHttpInfo",
+  "UserItemGetDetailWithHttpInfo",
+  "UserItemGetListWithHttpInfo",
+  "UserJewelGetHistoryWithHttpInfo",
+  "UserLoginWithHttpInfo",
+  "UserPushDevicePutWithHttpInfo",
+  "UserPushDevicesPostWithHttpInfo",
+  "UserSetContentsReleaseEffectHistoryWithHttpInfo",
+  "UserSetSimpleTutorialFinishWithHttpInfo"
+ ],
+ "WebviewApi": [
+  "WebviewGachaGetDetailWithHttpInfo",
+  "WebviewGachaGetSelectCardListWithHttpInfo",
+  "WebviewSchoolIdolConnectPostGetThemeListWithHttpInfo",
+  "WebviewShopMembershipPerkDetailWithHttpInfo"
+ ],
+ "WebviewLiveApi": [
+  "WebviewLiveEnterWithHttpInfo",
+  "WebviewLiveLiveInfoWithHttpInfo",
+  "WebviewLiveLoginWithHttpInfo"
+ ],
+ "WithliveApi": [
+  "WithliveCommentWithHttpInfo",
+  "WithliveConnectTokenWithHttpInfo",
+  "WithliveEnqueteAnswerWithHttpInfo",
+  "WithliveEnterWithHttpInfo",
+  "WithliveGetGiftShopListWithHttpInfo",
+  "WithliveGetListWithHttpInfo",
+  "WithliveGiftPtRankingsWithHttpInfo",
+  "WithliveGiftWithHttpInfo",
+  "WithliveLiveInfoWithHttpInfo",
+  "WithliveLiveSubinfoWithHttpInfo",
+  "WithliveMessageCardWithHttpInfo",
+  "WithlivePrizeWithHttpInfo",
+  "WithliveResultRankingWithHttpInfo",
+  "WithliveSetStarWithHttpInfo"
+ ],
+ "WithstationApi": [
+  "WithstationCommentWithHttpInfo",
+  "WithstationGetGiftShopListWithHttpInfo",
+  "WithstationGiftPtRankingsWithHttpInfo",
+  "WithstationGiftWithHttpInfo",
+  "WithstationLiveInfoWithHttpInfo",
+  "WithstationLiveSubinfoWithHttpInfo",
+  "WithstationMessageCardWithHttpInfo",
+  "WithstationPrizeWithHttpInfo",
+  "WithstationResultRankingWithHttpInfo",
+  "WithstationSetStarWithHttpInfo",
+  "WithstationWithstationInfoWithHttpInfo"
+ ]
+}

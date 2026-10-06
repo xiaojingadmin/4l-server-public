@@ -1,0 +1,67 @@
+server:
+  port: ${LINKLIKE_PORT:8081}
+  shutdown: graceful
+  tomcat:
+    connection-timeout: 30s
+    threads:
+      max: 64
+
+spring:
+  application:
+    name: linklike-server
+  datasource:
+    # 也接受 Python 版格式的 mysql://user:pass@host:port/db（见 DatabaseUrlSupport）。
+    url: ${LINKLIKE_DATABASE_URL:jdbc:mariadb://127.0.0.1:3306/linkura_5_1_0}
+    username: ${LINKLIKE_DATABASE_USER:root}
+    password: ${LINKLIKE_DATABASE_PASSWORD:}
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      maximum-pool-size: 16
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+          batch_size: 100
+        order_inserts: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+  jackson:
+    default-property-inclusion: always
+    serialization:
+      write-dates-as-timestamps: false
+      fail-on-empty-beans: false
+
+linklike:
+  # "off" 表示不校验 X-Api-Key；设置后请求必须匹配，否则 401。
+  api-key: ${LINKLIKE_API_KEY:off}
+  # true 时强制所有 /v1 接口（登录除外）必须带有效 Bearer。
+  require-bearer: ${LINKLIKE_REQUIRE_BEARER:false}
+  client-version: "5.1.0"
+  # 下发给客户端的资源版本；被自制内容覆盖时会替换（见 CustomContentService）。
+  resource-version: "R2604100@BFrkfPQkJ9JM6RLSZCpOYoDTYA=="
+  # 每个请求写一份 JSON 日志到 logs 目录，便于对照客户端行为排查。
+  log-requests: ${LINKLIKE_LOG_REQUESTS:true}
+  log-dir: ${LINKLIKE_LOG_DIR:build/server-profiles/5.1.0/logs}
+  # 本地没有可核实来源的数据（表情 / 会员贴图 / 社团赛事名）按需向官方 API 读取。
+  # enabled=false 时全部返回空值，不访问外网。
+  official-api:
+    enabled: ${LINKLIKE_OFFICIAL_API:false}
+    player-id: ""
+    device-id: ""
+    proxy: ""
+    cache-seconds: 600
+    retry-seconds: 60
+    timeout-seconds: 20
+
+logging:
+  level:
+    root: INFO
+    com.linklike.server: INFO
+    org.hibernate.SQL: WARN

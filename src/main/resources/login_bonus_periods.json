@@ -1,0 +1,158 @@
+{
+  "source": "Upstream 5.1.0 /v1/home/get_login_bonus response captured 2026-09-09 12:05:18 (capture/20260909-120518-c0a2f0.json) for a freshly registered account; per-account is_get/is_now_get flags removed.",
+  "login_bonus_list": [],
+  "event_login_bonus_list": [
+    {
+      "login_bonus_id": 201001,
+      "name": "スタートダッシュログインボーナス",
+      "file_name": "",
+      "start_time": "2022-12-31T15:00:00Z",
+      "end_time": "2035-12-31T14:59:59Z",
+      "show_order": 0,
+      "datas": [
+        {
+          "count": 1,
+          "file_name": "3009000",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 1日目のプレゼントです。",
+              "amount": 2,
+              "reward_type": 3,
+              "reward_id": 3009000
+            }
+          ]
+        },
+        {
+          "count": 2,
+          "file_name": "3009000",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 2日目のプレゼントです。",
+              "amount": 1,
+              "reward_type": 3,
+              "reward_id": 3009000
+            }
+          ]
+        },
+        {
+          "count": 3,
+          "file_name": "3009000",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 3日目のプレゼントです。",
+              "amount": 1,
+              "reward_type": 3,
+              "reward_id": 3009000
+            }
+          ]
+        },
+        {
+          "count": 4,
+          "file_name": "3009000",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 4日目のプレゼントです。",
+              "amount": 1,
+              "reward_type": 3,
+              "reward_id": 3009000
+            }
+          ]
+        },
+        {
+          "count": 5,
+          "file_name": "3009000",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 5日目のプレゼントです。",
+              "amount": 1,
+              "reward_type": 3,
+              "reward_id": 3009000
+            }
+          ]
+        },
+        {
+          "count": 6,
+          "file_name": "3009000",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 6日目のプレゼントです。",
+              "amount": 1,
+              "reward_type": 3,
+              "reward_id": 3009000
+            }
+          ]
+        },
+        {
+          "count": 7,
+          "file_name": "3009000",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 7日目のプレゼントです。",
+              "amount": 1,
+              "reward_type": 3,
+              "reward_id": 3009000
+            }
+          ]
+        },
+        {
+          "count": 8,
+          "file_name": "3009000",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 8日目のプレゼントです。",
+              "amount": 3,
+              "reward_type": 3,
+              "reward_id": 3009000
+            }
+          ]
+        },
+        {
+          "count": 9,
+          "file_name": "10224060",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 9日目のプレゼントです。",
+              "amount": 1,
+              "reward_type": 2,
+              "reward_id": 10224060
+            }
+          ]
+        },
+        {
+          "count": 10,
+          "file_name": "10325040",
+          "rewards": [
+            {
+              "name": "WELCOME TO LINK！LIKE！LOVELIVE！スペシャルログインボーナス 10日目のプレゼントです。",
+              "amount": 1,
+              "reward_type": 2,
+              "reward_id": 10325040
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "login_bonus_id": 201064,
+      "name": "映画公開記念プレゼント！",
+      "file_name": "",
+      "start_time": "2026-05-08T03:00:00Z",
+      "end_time": "2035-12-31T14:59:59Z",
+      "show_order": 0,
+      "datas": [
+        {
+          "count": 1,
+          "file_name": "19534010",
+          "rewards": [
+            {
+              "name": "映画公開記念プレゼントです。",
+              "amount": 1,
+              "reward_type": 2,
+              "reward_id": 19534010
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,317 @@
+[
+  {
+    "id": 31,
+    "rarity": 3,
+    "price": 1,
+    "exchange_limit_lower": 1,
+    "exchange_limit_upper": 25
+  },
+  {
+    "id": 32,
+    "rarity": 3,
+    "price": 2,
+    "exchange_limit_lower": 26,
+    "exchange_limit_upper": 50
+  },
+  {
+    "id": 33,
+    "rarity": 3,
+    "price": 3,
+    "exchange_limit_lower": 51,
+    "exchange_limit_upper": 75
+  },
+  {
+    "id": 34,
+    "rarity": 3,
+    "price": 4,
+    "exchange_limit_lower": 76,
+    "exchange_limit_upper": 100
+  },
+  {
+    "id": 35,
+    "rarity": 3,
+    "price": 5,
+    "exchange_limit_lower": 101,
+    "exchange_limit_upper": 9999
+  },
+  {
+    "id": 41,
+    "rarity": 4,
+    "price": 1,
+    "exchange_limit_lower": 1,
+    "exchange_limit_upper": 25
+  },
+  {
+    "id": 42,
+    "rarity": 4,
+    "price": 2,
+    "exchange_limit_lower": 26,
+    "exchange_limit_upper": 50
+  },
+  {
+    "id": 43,
+    "rarity": 4,
+    "price": 3,
+    "exchange_limit_lower": 51,
+    "exchange_limit_upper": 75
+  },
+  {
+    "id": 44,
+    "rarity": 4,
+    "price": 4,
+    "exchange_limit_lower": 76,
+    "exchange_limit_upper": 100
+  },
+  {
+    "id": 45,
+    "rarity": 4,
+    "price": 5,
+    "exchange_limit_lower": 101,
+    "exchange_limit_upper": 9999
+  },
+  {
+    "id": 51,
+    "rarity": 5,
+    "price": 1,
+    "exchange_limit_lower": 1,
+    "exchange_limit_upper": 25
+  },
+  {
+    "id": 52,
+    "rarity": 5,
+    "price": 2,
+    "exchange_limit_lower": 26,
+    "exchange_limit_upper": 50
+  },
+  {
+    "id": 53,
+    "rarity": 5,
+    "price": 3,
+    "exchange_limit_lower": 51,
+    "exchange_limit_upper": 75
+  },
+  {
+    "id": 54,
+    "rarity": 5,
+    "price": 4,
+    "exchange_limit_lower": 76,
+    "exchange_limit_upper": 100
+  },
+  {
+    "id": 55,
+    "rarity": 5,
+    "price": 5,
+    "exchange_limit_lower": 101,
+    "exchange_limit_upper": 9999
+  },
+  {
+    "id": 71,
+    "rarity": 7,
+    "price": 1,
+    "exchange_limit_lower": 1,
+    "exchange_limit_upper": 25
+  },
+  {
+    "id": 72,
+    "rarity": 7,
+    "price": 2,
+    "exchange_limit_lower": 26,
+    "exchange_limit_upper": 50
+  },
+  {
+    "id": 73,
+    "rarity": 7,
+    "price": 3,
+    "exchange_limit_lower": 51,
+    "exchange_limit_upper": 75
+  },
+  {
+    "id": 74,
+    "rarity": 7,
+    "price": 4,
+    "exchange_limit_lower": 76,
+    "exchange_limit_upper": 100
+  },
+  {
+    "id": 75,
+    "rarity": 7,
+    "price": 5,
+    "exchange_limit_lower": 101,
+    "exchange_limit_upper": 9999
+  },
+  {
+    "id": 91,
+    "rarity": 9,
+    "price": 1,
+    "exchange_limit_lower": 1,
+    "exchange_limit_upper": 25
+  },
+  {
+    "id": 92,
+    "rarity": 9,
+    "price": 2,
+    "exchange_limit_lower": 26,
+    "exchange_limit_upper": 50
+  },
+  {
+    "id": 93,
+    "rarity": 9,
+    "price": 3,
+    "exchange_limit_lower": 51,
+    "exchange_limit_upper": 75
+  },
+  {
+    "id": 94,
+    "rarity": 9,
+    "price": 4,
+    "exchange_limit_lower": 76,
+    "exchange_limit_upper": 100
+  },
+  {
+    "id": 95,
+    "rarity": 9,
+    "price": 5,
+    "exchange_limit_lower": 101,
+    "exchange_limit_upper": 9999
+  },
+  {
+    "id": 931,
+    "rarity": 93,
+    "price": 1,
+    "exchange_limit_lower": 1,
+    "exchange_limit_upper": 25
+  },
+  {
+    "id": 932,
+    "rarity": 93,
+    "price": 2,
+    "exchange_limit_lower": 26,
+    "exchange_limit_upper": 50
+  },
+  {
+    "id": 933,
+    "rarity": 93,
+    "price": 3,
+    "exchange_limit_lower": 51,
+    "exchange_limit_upper": 75
+  },
+  {
+    "id": 934,
+    "rarity": 93,
+    "price": 4,
+    "exchange_limit_lower": 76,
+    "exchange_limit_upper": 100
+  },
+  {
+    "id": 935,
+    "rarity": 93,
+    "price": 5,
+    "exchange_limit_lower": 101,
+    "exchange_limit_upper": 9999
+  },
+  {
+    "id": 941,
+    "rarity": 94,
+    "price": 1,
+    "exchange_limit_lower": 1,
+    "exchange_limit_upper": 25
+  },
+  {
+    "id": 942,
+    "rarity": 94,
+    "price": 2,
+    "exchange_limit_lower": 26,
+    "exchange_limit_upper": 50
+  },
+  {
+    "id": 943,
+    "rarity": 94,
+    "price": 3,
+    "exchange_limit_lower": 51,
+    "exchange_limit_upper": 75
+  },
+  {
+    "id": 944,
+    "rarity": 94,
+    "price": 4,
+    "exchange_limit_lower": 76,
+    "exchange_limit_upper": 100
+  },
+  {
+    "id": 945,
+    "rarity": 94,
+    "price": 5,
+    "exchange_limit_lower": 101,
+    "exchange_limit_upper": 9999
+  },
+  {
+    "id": 951,
+    "rarity": 95,
+    "price": 1,
+    "exchange_limit_lower": 1,
+    "exchange_limit_upper": 25
+  },
+  {
+    "id": 952,
+    "rarity": 95,
+    "price": 2,
+    "exchange_limit_lower": 26,
+    "exchange_limit_upper": 50
+  },
+  {
+    "id": 953,
+    "rarity": 95,
+    "price": 3,
+    "exchange_limit_lower": 51,
+    "exchange_limit_upper": 75
+  },
+  {
+    "id": 954,
+    "rarity": 95,
+    "price": 4,
+    "exchange_limit_lower": 76,
+    "exchange_limit_upper": 100
+  },
+  {
+    "id": 955,
+    "rarity": 95,
+    "price": 5,
+    "exchange_limit_lower": 101,
+    "exchange_limit_upper": 9999
+  },
+  {
+    "id": 991,
+    "rarity": 99,
+    "price": 1,
+    "exchange_limit_lower": 1,
+    "exchange_limit_upper": 25
+  },
+  {
+    "id": 992,
+    "rarity": 99,
+    "price": 2,
+    "exchange_limit_lower": 26,
+    "exchange_limit_upper": 50
+  },
+  {
+    "id": 993,
+    "rarity": 99,
+    "price": 3,
+    "exchange_limit_lower": 51,
+    "exchange_limit_upper": 75
+  },
+  {
+    "id": 994,
+    "rarity": 99,
+    "price": 4,
+    "exchange_limit_lower": 76,
+    "exchange_limit_upper": 100
+  },
+  {
+    "id": 995,
+    "rarity": 99,
+    "price": 5,
+    "exchange_limit_lower": 101,
+    "exchange_limit_upper": 9999
+  }
+]
