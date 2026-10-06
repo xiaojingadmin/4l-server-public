@@ -39,8 +39,6 @@ public final class ResourceManifest {
     /** CRC-64/ECMA-182 多项式，最高位优先（MSB-first）。 */
     private static final long CRC64_POLYNOMIAL = 0x42F0E1EBA9EA3693L;
 
-    private static final long UINT32_MAX = 0xFFFFFFFFL;
-
     private static final Pattern VERSION_PATTERN =
             Pattern.compile("(R[0-9]{7})@([A-Za-z0-9+/]+={0,2})");
 
@@ -230,10 +228,5 @@ public final class ResourceManifest {
             out.append(BASE32_ALPHABET[(buffer << (5 - bitsLeft)) & 0x1F]);
         }
         return out.toString();
-    }
-
-    /** 供资源校验使用的 uint32 掩码。 */
-    public static long uint32Max() {
-        return UINT32_MAX;
     }
 }
