@@ -40,6 +40,10 @@ capture/
 *.jks
 *.keystore
 
+# ---- 开发临时文件 ----
+# 移植过程中的比对脚本、离线核对工具与中间产物
+scratch/
+
 # ---- IDE / 编辑器 ----
 .idea/
 *.iml

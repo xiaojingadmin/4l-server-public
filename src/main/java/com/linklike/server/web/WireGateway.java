@@ -54,15 +54,18 @@ public class WireGateway {
     public Result dispatch(String path, Map<String, Object> body, Map<String, String> headers) {
         String canonical = RequestPaths.canonical(path);
 
+        // 顺序与 Python 的 wire_api.dispatch 一致：先判「路径是否被支持」（501），再校验
+        // X-Api-Key（401）。反过来的话，在配了 api_key 的部署上「不存在的路径 + 错误 key」
+        // 会返回 401，而 Python 返回 501。
+        WireHandler handler = router.resolve(canonical);
+        if (handler == null) {
+            throw WireError.unimplemented();
+        }
+
         String expected = config.getApiKey();
         if (expected != null && !"off".equals(expected)
                 && !expected.equals(headers.get("x-api-key"))) {
             throw new WireError(401, "Invalid API key");
-        }
-
-        WireHandler handler = router.resolve(canonical);
-        if (handler == null) {
-            throw WireError.unimplemented();
         }
 
         PlayerContext player = loadPlayer(headers);

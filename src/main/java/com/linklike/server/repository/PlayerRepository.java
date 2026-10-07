@@ -11,6 +11,9 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
 
     List<Player> findByDeviceSpecificId(String deviceSpecificId);
 
+    /** 同一设备绑定多个账号时按创建顺序取第一个（对应 Python 的 {@code list_players} rowid 顺序）。 */
+    List<Player> findByDeviceSpecificIdOrderByCreatedAsc(String deviceSpecificId);
+
     List<Player> findByOfficialPlayerIdOrderByCreatedAsc(String officialPlayerId);
 
     boolean existsByPlayerId(String playerId);

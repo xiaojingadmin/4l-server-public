@@ -73,23 +73,30 @@ public class WireController {
         boolean routeImplemented = gateway.supports(path);
 
         try {
-            if (http.getHeader("Transfer-Encoding") != null) {
+            // Python 用的是真值判断（`if self.headers.get("Transfer-Encoding")`），
+            // 所以值为空串时按「没有这个头」处理。
+            String transferEncoding = http.getHeader("Transfer-Encoding");
+            if (transferEncoding != null && !transferEncoding.isEmpty()) {
                 status = 501;
                 response = ErrorCodes.payload(501, "Transfer-Encoding is not supported", null);
-            } else if (!methodAllowed(method, path)) {
-                status = 405;
-                response = ErrorCodes.payload(405, "POST required", null);
             } else {
+                // 先读请求体、再判方法：Python 的 _read_body 在方法检查之前，所以
+                // 「非 POST + 坏的请求体」是 400 而不是 405。
                 BodyRead read = readBody(http);
                 bodyBytes = read.bodyBytes();
                 body = read.body();
-                // 少量官方接口用 GET + query string，参数在 query 里而不是请求体里。
-                if ("GET".equals(method) && body.isEmpty()) {
-                    body = decodeQuery(http.getQueryString());
+                if (!methodAllowed(method, path)) {
+                    status = 405;
+                    response = ErrorCodes.payload(405, "POST required", null);
+                } else {
+                    // 少量官方接口用 GET + query string，参数在 query 里而不是请求体里。
+                    if ("GET".equals(method) && body.isEmpty()) {
+                        body = decodeQuery(http.getQueryString());
+                    }
+                    WireGateway.Result result = gateway.dispatch(path, body, headers);
+                    response = result.body();
+                    responseHeaders = successHeaders(result.player(), path);
                 }
-                WireGateway.Result result = gateway.dispatch(path, body, headers);
-                response = result.body();
-                responseHeaders = successHeaders(result.player(), path);
             }
         } catch (WireError e) {
             status = e.status();

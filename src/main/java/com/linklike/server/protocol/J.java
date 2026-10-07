@@ -142,4 +142,32 @@ public final class J {
         }
         return rows;
     }
+
+    /**
+     * Python 的布尔判定 {@code bool(value)}：{@code None}、0、空串、空集合为假，其余为真。
+     *
+     * <p>移植时要与 Python 的 {@code if not player.get(key)} 逐条对应，所以不能写成
+     * {@code value != null}：那样会把已存的 {@code 0}、{@code ""}、{@code []} 判成「已设置」。
+     */
+    public static boolean truthy(Object value) {
+        if (value == null) {
+            return false;
+        }
+        if (value instanceof Boolean flag) {
+            return flag;
+        }
+        if (value instanceof Number number) {
+            return number.doubleValue() != 0;
+        }
+        if (value instanceof String text) {
+            return !text.isEmpty();
+        }
+        if (value instanceof Map<?, ?> node) {
+            return !node.isEmpty();
+        }
+        if (value instanceof List<?> list) {
+            return !list.isEmpty();
+        }
+        return true;
+    }
 }

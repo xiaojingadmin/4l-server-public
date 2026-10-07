@@ -82,9 +82,49 @@ public class PlayerContext {
         return created;
     }
 
-    /** 只读语义的列表副本，不会创建缺失的键。 */
+    /**
+     * 只读语义的列表副本，<b>不会</b>创建缺失的键（对应 Python 的 {@code player.get(key, [])}）。
+     *
+     * <p>纯读取路径（首页、资料）用这个方法，避免只因为「读过一遍」就在账号状态里留下
+     * 一堆空集合行。
+     */
+    @SuppressWarnings("unchecked")
     public List<Map<String, Object>> rowsSnapshot(String key) {
-        return new ArrayList<>(rows(key));
+        Object value = state.get(key);
+        if (!(value instanceof List<?> list)) {
+            return new ArrayList<>();
+        }
+        List<Map<String, Object>> copy = new ArrayList<>(list.size());
+        for (Object item : list) {
+            if (item instanceof Map<?, ?> map) {
+                copy.add((Map<String, Object>) map);
+            }
+        }
+        return copy;
+    }
+
+    /**
+     * 纯标量列表型状态（{@code TutorialSteps}、{@code FinishedTutorials} 这类整型列表）。
+     *
+     * <p>与 {@link #rows(String)} 一样返回内部引用，缺失时创建空表并挂到状态里。
+     * 不能对同一个键混用这两个方法：Python 里这些键是 {@code [1, 2]}，用行语义读会出错。
+     */
+    @SuppressWarnings("unchecked")
+    public List<Object> scalarList(String key) {
+        Object value = state.get(key);
+        if (value instanceof List<?> list) {
+            return (List<Object>) list;
+        }
+        List<Object> created = new ArrayList<>();
+        state.put(key, created);
+        loadedKeys.add(key);
+        return created;
+    }
+
+    /** 只读语义的标量列表副本，不会创建缺失的键（对应 Python 的 {@code player.get(k, [])}）。 */
+    public List<Object> scalarsOrEmpty(String key) {
+        Object value = state.get(key);
+        return value instanceof List<?> list ? new ArrayList<>(list) : new ArrayList<>();
     }
 
     /** 对象型状态；缺失返回 null。 */
@@ -149,6 +189,16 @@ public class PlayerContext {
 
     public boolean boolOf(String key, boolean fallback) {
         return J.boolOr(state.get(key), fallback);
+    }
+
+    /**
+     * Python 的 {@code player.get(key)} 布尔判定（缺失、0、空串、空集合都是 false）。
+     *
+     * <p>与 {@link #rows(String)} 不同，这个方法<b>不会</b>创建缺失的键，因此
+     * 纯读取路径（首页、资料）不会在账号里留下凭空多出来的空集合行。
+     */
+    public boolean truthy(String key) {
+        return J.truthy(state.get(key));
     }
 
     /** 在列表型集合里按某个属性找一行，对应 Python 的 {@code next((x for x in rows if ...), None)}。 */

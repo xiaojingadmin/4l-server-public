@@ -121,7 +121,7 @@ public class PlayerStore {
         if (device == null || device.isEmpty()) {
             return null;
         }
-        List<Player> found = players.findByDeviceSpecificId(device);
+        List<Player> found = players.findByDeviceSpecificIdOrderByCreatedAsc(device);
         return found.isEmpty() ? null : loadById(found.get(0).playerId);
     }
 
@@ -204,6 +204,29 @@ public class PlayerStore {
             throw new IllegalArgumentException("会话归属的玩家不存在: " + playerId);
         }
         sessions.save(new SessionRecord(token, playerId, Instant.now().getEpochSecond()));
+    }
+
+    /**
+     * 签发会话：把令牌写到玩家上并落库，再建立令牌映射 —— 对应 Python 版
+     * {@code server.set_session}。
+     *
+     * <p>与 {@link #setSession(String, String)} 的区别是这里会先写
+     * {@code player.SessionToken}：客户端登录后读到的是最新令牌，登录响应里的
+     * {@code SessionToken} 必须与此一致。
+     *
+     * @param token 指定令牌；为空时新生成
+     * @return 实际写入的令牌
+     */
+    @Transactional
+    public String issueSession(PlayerContext context, String token) {
+        String issued = (token == null || token.isEmpty()) ? genToken() : token;
+        if (!players.existsByPlayerId(context.id())) {
+            throw new IllegalArgumentException("会话归属的玩家不存在: " + context.id());
+        }
+        context.entity().sessionToken = issued;
+        save(context);
+        sessions.save(new SessionRecord(issued, context.id(), Instant.now().getEpochSecond()));
+        return issued;
     }
 
     // ------------------------------------------------------------------
