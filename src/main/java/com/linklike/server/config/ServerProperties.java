@@ -17,6 +17,15 @@ public class ServerProperties {
     /** 下发给客户端的资源版本；自制内容激活时会被替换。 */
     private String resourceVersion = "";
 
+    /**
+     * 已解码资源目录的根目录（{@code verify_resource_catalog.py --output-dir} 的产物），
+     * 里面按 {@code <client_version>-<Rversion>/catalog_entries.json} 分版本存放。
+     *
+     * <p>Python 版写死在仓库的 {@code build/catalog}；Java 版做成可配置，默认值与它一致
+     * （相对进程工作目录）。目录不存在时按「没有解码目录」处理，不按标签过滤。
+     */
+    private String resourceCatalogDir = "build/catalog";
+
     private boolean logRequests = true;
 
     private String logDir = "build/server-profiles/5.1.0/logs";
@@ -53,6 +62,14 @@ public class ServerProperties {
 
     public void setResourceVersion(String resourceVersion) {
         this.resourceVersion = resourceVersion;
+    }
+
+    public String getResourceCatalogDir() {
+        return resourceCatalogDir;
+    }
+
+    public void setResourceCatalogDir(String resourceCatalogDir) {
+        this.resourceCatalogDir = resourceCatalogDir;
     }
 
     public boolean isLogRequests() {

@@ -46,7 +46,14 @@ java -jar target/linklike-server-5.1.0.jar
 | `LINKLIKE_REQUIRE_BEARER` | `false` | `true` 时强制所有 `/v1` 接口带有效 Bearer |
 | `LINKLIKE_LOG_REQUESTS` | `true` | 每个请求写一份脱敏 JSON 日志 |
 | `LINKLIKE_LOG_DIR` | `build/server-profiles/5.1.0/logs` | 请求日志目录 |
+| `LINKLIKE_RESOURCE_CATALOG_DIR` | `build/catalog` | 已解码资源目录的根，用来过滤客户端渲染不出来的目录条目 |
 | `LINKLIKE_OFFICIAL_API` | `false` | 是否允许向官方 API 回源补齐本地缺失数据 |
+
+`LINKLIKE_RESOURCE_CATALOG_DIR` 指向 `verify_resource_catalog.py --output-dir` 的产物，
+里面按 `<client_version>-<Rversion>/catalog_entries.json` 分版本存放。目录型接口（表情、
+歌曲……）会据此丢掉资源包里没有对应 label 的条目 —— 客户端加载界面遇到不存在的资源会一直
+等下去，所以这一步不能省。**目录不存在时不过滤**，与 Python 版「本机没有解码目录」的行为
+一致；启动日志会明确写明过滤是否生效。
 
 `LINKLIKE_DATABASE_URL` 写成 Python 版格式时，`mysql://user:pass@host:3306/db` 会被
 转换成对应的 JDBC 连接串，方便直接复用原项目的配置。
@@ -61,13 +68,15 @@ src/main/java/com/linklike/server/
 ├─ config/        ServerProperties          # 对应 Python 版 config.json
 ├─ protocol/      J, WireCodec, WireModels, WireError, ErrorCodes
 │                 # 内部 PascalCase 数据 <-> 线上 snake_case 字段的编解码
-├─ resource/      ResourceManifest, ResourceChecksum
-│                 # 资源版本解析（CRC-64 + VLQ + Base32）与 XXH64 下载校验和
+├─ resource/      ResourceManifest, ResourceChecksum, ResourceCatalogLabels
+│                 # 资源版本解析（CRC-64 + VLQ + Base32）、XXH64 下载校验和、
+│                 # 已解码资源目录的 label 集合
 ├─ domain/        Player, PlayerState, RefCatalogEntry, SessionRecord, IdempotencyKey
 ├─ repository/    对应的 Spring Data JPA 仓库
 ├─ service/       PlayerStore, PlayerContext     # 玩家/会话/状态的持久化门面
 ├─ web/           GameHeaders, ...               # /v1 响应头与 HTTP 层
-└─ wire/          WireRouter, WireModule, WireHandler, WireRequest, 各 wire_* 模块
+└─ wire/          WireRouter, WireModule, WireHandler, WireRequest, WireServices,
+│                 各 wire_* 模块
 src/main/resources/
 ├─ application.yml
 ├─ wire_models.json            # 949 个协议模型定义（运行时读取）
@@ -87,6 +96,8 @@ src/main/resources/
 | `server.py` 的 `build_common_game_headers` | `web/GameHeaders` | `/v1` 成功响应的游戏响应头 |
 | `wire_api.encode` | `protocol/WireCodec` | 只输出模型声明过的属性，嵌套模型递归编码 |
 | 各 `wire_*.py` 的 `ROUTES` + `dispatch` | `wire/*Module` 实现 `WireModule` | 一个模块注册自己的全部路由 |
+| `wire_services.py` 的目录/资源标签辅助函数 | `wire/WireServices` | 目前只有 `catalog_labels`/`with_resources`/`served`/`overlay` 这一层；该文件其余部分移植时继续往这里加 |
+| `build/catalog/<client>-<Rversion>/catalog_entries.json` | `resource/ResourceCatalogLabels` | 已解码资源目录的 label 集合，目录类接口据此过滤 |
 | `entity_schema.py` 动态建表 | `db/migration/V1__init.sql` | 改为显式 schema：核心标量独立成列，其余状态按 JSON 行存储 |
 | `resource_manifest.py` | `resource/ResourceManifest` | 已与 Python 版逐值比对通过 |
 | `resource_checksum.py` | `resource/ResourceChecksum` | 已与 Python 版逐值比对通过 |

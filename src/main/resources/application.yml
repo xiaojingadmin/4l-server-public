@@ -46,6 +46,11 @@ linklike:
   client-version: "5.1.0"
   # 下发给客户端的资源版本；被自制内容覆盖时会替换（见 CustomContentService）。
   resource-version: "R2604100@BFrkfPQkJ9JM6RLSZCpOYoDTYA=="
+  # 已解码资源目录的根（verify_resource_catalog.py --output-dir 的产物），
+  # 里面按 <client_version>-<Rversion>/catalog_entries.json 分版本存放。
+  # 目录型接口（表情、歌曲……）按这些 label 过滤掉客户端渲染不出来的条目；
+  # 目录不存在时不过滤，与 Python 版「本机没有解码目录」的行为一致。
+  resource-catalog-dir: ${LINKLIKE_RESOURCE_CATALOG_DIR:build/catalog}
   # 每个请求写一份 JSON 日志到 logs 目录，便于对照客户端行为排查。
   log-requests: ${LINKLIKE_LOG_REQUESTS:true}
   log-dir: ${LINKLIKE_LOG_DIR:build/server-profiles/5.1.0/logs}
