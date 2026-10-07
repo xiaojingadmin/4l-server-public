@@ -255,8 +255,8 @@ public class WireServices {
                 minimum, (long) maximum);
     }
 
-    /** Python 的 {@code type(value) is int}：只认整型数字，布尔不算。 */
-    private static Long strictLong(Object value) {
+    /** Python 的 {@code type(value) is int}：只认整型数字，布尔不算。包内共用。 */
+    static Long strictLong(Object value) {
         if (value instanceof Integer number) {
             return number.longValue();
         }
