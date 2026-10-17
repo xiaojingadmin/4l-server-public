@@ -26,6 +26,15 @@ public class ServerProperties {
      */
     private String resourceCatalogDir = "build/catalog";
 
+    /**
+     * 客户端抽取产物目录（{@code base_res_content_*.json}、{@code shop_catalog.json} 等）。
+     *
+     * <p>为空时只读 classpath 里的 {@code client_defaults/}；设置后优先读这个目录，
+     * 缺失的文件再回退到 classpath。指向本机参考数据的
+     * {@code build/client_defaults} 目录即可直接复用现有的抽取产物。
+     */
+    private String clientDefaultsDir = "";
+
     private boolean logRequests = true;
 
     private String logDir = "build/server-profiles/5.1.0/logs";
@@ -70,6 +79,14 @@ public class ServerProperties {
 
     public void setResourceCatalogDir(String resourceCatalogDir) {
         this.resourceCatalogDir = resourceCatalogDir;
+    }
+
+    public String getClientDefaultsDir() {
+        return clientDefaultsDir;
+    }
+
+    public void setClientDefaultsDir(String clientDefaultsDir) {
+        this.clientDefaultsDir = clientDefaultsDir;
     }
 
     public boolean isLogRequests() {

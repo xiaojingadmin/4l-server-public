@@ -1,0 +1,6375 @@
+{
+  "checked_at": "2026-09-08T10:19:35.179475+00:00",
+  "source": "https://assets.link-like-lovelive.app/raw/db/dbfpxkd2kjshqme6bgvlw6ieya",
+  "catalog_url": "https://assets.link-like-lovelive.app/raw/db/dbfpxkd2kjshqme6bgvlw6ieya",
+  "version_source": "https://assets.chocoie.com/client-res",
+  "client_version": "5.1.0",
+  "resource_version": "R2604100@BFrkfPQkJ9JM6RLSZCpOYoDTYA==",
+  "catalog_path": "/raw/db/dbfpxkd2kjshqme6bgvlw6ieya",
+  "encrypted_bytes": 1583488,
+  "encrypted_sha256": "8458a6819d7a7820475465f6ca9bf58157110b68fde9f347ed213fe99cce385d",
+  "decoded_bytes": 12871816,
+  "decoded_sha256": "d8ad2b026cd3f8de4d580caf7a0e41a10b5dc4678c6ef971216f75a490b1389e",
+  "padding_valid": true,
+  "lz4_complete": true,
+  "catalog_magic": "CA01",
+  "format_bytes": "0003",
+  "all_catalog_bytes_consumed": true,
+  "entry_count": 53950,
+  "missing_dependency_labels": [],
+  "resource_types": {
+    "1": 48426,
+    "128": 4014,
+    "192": 1510
+  },
+  "priorities": {
+    "0": 53950
+  },
+  "master_entries": [
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 8912,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stylemovies.tsv",
+      "contents": [
+        "stylemovies.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12279261283486054501,
+      "seed": 10259828450418770331,
+      "path": "/raw/zy/zyjkqof6tynbznineqo5hwj3ia"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 6928,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "advseries.tsv",
+      "contents": [
+        "advseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12708824218233273674,
+      "seed": 10710855811673024344,
+      "path": "/raw/eq/equ4mcurydopxdf5f6pbk2qqmu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 192,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "shops.tsv",
+      "contents": [
+        "shops.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10984912600195264834,
+      "seed": 18040568647880443514,
+      "path": "/raw/2g/2gsep2uuvlkpvzmkfqokon4eju"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 176,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "shopbanners.tsv",
+      "contents": [
+        "shopbanners.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 3372967597077889734,
+      "seed": 11333884691165132115,
+      "path": "/raw/pg/pggdyqfwqqgvvxwndrvqq45xim"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "shopitems.tsv",
+      "contents": [
+        "shopitems.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15734144258973244849,
+      "seed": 13421464719764604822,
+      "path": "/raw/y3/y3ol36jnuqsdv5i5wslqw6w7pa"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 256,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "boxeventseries.tsv",
+      "contents": [
+        "boxeventseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5023421756622958208,
+      "seed": 11579174757641855089,
+      "path": "/raw/yv/yvhsrxlsxtpk3mcmwf6tyua3vy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 384,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "specialrewardprogressdatas.tsv",
+      "contents": [
+        "specialrewardprogressdatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16541835463291478993,
+      "seed": 12264642856481493998,
+      "path": "/raw/u4/u4guwforyj7vu5up3opo3fpixu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 240,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "boxdatas.tsv",
+      "contents": [
+        "boxdatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16637132623199625605,
+      "seed": 10863243050969442278,
+      "path": "/raw/mc/mcna7nmt4o7gekiixlwlqfxn3m"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3328,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "boxitemdatas.tsv",
+      "contents": [
+        "boxitemdatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 304851718946497685,
+      "seed": 9998417358103468028,
+      "path": "/raw/bu/bufarzrfvo5xfflylsp7jdwrza"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 4752,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "membervoices.tsv",
+      "contents": [
+        "membervoices.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13355812771801083198,
+      "seed": 10928261205834155954,
+      "path": "/raw/hd/hdbekvv54ffo7tf2puvqbriqni"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 368,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicmasteryvoltagebonuses.tsv",
+      "contents": [
+        "musicmasteryvoltagebonuses.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11994706440889470482,
+      "seed": 9632412113101158434,
+      "path": "/raw/oq/oqnd4srbhklttuokwfcpibvxri"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 224,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "tutorialqueststages.tsv",
+      "contents": [
+        "tutorialqueststages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 621798401522211330,
+      "seed": 14777917823259042197,
+      "path": "/raw/x4/x4vv2zwqvcfqt3hk2qrofzmk2q"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 208,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "loginbonuses.tsv",
+      "contents": [
+        "loginbonuses.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1706740409919537114,
+      "seed": 17945215080225148816,
+      "path": "/raw/qh/qhbbmbkahrlufmga5w67kirwya"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 768,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "helpimages.tsv",
+      "contents": [
+        "helpimages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6922781054684370714,
+      "seed": 12017193332617500217,
+      "path": "/raw/rg/rghm6yzx22nngb46z7b7lbv5jm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 816,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "customcomplementmaterials.tsv",
+      "contents": [
+        "customcomplementmaterials.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2294723718603757478,
+      "seed": 15603938604332612735,
+      "path": "/raw/mz/mz7hx74yosox5hvowokvbf2dcy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 656,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "dreamquestseries.tsv",
+      "contents": [
+        "dreamquestseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13075965084636626202,
+      "seed": 14225520925005220927,
+      "path": "/raw/ah/ah2c3tcvumf5awhf2lbdg543ge"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2272,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "dreamqueststages.tsv",
+      "contents": [
+        "dreamqueststages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15148982615117814719,
+      "seed": 13985109947492294541,
+      "path": "/raw/pa/pa7snfsdt62ykn266zmaxnpjlq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 160,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "dreamliveserieslist.tsv",
+      "contents": [
+        "dreamliveserieslist.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7217970697162647434,
+      "seed": 17520933881952045258,
+      "path": "/raw/t3/t3vcatvkrb44zw3fnayagzce4a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 208,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "petalexchangerates.tsv",
+      "contents": [
+        "petalexchangerates.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 18118365930644379919,
+      "seed": 12874757519454285542,
+      "path": "/raw/7b/7btnlgfzfwspxyperpykufr6pm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 17504,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "learninglivereleaseconditions.tsv",
+      "contents": [
+        "learninglivereleaseconditions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 4317474028219426028,
+      "seed": 11227680974299224548,
+      "path": "/raw/ga/gawn32uuftbuy7g3rac4dyj234"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 11008,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardevolutionmaterials.tsv",
+      "contents": [
+        "cardevolutionmaterials.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10430689997410174461,
+      "seed": 14710037150879285257,
+      "path": "/raw/sy/sywfekvuyitz2t2mndysgg6y4a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 5248,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musiclearningquestseries.tsv",
+      "contents": [
+        "musiclearningquestseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 3031170261159175392,
+      "seed": 15514895593745302421,
+      "path": "/raw/2z/2zghgwhp66q6pwyue3ndaowyiy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 24704,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musiclearningqueststages.tsv",
+      "contents": [
+        "musiclearningqueststages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9233984202425657608,
+      "seed": 17283114202986473499,
+      "path": "/raw/az/azkhlqxhi6lvobzty7unskfnye"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 6048,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicmasterylevels.tsv",
+      "contents": [
+        "musicmasterylevels.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7113399713560587922,
+      "seed": 10902204326627465170,
+      "path": "/raw/v4/v4d2dmntjwwxjnrbf4ncuc6qai"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 172864,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stickers.tsv",
+      "contents": [
+        "stickers.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11949590612082989425,
+      "seed": 15081320932166348756,
+      "path": "/raw/fi/fiv7ahtz5wrboq5c5m3savnyou"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 272,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "generations.tsv",
+      "contents": [
+        "generations.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13341688469245821032,
+      "seed": 13023476655269009205,
+      "path": "/raw/iu/iuva32hres3gjmiakdj6s4sj74"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 512,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "deckmemberpositions.tsv",
+      "contents": [
+        "deckmemberpositions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15536752738962827839,
+      "seed": 13858777233190685754,
+      "path": "/raw/pk/pkhz6chz2khsvp6gd4trsh525m"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1488,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "characters.tsv",
+      "contents": [
+        "characters.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1913111440080156957,
+      "seed": 18309812924012080141,
+      "path": "/raw/36/36cdloeo3fthfv7bdqfnde4mjq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 208,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "subcharacters.tsv",
+      "contents": [
+        "subcharacters.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 716408040857942759,
+      "seed": 15937938442550566974,
+      "path": "/raw/4g/4ggwipbixgy2eo7tgj2za4vijq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "tutorialquestareas.tsv",
+      "contents": [
+        "tutorialquestareas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12746667434999194030,
+      "seed": 16458385156875870118,
+      "path": "/raw/gf/gfwd7irjozqxs5xmzoscbqbgvu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 55728,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "carddatas.tsv",
+      "contents": [
+        "carddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11684984095081922144,
+      "seed": 9789364451268764212,
+      "path": "/raw/z2/z2tmc7bah3vbpl4ykudkzxabnu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 544,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicmasteryheartbonuses.tsv",
+      "contents": [
+        "musicmasteryheartbonuses.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5872388807551531826,
+      "seed": 10845785774904200843,
+      "path": "/raw/5x/5x7dvluex5hairlb6n3k6vtdpq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 64,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "challengemodeeffectdetails.tsv",
+      "contents": [
+        "challengemodeeffectdetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7337890319455746744,
+      "seed": 14284534278812226013,
+      "path": "/raw/gf/gfdrk2adldiz4jjanwqubgy3z4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 11216,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "livestages.tsv",
+      "contents": [
+        "livestages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12665049630682742800,
+      "seed": 13333529380386511937,
+      "path": "/raw/re/rejmwjs5oohfjqcokl62dfwn6y"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 38560,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grandprixrewarddatas.tsv",
+      "contents": [
+        "grandprixrewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2966655871708087461,
+      "seed": 11899016293270342573,
+      "path": "/raw/h4/h4xo7e2rn62nd4lgpa26gp4u2y"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3440,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "loginbonusrewarddatas.tsv",
+      "contents": [
+        "loginbonusrewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 296255387465173374,
+      "seed": 13147855109353762333,
+      "path": "/raw/7t/7tholpesyfnm2gekas65mpf66y"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 464,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "homebgms.tsv",
+      "contents": [
+        "homebgms.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 545623367109246389,
+      "seed": 10693211830776851685,
+      "path": "/raw/46/46ix3fz36wgb66rh5mkkkedlsu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 288,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "simulationgraphlimit.tsv",
+      "contents": [
+        "simulationgraphlimit.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 4637723454305334653,
+      "seed": 10119142867678199123,
+      "path": "/raw/54/54tpojcnaqo6bv44rj3lj3ioza"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 518704,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardskills.tsv",
+      "contents": [
+        "cardskills.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9981833187326412160,
+      "seed": 13797421893102353243,
+      "path": "/raw/qt/qt4frmnwmmat6hi3n3joymlw2i"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2144,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grandprix.tsv",
+      "contents": [
+        "grandprix.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11443011894718918360,
+      "seed": 15002649378115393012,
+      "path": "/raw/d6/d62rvq7lzewsjdqvmjjvddpe3e"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3136,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "dreamlivereleaseconditions.tsv",
+      "contents": [
+        "dreamlivereleaseconditions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10897107390213772631,
+      "seed": 11123396259450265717,
+      "path": "/raw/so/sotkexuqodeh47ffwynedcpe4a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 304,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "units.tsv",
+      "contents": [
+        "units.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5865615287224599635,
+      "seed": 11905583020048000063,
+      "path": "/raw/7p/7p4tjepo3nw4mqcehatsrngvmi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1280,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "dailyqueststages.tsv",
+      "contents": [
+        "dailyqueststages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1584214408146807654,
+      "seed": 12650799731138592990,
+      "path": "/raw/x3/x3davb6zlwxts7xc4qivgnydji"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 13264,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardlimitbreakmaterials.tsv",
+      "contents": [
+        "cardlimitbreakmaterials.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15320437912183571278,
+      "seed": 15633038850201079604,
+      "path": "/raw/22/223vxaobz64yadtr4pvm54ki2u"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 240,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "missionachieverewards.tsv",
+      "contents": [
+        "missionachieverewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5875906409464553011,
+      "seed": 10715794901957600134,
+      "path": "/raw/vx/vxfkuitpwj3nh2y5eihgmu5mda"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 25824,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "items.tsv",
+      "contents": [
+        "items.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17113054110058717186,
+      "seed": 12998688513745134472,
+      "path": "/raw/rh/rhv6ntljkngv7soracet2x6ihu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 7520,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "itemsources.tsv",
+      "contents": [
+        "itemsources.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1316300854291424082,
+      "seed": 9417788960848624581,
+      "path": "/raw/66/66citoih3nhjyf2nbc3jkybq3e"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 176,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "messagecards.tsv",
+      "contents": [
+        "messagecards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9332245498063034854,
+      "seed": 10394754808838718046,
+      "path": "/raw/m5/m5zfvafv5sxlkbf5zqlykrp3ea"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2800,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardgetmoviesettings.tsv",
+      "contents": [
+        "cardgetmoviesettings.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17287858249382239311,
+      "seed": 18254582358694877355,
+      "path": "/raw/tq/tqz7rei34wpv2bzhj3dn6enmwy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 96,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "flowerstandcolors.tsv",
+      "contents": [
+        "flowerstandcolors.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2240102846054507138,
+      "seed": 18178426107900129801,
+      "path": "/raw/ro/rod3mwfyvatqloomafdvpbhoay"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 144,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicmasteryskill.tsv",
+      "contents": [
+        "musicmasteryskill.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15200279661372051056,
+      "seed": 16525782889180604926,
+      "path": "/raw/tg/tgaa6jmc45lrt5s54f3xmhm4la"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 352,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "dailyquestseries.tsv",
+      "contents": [
+        "dailyquestseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15594701387028198652,
+      "seed": 12475576446735377247,
+      "path": "/raw/45/45obsqtwxj6vz623mnxaxrtmvi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2528,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "eventmissionrewards.tsv",
+      "contents": [
+        "eventmissionrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11725261992374603026,
+      "seed": 15756308994234013620,
+      "path": "/raw/cf/cf6hf6xtxavqcbe7omx6wwxfci"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 63152,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardskilllevelupmaterials.tsv",
+      "contents": [
+        "cardskilllevelupmaterials.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 4525647097927891258,
+      "seed": 18115453962053988398,
+      "path": "/raw/be/beqcw2h7mu5yflspgmwjoj3atm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 464,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musiclevels.tsv",
+      "contents": [
+        "musiclevels.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15494316649885048504,
+      "seed": 18251641076878233817,
+      "path": "/raw/h3/h3x3bcmfkjr6nw7kdcwadh5wnu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 688,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicmasterylovebonuses.tsv",
+      "contents": [
+        "musicmasterylovebonuses.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 861221713601475346,
+      "seed": 17716958149443641770,
+      "path": "/raw/kt/kto67dm5a2k27r5f757jz4blse"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 848,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "seasons.tsv",
+      "contents": [
+        "seasons.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5649170195225679759,
+      "seed": 17761567991362172462,
+      "path": "/raw/3f/3fg6jtzgjjoap4dz3qtgw6urxe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 14096,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musics.tsv",
+      "contents": [
+        "musics.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14488763601214464699,
+      "seed": 11623043169593035422,
+      "path": "/raw/mg/mggpke4bir5wfrrdtkbevtx4ci"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2592,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicscores.tsv",
+      "contents": [
+        "musicscores.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7975368796846496814,
+      "seed": 11304846110365293170,
+      "path": "/raw/rg/rg3su22mzcdonb57rqzg7aylly"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 336,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicscorerewards.tsv",
+      "contents": [
+        "musicscorerewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2137385579136950791,
+      "seed": 14282195421243608417,
+      "path": "/raw/3h/3h2gtqf6mvjpvm6zeb4bo4fuq4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 352,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicscorerewarddatas.tsv",
+      "contents": [
+        "musicscorerewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1714342045942535288,
+      "seed": 16705504708580692319,
+      "path": "/raw/7p/7pggkfxr7azfas6mm652c7uqaa"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 192,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicdroprewards.tsv",
+      "contents": [
+        "musicdroprewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 18058123320493642149,
+      "seed": 16800262461704477795,
+      "path": "/raw/cm/cmpfly725d7uvzpbbp57f22aim"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 608,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicdroprewarddetails.tsv",
+      "contents": [
+        "musicdroprewarddetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17165475002188276469,
+      "seed": 17086124115757497599,
+      "path": "/raw/x3/x3cm6juaujdx3hb6ljxh4uoa7i"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 80,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "difficultybgimages.tsv",
+      "contents": [
+        "difficultybgimages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12638533340989579182,
+      "seed": 11631557395689424677,
+      "path": "/raw/jn/jn47kvytwdvisv4bk3kbmm7yue"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 22816,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "presenttexts.tsv",
+      "contents": [
+        "presenttexts.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13058845246880486994,
+      "seed": 9951130695008793756,
+      "path": "/raw/ay/ay4dbb7wk4fjimp6hg3p7fbpzy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 592,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "textsplaceholder.tsv",
+      "contents": [
+        "textsplaceholder.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8756765655821990709,
+      "seed": 17067781511866363077,
+      "path": "/raw/ij/ijxm4qcan4wid3btdet6iw4nne"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 880,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "questareareleaseconditions.tsv",
+      "contents": [
+        "questareareleaseconditions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10473902348492384332,
+      "seed": 17000285825596105694,
+      "path": "/raw/cf/cfzl4e5stw4ucm5oioannjit6m"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1344,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "characterfavoritegifts.tsv",
+      "contents": [
+        "characterfavoritegifts.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 3963804979871427002,
+      "seed": 16742338322652041542,
+      "path": "/raw/ay/aywygrkuzjqio7kra7prc2tlhe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 13712,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardseries.tsv",
+      "contents": [
+        "cardseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15814082638928149835,
+      "seed": 9912534441846220312,
+      "path": "/raw/ou/ou73imxktbjq3fv2k5e7rppjra"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 64,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "parallelcard.tsv",
+      "contents": [
+        "parallelcard.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1429328734720426305,
+      "seed": 9844919097727844135,
+      "path": "/raw/ak/akflpap6tkz45rf24wxjvv6y64"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1568,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "comics.tsv",
+      "contents": [
+        "comics.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6309384331100858793,
+      "seed": 15477673709712379807,
+      "path": "/raw/f5/f5fida244slhxawpc3xo2vcvyi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "tablist.tsv",
+      "contents": [
+        "tablist.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2549682593553851423,
+      "seed": 9834888475800632058,
+      "path": "/raw/pz/pzl2aydndenefgjhmizuiy7uzm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 28640,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grandprixpointbonuses.tsv",
+      "contents": [
+        "grandprixpointbonuses.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15662093693214228799,
+      "seed": 17386017360953722328,
+      "path": "/raw/2v/2vx4pe4gmi3icyc7lpltbb2ogu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 7760,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "questlivereleaseconditions.tsv",
+      "contents": [
+        "questlivereleaseconditions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10892831041135764212,
+      "seed": 11166101373245382356,
+      "path": "/raw/to/tovrp63kulfnxikmdylivl4c4i"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 7648,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "memberfanlevels.tsv",
+      "contents": [
+        "memberfanlevels.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9332814438273268798,
+      "seed": 15219079229847029873,
+      "path": "/raw/wp/wpgbviaq7l2taqyrwmk7qru26q"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2336,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grandprixquestseries.tsv",
+      "contents": [
+        "grandprixquestseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12356563639214606868,
+      "seed": 12033598298449599199,
+      "path": "/raw/bh/bh4kl32azmc3xt7fshi4xk4tym"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 14752,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grandprixqueststages.tsv",
+      "contents": [
+        "grandprixqueststages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17692986754863173349,
+      "seed": 13383373409335057303,
+      "path": "/raw/7o/7o3twj5lpobtvzqi4xitdbt5f4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 34816,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardskillseries.tsv",
+      "contents": [
+        "cardskillseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10800237145021051741,
+      "seed": 10093653850251804238,
+      "path": "/raw/cs/csfnjcl52sminujaynvkjibvt4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 896,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "standardquestareas.tsv",
+      "contents": [
+        "standardquestareas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11847725058839320376,
+      "seed": 10325543777814249205,
+      "path": "/raw/d2/d2jupmybmarsxi654qrcpm5r2a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 271472,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardskilleffects.tsv",
+      "contents": [
+        "cardskilleffects.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5200658939330425334,
+      "seed": 10643907467169968434,
+      "path": "/raw/hr/hrdnsbipnltxbayljqr23qfx44"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 71056,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardcoordinates.tsv",
+      "contents": [
+        "cardcoordinates.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11838867770956915352,
+      "seed": 10832991758421198567,
+      "path": "/raw/a4/a42cm5wcbsevgzjtjlni4xgap4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 240,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "unitcharacters.tsv",
+      "contents": [
+        "unitcharacters.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13662276152255147778,
+      "seed": 12867643249466331291,
+      "path": "/raw/tg/tgg7r4miefpdtrdallqg5gtkbm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 224,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardrarities.tsv",
+      "contents": [
+        "cardrarities.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8762179235969811916,
+      "seed": 10016398591392807165,
+      "path": "/raw/v7/v723mdhbiarvap6sq6dodqt6xm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2304,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "missionrewards.tsv",
+      "contents": [
+        "missionrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 3403413220014901895,
+      "seed": 9309029351917059905,
+      "path": "/raw/5g/5gfsoad27yjehh46znef3a4tuy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3936,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "missions.tsv",
+      "contents": [
+        "missions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17890822313904215605,
+      "seed": 12457577701743436038,
+      "path": "/raw/fb/fbddovxmews6culxque3jd6oke"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "eventmissionachieverewards.tsv",
+      "contents": [
+        "eventmissionachieverewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 4582134309274819266,
+      "seed": 18360133050698635040,
+      "path": "/raw/g4/g4gbd6ykywjfony66zhu463nr4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1008,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "flowerstandidolpictures.tsv",
+      "contents": [
+        "flowerstandidolpictures.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7318689607686418462,
+      "seed": 14779641365246504183,
+      "path": "/raw/s3/s3gy67pss7fainjjbh2p7f25ty"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 176,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "challengemodestages.tsv",
+      "contents": [
+        "challengemodestages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 573652732967845070,
+      "seed": 14789582630847200039,
+      "path": "/raw/rm/rmu6e53cnmhenh6bc44mwcpwyu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1573840,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardskilleffectdetails.tsv",
+      "contents": [
+        "cardskilleffectdetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15420622622759491733,
+      "seed": 9293650386597335436,
+      "path": "/raw/3p/3pyjt5fqmrdz3yikkrswr75lde"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 23856,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardskilleffectdetailparams.tsv",
+      "contents": [
+        "cardskilleffectdetailparams.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 400513476586067098,
+      "seed": 17851750775130971303,
+      "path": "/raw/xe/xe5k7vmaijbrqu3w3rxgvlgz7i"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 240,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "contentsreleaseconditions.tsv",
+      "contents": [
+        "contentsreleaseconditions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1653866713469061235,
+      "seed": 13560769981983486027,
+      "path": "/raw/ys/yshldiqf5lotghzhrb2cvj2l6a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 9056,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grandprixrewards.tsv",
+      "contents": [
+        "grandprixrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 903240749147642288,
+      "seed": 15230953932250238824,
+      "path": "/raw/df/dfgbtkidjbk46nrgjwlvcnlxba"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 96,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "tutorialrewarddatas.tsv",
+      "contents": [
+        "tutorialrewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1592807845933160430,
+      "seed": 17351096773443961424,
+      "path": "/raw/bg/bgqrs6mrar3izxx6tqkrp7ptfe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1008,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "seasonfanlevels.tsv",
+      "contents": [
+        "seasonfanlevels.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12701381870434850338,
+      "seed": 17843983297588989907,
+      "path": "/raw/wo/wo7jjlhhu2uy6gnabqafrkh2ki"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3152,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardlevels.tsv",
+      "contents": [
+        "cardlevels.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2576204542028365452,
+      "seed": 14808335936241331121,
+      "path": "/raw/ny/nyewk4ivzhuqsdixzgok3pg6ai"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 186928,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "questsections.tsv",
+      "contents": [
+        "questsections.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17976479170516980678,
+      "seed": 17798869765708251426,
+      "path": "/raw/ew/ewvupemqls6ey3zjmmzs7he7qe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 93408,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "sectionskilleffects.tsv",
+      "contents": [
+        "sectionskilleffects.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1861652203592274320,
+      "seed": 10265345723286584191,
+      "path": "/raw/xc/xcofe2sashe3vtcotj2w7q3qhm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 6160,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "advdatas.tsv",
+      "contents": [
+        "advdatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2337153253404457798,
+      "seed": 15596766019068259229,
+      "path": "/raw/ni/niafjcsnt6icdh3zmi3d3et5fu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 288,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "advstorydigestmovies.tsv",
+      "contents": [
+        "advstorydigestmovies.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13917764027005432757,
+      "seed": 11679213777540502384,
+      "path": "/raw/hm/hmikesalxar7p6mvobfvuuseaq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 320,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "musicmasterymentalbonuses.tsv",
+      "contents": [
+        "musicmasterymentalbonuses.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6697974007752370493,
+      "seed": 15415392725312692072,
+      "path": "/raw/ib/ibmwvl75xv4kg7pvhnfzimmyvy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 752,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "eventmissionseries.tsv",
+      "contents": [
+        "eventmissionseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8329163141271221507,
+      "seed": 17069761353253037049,
+      "path": "/raw/sk/sk7ah27xnbdh5okw7vqwxvlcvm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 528,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stamps.tsv",
+      "contents": [
+        "stamps.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8356807916017927338,
+      "seed": 17325060578722161970,
+      "path": "/raw/yl/yl5nmsykpebjcsgxruolaxkiga"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 206592,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "sectionskilleffectdetails.tsv",
+      "contents": [
+        "sectionskilleffectdetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10648224032912239017,
+      "seed": 17851150068765825838,
+      "path": "/raw/4c/4cffiwo3hd6d4lxsdlm7l22ioa"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 17072,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stylevoices.tsv",
+      "contents": [
+        "stylevoices.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6152508511684653988,
+      "seed": 17701754946102465587,
+      "path": "/raw/xn/xnelw3jd3qecahicidmekszezq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 80,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "challengemodereleasecondition.tsv",
+      "contents": [
+        "challengemodereleasecondition.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6590934193536031604,
+      "seed": 10626126728753610765,
+      "path": "/raw/fh/fhks7pv3wyouav2zlfitd2y45a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 224,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "tutorials.tsv",
+      "contents": [
+        "tutorials.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16888634958646739199,
+      "seed": 13984098554062530405,
+      "path": "/raw/ht/htrrr7re6bflwegpdxxl5kuqjy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 80,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "challengemodeeffects.tsv",
+      "contents": [
+        "challengemodeeffects.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8086433042668043490,
+      "seed": 18434292924273263534,
+      "path": "/raw/vm/vmzfoqmepuw2uzq524i4dbgopu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 384,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "dailylivereleaseconditions.tsv",
+      "contents": [
+        "dailylivereleaseconditions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7307864760516573136,
+      "seed": 13416361317441141229,
+      "path": "/raw/7l/7lind4tc5rrxdms6qq6q7genji"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "memberprofilecategory.tsv",
+      "contents": [
+        "memberprofilecategory.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13238685466663518775,
+      "seed": 10688250716118226800,
+      "path": "/raw/4o/4oe5r7hcu6c2cvg3jirbq5c5d4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3376,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "memberprofiles.tsv",
+      "contents": [
+        "memberprofiles.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13785802024837585038,
+      "seed": 15093482729278690513,
+      "path": "/raw/ch/ch5a5iln5xszl2z5jltwsp4znq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 8848,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grandprixreleasecondition.tsv",
+      "contents": [
+        "grandprixreleasecondition.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16872221752098160261,
+      "seed": 11396709993319097909,
+      "path": "/raw/a4/a4ykrr2xzeosa6jqdv57mlg3pu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 204400,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "sectionskills.tsv",
+      "contents": [
+        "sectionskills.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12916218770887308472,
+      "seed": 16619124765380865700,
+      "path": "/raw/6j/6jc7hiywf23mxl74dtshg5bx4a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "flowerstandtypes.tsv",
+      "contents": [
+        "flowerstandtypes.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13401032069745443019,
+      "seed": 13812173000978594459,
+      "path": "/raw/ql/qlpmf77hmwk4euqdfvsfmfvvvu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 64,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "tutorialdeckdatas.tsv",
+      "contents": [
+        "tutorialdeckdatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 3137795238884017331,
+      "seed": 13800880794891682422,
+      "path": "/raw/g7/g7rxjyldofmsdzro7dli5o3uza"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 15600,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "standardqueststages.tsv",
+      "contents": [
+        "standardqueststages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9108189650729085512,
+      "seed": 17936673727030799128,
+      "path": "/raw/cc/ccc5ldhm63gkh6ayqgu5t42wbq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 4064,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "eventmissions.tsv",
+      "contents": [
+        "eventmissions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15019778903164366589,
+      "seed": 14838753508163396104,
+      "path": "/raw/le/lepejgqu3f2pvsuaa6p3cgcoaq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 96,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "tutorialdeckcards.tsv",
+      "contents": [
+        "tutorialdeckcards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1895896808648270463,
+      "seed": 18343709084421007133,
+      "path": "/raw/z6/z6w2skinfzogqtcw6q2ets2y4e"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3376,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "eventloginbonuses.tsv",
+      "contents": [
+        "eventloginbonuses.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7619316298313340092,
+      "seed": 18265972845324623470,
+      "path": "/raw/yj/yjpjzptt3iau6msnp4srizq4my"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 656,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "exchangepointconvert.tsv",
+      "contents": [
+        "exchangepointconvert.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 18058618455491472926,
+      "seed": 13664489279641957923,
+      "path": "/raw/4i/4iwaoq7eds5vwth3n3ymwf6pm4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 10528,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "exchangepointrate.tsv",
+      "contents": [
+        "exchangepointrate.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7551234293850987114,
+      "seed": 13954509422271306386,
+      "path": "/raw/bq/bqc242vz7bj3qbno4bioye4ln4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 736,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "giftbonusgachas.tsv",
+      "contents": [
+        "giftbonusgachas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17723532840856867479,
+      "seed": 18385835814043956535,
+      "path": "/raw/5l/5lrpu5kzsf3hszwchxuh6lkbee"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 496,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "giftlessgachas.tsv",
+      "contents": [
+        "giftlessgachas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7775652461462791461,
+      "seed": 17125640893388034843,
+      "path": "/raw/a6/a6fmnehcqzkgtbyqmlqbca4wku"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 5600,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "limitbreakmaterialrate.tsv",
+      "contents": [
+        "limitbreakmaterialrate.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 187557891869249042,
+      "seed": 10156837714024713983,
+      "path": "/raw/gx/gxoodst2wjzbifx5vbkf7exjpi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 96,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "petalcoinexchangerate.tsv",
+      "contents": [
+        "petalcoinexchangerate.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9117313259108492989,
+      "seed": 10622660547837755259,
+      "path": "/raw/dz/dzdxtyouiqkitwr3t4nngbqzby"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 13008,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "selectticketexchangerate.tsv",
+      "contents": [
+        "selectticketexchangerate.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11574888698367115306,
+      "seed": 11428779814197019241,
+      "path": "/raw/z3/z332bxken7gzrwavae4xqmnpya"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2576,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "selectticketseries.tsv",
+      "contents": [
+        "selectticketseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6818123278401657990,
+      "seed": 13682317425022018952,
+      "path": "/raw/7t/7tftwkt4qu5vbip6oliu6eccga"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 13648,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gachaseries.tsv",
+      "contents": [
+        "gachaseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17278883842078354642,
+      "seed": 11773315480640765747,
+      "path": "/raw/gc/gc7aq3jmnucor7jh576rhd7exe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 336,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gachaprizes.tsv",
+      "contents": [
+        "gachaprizes.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14660235624102932463,
+      "seed": 11946885747496502768,
+      "path": "/raw/rl/rlkdvuafqvmjbmvntxnpzydynq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1120,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gachaprizedatas.tsv",
+      "contents": [
+        "gachaprizedatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15779354430665066281,
+      "seed": 16445580723795911162,
+      "path": "/raw/hc/hcadpyzukpkgmb4oeahznktjaq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 6256,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "costumemodels.tsv",
+      "contents": [
+        "costumemodels.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1317088337340364608,
+      "seed": 12825358663415287354,
+      "path": "/raw/i7/i7bkgoj7ujs2lg4slu2h7cgh5y"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 816,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "costumes.tsv",
+      "contents": [
+        "costumes.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2152578367402466905,
+      "seed": 14998572419467299914,
+      "path": "/raw/x7/x7gqk2coiff3nrgdnkmeulimz4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1904,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "downloadimages.tsv",
+      "contents": [
+        "downloadimages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11849659674561762165,
+      "seed": 15578717573110332945,
+      "path": "/raw/pr/pr6u3vbk7r333i2k5cajiorade"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 336,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "questlivedownloads.tsv",
+      "contents": [
+        "questlivedownloads.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6786102157571322750,
+      "seed": 14401891748484882874,
+      "path": "/raw/nn/nn43xin26pst43qzqbhqzgg62m"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 160,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "questliveloadings.tsv",
+      "contents": [
+        "questliveloadings.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13737322529713113071,
+      "seed": 16387031263801234705,
+      "path": "/raw/s2/s27jc6bsxklhhmjf4f7bcor5lm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 144,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "tutorialschoolidolstagemovies.tsv",
+      "contents": [
+        "tutorialschoolidolstagemovies.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9848158162854666894,
+      "seed": 10714231620768210281,
+      "path": "/raw/od/odyuglq4yd3tweepaylbb26psy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 320,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "emojicategory.tsv",
+      "contents": [
+        "emojicategory.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10648506698629052162,
+      "seed": 10270752328225689600,
+      "path": "/raw/2r/2rgr5j7belxtzjkm36jbuj7aoi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2256,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "emojis.tsv",
+      "contents": [
+        "emojis.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 69838354178962716,
+      "seed": 16167247413360162920,
+      "path": "/raw/w3/w35gry34ot4m5zky5bakd7i5zi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 736,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gachacampaigns.tsv",
+      "contents": [
+        "gachacampaigns.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14988401313671722887,
+      "seed": 10130017974592830220,
+      "path": "/raw/zb/zbeobjqli6fvepacaebt2ghy7m"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 416,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidevents.tsv",
+      "contents": [
+        "raidevents.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16167918778712826299,
+      "seed": 14222608912919924471,
+      "path": "/raw/rl/rl62s3m7mqhp2awhnnowopmjni"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 224,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidtopprogressimage.tsv",
+      "contents": [
+        "raidtopprogressimage.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11035374904793162978,
+      "seed": 9447027935609185111,
+      "path": "/raw/x7/x7pzfg26cvkzatvktgsctw4l6u"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2160,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidrewards.tsv",
+      "contents": [
+        "raidrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12431418426425769165,
+      "seed": 15889630459048817266,
+      "path": "/raw/if/ifqqnxxjpmsnvujok3lsqx3c4u"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 5536,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidrewarddatas.tsv",
+      "contents": [
+        "raidrewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 150734729186846389,
+      "seed": 13408993786671929719,
+      "path": "/raw/oe/oentb4w37hnruni2hkkitdztzu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidresource.tsv",
+      "contents": [
+        "raidresource.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 18220186449197733234,
+      "seed": 14910560844023732319,
+      "path": "/raw/pz/pzxn7bq5l6dxziazqfl7hcvjv4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 176,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidresourcerecoverydatas.tsv",
+      "contents": [
+        "raidresourcerecoverydatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13336862801425379529,
+      "seed": 10037163419227534038,
+      "path": "/raw/u4/u4xeflh3qzo7aox4jgo4ozskmi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 928,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidresourceadddate.tsv",
+      "contents": [
+        "raidresourceadddate.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15317947764676454800,
+      "seed": 10446541733086420633,
+      "path": "/raw/m5/m5yjj5lcv66dxsv26hj53bjloe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 432,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidquestseries.tsv",
+      "contents": [
+        "raidquestseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 18153519229168713728,
+      "seed": 12870578292143309670,
+      "path": "/raw/pb/pbab5tzmrjo57mg226iwq27r6y"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1488,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidqueststages.tsv",
+      "contents": [
+        "raidqueststages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14351075801182935448,
+      "seed": 15986795114074283418,
+      "path": "/raw/dx/dxnu5yahvdvras6q3wgjziw2wm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 592,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidquestreleasecondition.tsv",
+      "contents": [
+        "raidquestreleasecondition.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 4025332346487397256,
+      "seed": 16090086712581586595,
+      "path": "/raw/kt/ktj3dbxnpsstsg5mxqubl7drla"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 256,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "raidquestdroprateup.tsv",
+      "contents": [
+        "raidquestdroprateup.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 892224775991954017,
+      "seed": 10725500015148119505,
+      "path": "/raw/tq/tqg6x4aiaqznw7bwtwcb4i3lra"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 80,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "contentguidances.tsv",
+      "contents": [
+        "contentguidances.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16201155001148241107,
+      "seed": 14716004105757998980,
+      "path": "/raw/it/itobjyyyhikcfjeqkjy7fkp3ry"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 96,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "beginnermissionbannerrewards.tsv",
+      "contents": [
+        "beginnermissionbannerrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7212197163089711693,
+      "seed": 9904885813102465923,
+      "path": "/raw/2o/2oepishdaja6v74zgyr3i3t3ci"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 4416,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "beginnermissionshint.tsv",
+      "contents": [
+        "beginnermissionshint.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13696107695325968140,
+      "seed": 16052773126136667222,
+      "path": "/raw/22/22dxk726u7ckmxny3drzj5huse"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 176,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "beginnermissionshintimages.tsv",
+      "contents": [
+        "beginnermissionshintimages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17104471585093849546,
+      "seed": 9688488144760465622,
+      "path": "/raw/hu/hub4k6ygjpae44etifik34xq2i"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 144,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grade.tsv",
+      "contents": [
+        "grade.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16136568262869194713,
+      "seed": 15051694621510729032,
+      "path": "/raw/gc/gccacmlwfn5zoydvk3wb7ay26a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 10432,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradedatas.tsv",
+      "contents": [
+        "gradedatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1878307141243278401,
+      "seed": 11869094976073689241,
+      "path": "/raw/ij/ij2cualvbqmb4agvxkgkxupakq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 432,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "graderewards.tsv",
+      "contents": [
+        "graderewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 18215150795323780731,
+      "seed": 15635251050583878792,
+      "path": "/raw/5p/5pdm2qn4jutb4573mu6gjju7pq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1424,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "graderewarddatas.tsv",
+      "contents": [
+        "graderewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13906969741401959834,
+      "seed": 11686177459015340419,
+      "path": "/raw/2y/2ylogtukzb2eban4btadejgrmy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 848,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "seasongrade.tsv",
+      "contents": [
+        "seasongrade.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13525558834845862541,
+      "seed": 16311803290702123780,
+      "path": "/raw/xj/xjqpjalplhaof7tm7wfpshpxby"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 400,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "seasongraderewards.tsv",
+      "contents": [
+        "seasongraderewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10451209205331985530,
+      "seed": 9832880313229971634,
+      "path": "/raw/44/44vise3fjdbkuauvvcm56pmotm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 640,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "seasongraderewarddatas.tsv",
+      "contents": [
+        "seasongraderewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 695193668221236877,
+      "seed": 12571629789121425556,
+      "path": "/raw/b5/b5vttkcxrzad6fgfhzqok6mdte"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 400,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequestseason.tsv",
+      "contents": [
+        "gradequestseason.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15271195787507974655,
+      "seed": 17749816017507993795,
+      "path": "/raw/4r/4rmivclzfdlfiq3zw6nhss3lxm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 384,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequestseasonreleasecond.tsv",
+      "contents": [
+        "gradequestseasonreleasecond.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8574090763543111158,
+      "seed": 15649921715450249534,
+      "path": "/raw/g3/g32vzxaefxeianzwbf7ceayuji"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1440,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequestseries.tsv",
+      "contents": [
+        "gradequestseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13221698827608980860,
+      "seed": 9825388713628597317,
+      "path": "/raw/7e/7ebpxp25lizpxzxdtdu7lmf6cq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 768,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequestseriesreleasecond.tsv",
+      "contents": [
+        "gradequestseriesreleasecond.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16022452674825393164,
+      "seed": 12486872694934172151,
+      "path": "/raw/wi/witshosvoroyu5vpq7r5i3bm7a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 4528,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequestrewards.tsv",
+      "contents": [
+        "gradequestrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13593545546132848716,
+      "seed": 10852590490503512708,
+      "path": "/raw/nn/nnhqw5p72gveuai3inbftwepkq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 18512,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequestrewardsdatas.tsv",
+      "contents": [
+        "gradequestrewardsdatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2881375653039770689,
+      "seed": 9992663792398217318,
+      "path": "/raw/rp/rpmbyqqzpqwzwljysizwnan6uu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 8752,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequestsquare.tsv",
+      "contents": [
+        "gradequestsquare.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5041232689600528402,
+      "seed": 16239366745059981306,
+      "path": "/raw/ga/ga3ezogzqv3ihrkk4c26ujbani"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 6208,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequestsquaredatas.tsv",
+      "contents": [
+        "gradequestsquaredatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10607014967285783280,
+      "seed": 14012166104361225741,
+      "path": "/raw/gn/gnbpmgrh2qk737wyvoautlbvei"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3536,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequeststages.tsv",
+      "contents": [
+        "gradequeststages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 376821019629061524,
+      "seed": 11470677538867118442,
+      "path": "/raw/sb/sbmt7azgjiit3at6srgng5z3nm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3840,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradeaddskills.tsv",
+      "contents": [
+        "gradeaddskills.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14469574904588653093,
+      "seed": 16523799728772577931,
+      "path": "/raw/7g/7gqwnwvc5ebseqql7he2753j4i"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 784,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradeaddskilleffects.tsv",
+      "contents": [
+        "gradeaddskilleffects.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1436564408846316784,
+      "seed": 11921764888212752553,
+      "path": "/raw/35/35itbxxyggznxfjeigkkztzumq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2880,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradeaddskilleffectdetails.tsv",
+      "contents": [
+        "gradeaddskilleffectdetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10323338550283271974,
+      "seed": 13261815375895811387,
+      "path": "/raw/dw/dwe53xcjakpq6obdsun6lberhi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1376,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "launcherbanners.tsv",
+      "contents": [
+        "launcherbanners.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8035700942550532192,
+      "seed": 15238525675059622163,
+      "path": "/raw/hc/hcv36kpaz45gqex2qfnfmhsquy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1536,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradequestlivepointbonus.tsv",
+      "contents": [
+        "gradequestlivepointbonus.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12868353345937303878,
+      "seed": 12048275980409351339,
+      "path": "/raw/oo/oorzozhtbod4cbljqb6gtkmo3e"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1520,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "campaign.tsv",
+      "contents": [
+        "campaign.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5729264347460104506,
+      "seed": 10622153875595134102,
+      "path": "/raw/xo/xoresymsszpe6bvghrbemfkm3m"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "campaignaddrewardseries.tsv",
+      "contents": [
+        "campaignaddrewardseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9806869956596774068,
+      "seed": 11415120133779802501,
+      "path": "/raw/36/36tgqqre4svnqxkc33tlxkyoh4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 560,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "campaignaddrewards.tsv",
+      "contents": [
+        "campaignaddrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5753365571045260675,
+      "seed": 16211428543079349255,
+      "path": "/raw/nb/nb4tjgcxygizogenuxgop7h4q4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 544,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechalseason.tsv",
+      "contents": [
+        "gradechalseason.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14489084179765866860,
+      "seed": 16789623909650499195,
+      "path": "/raw/25/254kfmo6sxfincuidvru4eeaoy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 752,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechalqueststages.tsv",
+      "contents": [
+        "gradechalqueststages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 277700322909670242,
+      "seed": 10945527372200321512,
+      "path": "/raw/tb/tblwjo2yukpbihd2py7dxsgl6m"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1312,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechalqueststagesrewards.tsv",
+      "contents": [
+        "gradechalqueststagesrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 4724903498215265691,
+      "seed": 16047641325504543040,
+      "path": "/raw/yl/ylbgu3u37cfwkm7rcwf5pw3kxa"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2304,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechalqueststagerewarddatas.tsv",
+      "contents": [
+        "gradechalqueststagerewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7618028999450979698,
+      "seed": 14403502854058438714,
+      "path": "/raw/ob/obiqukkz325i2ub3pthmkdytzi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 10736,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechaltotalscorerewards.tsv",
+      "contents": [
+        "gradechaltotalscorerewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2956939114816718066,
+      "seed": 13030616712514257422,
+      "path": "/raw/mj/mj44vmwhb2fkbbys3puzxyk5py"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 24992,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechaltotalscorerewarddatas.tsv",
+      "contents": [
+        "gradechaltotalscorerewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5731450719617060547,
+      "seed": 11092554667771515827,
+      "path": "/raw/xr/xrjutn3fhp6ny7svgjn6mm5nwu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 80,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechaltotalrankingrewards.tsv",
+      "contents": [
+        "gradechaltotalrankingrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7503146907203193261,
+      "seed": 13461938982122657384,
+      "path": "/raw/e7/e725nu6nf54uw6cwnvvrdkzt64"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechaltotalrankingrewarddata.tsv",
+      "contents": [
+        "gradechaltotalrankingrewarddata.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6786210618402720903,
+      "seed": 17163028013901051831,
+      "path": "/raw/vi/viegnh6vrbtkk2n2irmskbljxm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 80,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechalstagerankingrewards.tsv",
+      "contents": [
+        "gradechalstagerankingrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12335486382384605351,
+      "seed": 10314243512043280608,
+      "path": "/raw/pq/pqky46kl2kh6ww3qijmkt6rmsy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gradechalstagerankingrewarddata.tsv",
+      "contents": [
+        "gradechalstagerankingrewarddata.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15819090706315212135,
+      "seed": 11978932642613167119,
+      "path": "/raw/kb/kbz57z4h2rp6b2lcsjse57line"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1792,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardduetvoice.tsv",
+      "contents": [
+        "cardduetvoice.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15658268665890320280,
+      "seed": 18191102415519541197,
+      "path": "/raw/2c/2c72hnhwfdfkdoy7rqxldrvkmu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 672,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "birthdayrarebonuses.tsv",
+      "contents": [
+        "birthdayrarebonuses.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5502547113413207357,
+      "seed": 11483832362721087341,
+      "path": "/raw/fz/fzsymsofppzhgovthk365gqyda"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 176,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "ticketonlygachas.tsv",
+      "contents": [
+        "ticketonlygachas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14343283960705435054,
+      "seed": 10660036713286900207,
+      "path": "/raw/iy/iy4q5gu225hevdm6jgbkoesd3q"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 912,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "gpprizeexchanges.tsv",
+      "contents": [
+        "gpprizeexchanges.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14390037921378879775,
+      "seed": 16327490031419728122,
+      "path": "/raw/la/laghy3h32wf3ijytsokysixbnu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3680,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "itemexchanges.tsv",
+      "contents": [
+        "itemexchanges.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 756738147212779804,
+      "seed": 9886921504997259096,
+      "path": "/raw/mr/mredtjcvscbrn6s7dajrscszqq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 192,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "itemexchangecategorylist.tsv",
+      "contents": [
+        "itemexchangecategorylist.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2702565140980351564,
+      "seed": 9379572090780649845,
+      "path": "/raw/jn/jn3renoja5gn3rllaul5ete6fe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 560,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "itemexchangecategorydatas.tsv",
+      "contents": [
+        "itemexchangecategorydatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2174940814751681497,
+      "seed": 10716909588543029083,
+      "path": "/raw/ud/udu3ltfrhrx3eov5lsgsvsnee4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 768,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "itemexchangecategoryfilter.tsv",
+      "contents": [
+        "itemexchangecategoryfilter.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7591240553686838121,
+      "seed": 16100702014909783170,
+      "path": "/raw/kx/kxxl472vszp7d45ka5aspwk32q"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "limitbreakmaterialconvertrate.tsv",
+      "contents": [
+        "limitbreakmaterialconvertrate.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10680048229289090638,
+      "seed": 14089335195874381338,
+      "path": "/raw/4x/4xtfxqpmf3hbzpzg4gjwxfg2nu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cardskillmodes.tsv",
+      "contents": [
+        "cardskillmodes.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5413269770666445086,
+      "seed": 15963769982243094893,
+      "path": "/raw/tf/tfkrncsndwqt5vdqagje5fy22y"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 240,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stageskillconditions.tsv",
+      "contents": [
+        "stageskillconditions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1487283143473889127,
+      "seed": 11583510355919821264,
+      "path": "/raw/b6/b626t6hvklg4vakhb2jysqnww4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 688,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stageskillconditiondetails.tsv",
+      "contents": [
+        "stageskillconditiondetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9816781046314468395,
+      "seed": 14013995150932336816,
+      "path": "/raw/ps/psb6noxzrbmq3of6uczbcvz6ai"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 912,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stageskilleffects.tsv",
+      "contents": [
+        "stageskilleffects.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13334544559473101748,
+      "seed": 17603393636383306417,
+      "path": "/raw/sa/sa2wqtisdir6hpml3v4jnyzpvu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 4784,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stageskilleffectdetails.tsv",
+      "contents": [
+        "stageskilleffectdetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 3746438980642271640,
+      "seed": 13872933833101610043,
+      "path": "/raw/yx/yxkr6yoq4e3c3h5vnlt6gh6lge"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 352,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rentaldecks.tsv",
+      "contents": [
+        "rentaldecks.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9329132606201132923,
+      "seed": 14256237259706600223,
+      "path": "/raw/ui/uikv325jz3nbmhwkkwiu3hq7du"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1104,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rentaldeckcards.tsv",
+      "contents": [
+        "rentaldeckcards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16021796024494346360,
+      "seed": 14232194431408088330,
+      "path": "/raw/dd/ddsu3gljcrw6yuh46t3a6zms3u"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1152,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rentalcarddatas.tsv",
+      "contents": [
+        "rentalcarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 9028330879768413375,
+      "seed": 17739674253083802491,
+      "path": "/raw/xo/xoqrfobmw5yuwscix2h6srfx3u"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3120,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stageskillsets.tsv",
+      "contents": [
+        "stageskillsets.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 18199945592896702042,
+      "seed": 11845128554694292718,
+      "path": "/raw/5i/5ihb43sihuux6rsog5xaa6ixdq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 81184,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "centerskills.tsv",
+      "contents": [
+        "centerskills.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2150036926190707203,
+      "seed": 16478807035748931488,
+      "path": "/raw/4z/4zogaytnsoa65ohv6yh7tebqia"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 544,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "centerskillconditions.tsv",
+      "contents": [
+        "centerskillconditions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12862645808536063207,
+      "seed": 10073092926631575871,
+      "path": "/raw/ev/evvmgheau47th7rbayy2j2fxty"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 26928,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "centerskilleffects.tsv",
+      "contents": [
+        "centerskilleffects.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 3660937145855031485,
+      "seed": 12423581985836207339,
+      "path": "/raw/yt/ytad5ocjuioechy4gcnuxqmp7e"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 14080,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "centerattributes.tsv",
+      "contents": [
+        "centerattributes.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12052070562071829994,
+      "seed": 10125600882797671473,
+      "path": "/raw/zh/zh2cowd5cnp3yhmtbcy5umtgye"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 176,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "targets.tsv",
+      "contents": [
+        "targets.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 233258724253501485,
+      "seed": 18011283435243925771,
+      "path": "/raw/jm/jm7j6eiood2lgaodkhxy3rxv6a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 384,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "centerattributeeffects.tsv",
+      "contents": [
+        "centerattributeeffects.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2249348127030847913,
+      "seed": 15623137622107143322,
+      "path": "/raw/di/dipmpwkvxvoz7hgaotaxuc2i3i"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 240,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "forbiddencards.tsv",
+      "contents": [
+        "forbiddencards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10703268300782562240,
+      "seed": 12325773185573551094,
+      "path": "/raw/wl/wluwzx5hay3lit7gysuy5ekydu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 476976,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgameskills.tsv",
+      "contents": [
+        "rhythmgameskills.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7579156230051126791,
+      "seed": 17038965758163933228,
+      "path": "/raw/hb/hb3rmq3j7tyhjebc36loecisuu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 624,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgameskillconditions.tsv",
+      "contents": [
+        "rhythmgameskillconditions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 4727475843533018059,
+      "seed": 11162233802311852895,
+      "path": "/raw/7w/7wbnl4nuncb7uaymi3giazsg2y"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 64816,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgameskilleffects.tsv",
+      "contents": [
+        "rhythmgameskilleffects.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12167282594201596463,
+      "seed": 13971664974487009950,
+      "path": "/raw/iz/izbqrpo2cz2tcldlgocrwqc4uq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1136,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgameskilllvupitems.tsv",
+      "contents": [
+        "rhythmgameskilllvupitems.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17789822505621052260,
+      "seed": 13037780010636869074,
+      "path": "/raw/c2/c2ansxzril3vxjaj6jbggomoky"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 7808,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgameskilllvupitemdetails.tsv",
+      "contents": [
+        "rhythmgameskilllvupitemdetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2695901155811414200,
+      "seed": 16125527013028277257,
+      "path": "/raw/aa/aae2ctoxpa2gh5werihcpxcvui"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 80,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgameclasses.tsv",
+      "contents": [
+        "rhythmgameclasses.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15060209571189055288,
+      "seed": 16472798020751404499,
+      "path": "/raw/ud/uducneg3gl4ehu34ct6jeylshq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3936,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgameclassdatas.tsv",
+      "contents": [
+        "rhythmgameclassdatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 4886839651489439283,
+      "seed": 12311599529958464626,
+      "path": "/raw/sp/sp7gmkdsq7y7zoiwxgnllulj4e"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgameclassmissionrewards.tsv",
+      "contents": [
+        "rhythmgameclassmissionrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1004558564671916495,
+      "seed": 15972578940016161819,
+      "path": "/raw/zv/zvxfgsjvmklak7k4zqktnn4udm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 368,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgametotalmissions.tsv",
+      "contents": [
+        "rhythmgametotalmissions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16011758553221947663,
+      "seed": 17488898719807871146,
+      "path": "/raw/w2/w2nyjuxbiiwz2css7mfhywcbya"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 288,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgametotalmissionrewards.tsv",
+      "contents": [
+        "rhythmgametotalmissionrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6225207610977798474,
+      "seed": 10109589798176964549,
+      "path": "/raw/pm/pmstqbtamebg3jhlsgudgiuzti"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1168,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "commonmissions.tsv",
+      "contents": [
+        "commonmissions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16510771967384289002,
+      "seed": 9815080288581657762,
+      "path": "/raw/bb/bbdwpfujzzvmwu6233rptwzlmi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 416,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stickerexchanges.tsv",
+      "contents": [
+        "stickerexchanges.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10031441816996735199,
+      "seed": 13365226126188472930,
+      "path": "/raw/d4/d4bhumhlrhgrmdi6gv6tzn62ci"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgamehelpimages.tsv",
+      "contents": [
+        "rhythmgamehelpimages.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5162228601178913565,
+      "seed": 17397684511830997716,
+      "path": "/raw/67/67cqnpmpvmrqp44md5wq5xqpbe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 832,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "sidestylesettings.tsv",
+      "contents": [
+        "sidestylesettings.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6116891627011245793,
+      "seed": 9261378864946690604,
+      "path": "/raw/bc/bct5p3z6r26riofoyb2mzjsyfy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 256,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stagescoremultipliersettings.tsv",
+      "contents": [
+        "stagescoremultipliersettings.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 11656793040050051185,
+      "seed": 10902261964999698984,
+      "path": "/raw/pi/pikaazc7gjsalqkc536dfns4ky"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 7056,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stagevoltagelevelthresholds.tsv",
+      "contents": [
+        "stagevoltagelevelthresholds.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8103346171441275903,
+      "seed": 17185685531923275339,
+      "path": "/raw/uh/uhltddlmof3gd5wm4tmey5blaq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 13984,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "stagevoltagelevelsettings.tsv",
+      "contents": [
+        "stagevoltagelevelsettings.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 13193063860356540857,
+      "seed": 13572231119392241795,
+      "path": "/raw/7n/7n3eaxw3tyd6rjk4tjaglek4qa"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 160,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grandprixdailypoints.tsv",
+      "contents": [
+        "grandprixdailypoints.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16346544003597068056,
+      "seed": 17936011170327033226,
+      "path": "/raw/43/43xx7ran76uwsvoqgq4hei52da"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "advalbums.tsv",
+      "contents": [
+        "advalbums.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5683050167992981416,
+      "seed": 17053749435155330590,
+      "path": "/raw/gv/gvlmwh6ji4x6ye74npbngexlaa"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2496,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "ingamemissionskilldetails.tsv",
+      "contents": [
+        "ingamemissionskilldetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 773547460061643979,
+      "seed": 9889638676032468738,
+      "path": "/raw/yp/ypis2xlbwcx5dlkpefil67icxq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 448,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "siscastoredatas.tsv",
+      "contents": [
+        "siscastoredatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16716124978339348487,
+      "seed": 14614482981748440036,
+      "path": "/raw/l3/l3j3cov4hpkfwlckanggshs2km"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 624,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "grandprixrhythmgameseries.tsv",
+      "contents": [
+        "grandprixrhythmgameseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 265396950351963216,
+      "seed": 10570706092531150883,
+      "path": "/raw/sy/sy3a6o5jriuwi7rmshwemvuf6a"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "rhythmgameeventseries.tsv",
+      "contents": [
+        "rhythmgameeventseries.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12746691343925084056,
+      "seed": 13992645768278554270,
+      "path": "/raw/en/enimzf6zt5e3eu3wpxrmizqtey"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 320,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "specialappealtokencardsets.tsv",
+      "contents": [
+        "specialappealtokencardsets.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14810111202694632584,
+      "seed": 17052490325009727337,
+      "path": "/raw/wy/wycswqxmgix5i3mlgqxj7perrm"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 160,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cheermembers.tsv",
+      "contents": [
+        "cheermembers.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 12088571310434961048,
+      "seed": 17067775031142604616,
+      "path": "/raw/d4/d4uvhghf7ka3dt7u2c7if6bpgy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 176,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cheerrankings.tsv",
+      "contents": [
+        "cheerrankings.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7826411219127609608,
+      "seed": 17091255141943612658,
+      "path": "/raw/sf/sfniyb7og5dn44feka4nzz4rym"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 416,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cheerrewards.tsv",
+      "contents": [
+        "cheerrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16709265048575242084,
+      "seed": 15394364961527359560,
+      "path": "/raw/4s/4scjecq37fzkdkrrq2j3yr3jte"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1184,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "cheerrewarddatas.tsv",
+      "contents": [
+        "cheerrewarddatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16223101226465988533,
+      "seed": 15735939553929120394,
+      "path": "/raw/b4/b4u24cht26o63moj7bv34trdgq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 80,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "itemconversions.tsv",
+      "contents": [
+        "itemconversions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16605553366749850031,
+      "seed": 10385668601299064702,
+      "path": "/raw/so/so7svj2y56hs34k6jaeonubtcq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 144,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "chapters.tsv",
+      "contents": [
+        "chapters.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15015270745287897466,
+      "seed": 9460629868206813815,
+      "path": "/raw/77/776mb2c5kjnrvb2b4amhw5kdoy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "chaptermissioncategorys.tsv",
+      "contents": [
+        "chaptermissioncategorys.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 5351942044032289825,
+      "seed": 17420783172256664992,
+      "path": "/raw/pk/pkboyukc32gfqoegq6zlgorixe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "chapterranks.tsv",
+      "contents": [
+        "chapterranks.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 4166488662391566333,
+      "seed": 13578081015006445528,
+      "path": "/raw/3y/3yfdi742n5i6org4nw3ncgzcpy"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 928,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "chaptermissions.tsv",
+      "contents": [
+        "chaptermissions.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1333158258361886580,
+      "seed": 12839860380719953621,
+      "path": "/raw/27/27p7gv7shwecyljskelsmffd2u"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 144,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "chapterpointrewards.tsv",
+      "contents": [
+        "chapterpointrewards.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8565291502243561039,
+      "seed": 16342313628105624889,
+      "path": "/raw/4c/4cr6brz53k7bezfaqmxli3m23i"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 304,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "chapterpointrewarddetails.tsv",
+      "contents": [
+        "chapterpointrewarddetails.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17159976096653407516,
+      "seed": 13808073248177006002,
+      "path": "/raw/vn/vnxi5p4bd3th4g3hyaq4pdctvu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 256,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "sddisplaysetting.tsv",
+      "contents": [
+        "sddisplaysetting.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 7927334646017146883,
+      "seed": 14607600451030254364,
+      "path": "/raw/2r/2rqgxjbxuxiricatxg5r34tleq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 160,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "effectsticker.tsv",
+      "contents": [
+        "effectsticker.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 14126087711505513984,
+      "seed": 17334195178514087440,
+      "path": "/raw/v3/v3qpdt2icogrntxdtw6iwvpkom"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "shapesticker.tsv",
+      "contents": [
+        "shapesticker.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 8848343310679736122,
+      "seed": 15863699288646658822,
+      "path": "/raw/cq/cqke74n4z2qf4qade5iw6cploi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 224,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "shapestickercolor.tsv",
+      "contents": [
+        "shapestickercolor.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2788565550601766558,
+      "seed": 13916010856114808304,
+      "path": "/raw/vf/vfvil4m5y2iohhx46eqv6nb7bi"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1264,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "iconframe.tsv",
+      "contents": [
+        "iconframe.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 15221998016624761601,
+      "seed": 9476319465044091544,
+      "path": "/raw/r4/r4mao5hy3phbg7y35utvrvuqcu"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 128,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "client"
+      ],
+      "label": "chapterportaldatas.tsv",
+      "contents": [
+        "chapterportaldatas.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 6496305899340049771,
+      "seed": 14936883437330178698,
+      "path": "/raw/ol/oljibm3eioykvvuujpkxxd67ui"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3088,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "live"
+      ],
+      "label": "livecharacters.tsv",
+      "contents": [
+        "livecharacters.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17684007823854666341,
+      "seed": 9352119172264048228,
+      "path": "/raw/re/renny6prggkikj2f57ljpdx7k4"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 96,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "live"
+      ],
+      "label": "liveeventsevol.tsv",
+      "contents": [
+        "liveeventsevol.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17997373385702972207,
+      "seed": 12566393097573350972,
+      "path": "/raw/tn/tnlmdm7x4pxgqvdklkbqmvjrcq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 784,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "live"
+      ],
+      "label": "liveitems.tsv",
+      "contents": [
+        "liveitems.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 3565303377568416798,
+      "seed": 14517924220295936078,
+      "path": "/raw/37/37r3j5cdpvblrwfshf2u6fudeq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 3056,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "live"
+      ],
+      "label": "liveposes.tsv",
+      "contents": [
+        "liveposes.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2325587855187239561,
+      "seed": 10015839693851910712,
+      "path": "/raw/gm/gm4r5audqvf4qlbhph45j42jty"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1088,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "live"
+      ],
+      "label": "livelocations.tsv",
+      "contents": [
+        "livelocations.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 16464338649213808969,
+      "seed": 14902477647584223012,
+      "path": "/raw/6f/6fjrben6tztfudxitgxvy5ztli"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 2752,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "live"
+      ],
+      "label": "livemusic.tsv",
+      "contents": [
+        "livemusic.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 2393952000177126855,
+      "seed": 15457850357508720722,
+      "path": "/raw/et/et3gr2b6oag7pbvmrzi2equjxe"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1216,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "live"
+      ],
+      "label": "livetimelinesevol.tsv",
+      "contents": [
+        "livetimelinesevol.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 1949558629978693198,
+      "seed": 17132245011334047612,
+      "path": "/raw/k3/k345kq2cb247xzjvl3uw3p2xou"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 1392,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "live"
+      ],
+      "label": "liveprops.tsv",
+      "contents": [
+        "liveprops.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 17508908756001565767,
+      "seed": 13183738449107736993,
+      "path": "/raw/sn/sn2z2golyovfzor2z25dzmf5qq"
+    },
+    {
+      "priority": 0,
+      "resource_type": 192,
+      "num_deps": 0,
+      "num_contents": 1,
+      "num_categories": 2,
+      "size": 112,
+      "type": "tsv",
+      "content_types": [
+        "tsv"
+      ],
+      "categories": [
+        "masterdata",
+        "live"
+      ],
+      "label": "livemovies.tsv",
+      "contents": [
+        "livemovies.tsv"
+      ],
+      "dependencies": [],
+      "checksum": 10600094066677223060,
+      "seed": 18014190616776121259,
+      "path": "/raw/hl/hl73znjgex2dg7mr223mbky42y"
+    }
+  ],
+  "limits": "Catalog compatibility only; asset availability and device Home entry unproven. Manifest.Checksum is not assumed to be ciphertext CRC64.",
+  "masterdata_samples": [
+    {
+      "label": "characters.tsv",
+      "url": "https://assets.link-like-lovelive.app/raw/36/36cdloeo3fthfv7bdqfnde4mjq",
+      "encrypted_bytes": 1488,
+      "decoded_bytes": 2850,
+      "decoded_sha256": "abc74af06fd4191ad1838e10e75764a695d7f24bf2ec7c4a4b0d7fa6bf0463db",
+      "padding_valid": true,
+      "lz4_complete": true,
+      "binary_magic": "DA00",
+      "row_count": 15,
+      "field_count": 27,
+      "field_types": {
+        "0x20": 11,
+        "0x10": 16
+      },
+      "all_table_bytes_consumed": true,
+      "validation_scope": "All cells structurally parsed; field names and gameplay semantics not mapped"
+    },
+    {
+      "label": "carddatas.tsv",
+      "url": "https://assets.link-like-lovelive.app/raw/z2/z2tmc7bah3vbpl4ykudkzxabnu",
+      "encrypted_bytes": 55728,
+      "decoded_bytes": 260109,
+      "decoded_sha256": "98f246bc6cea5e8c8d46b34758b89cc4f5595b76c901d8e4a1a71e6d9694a56b",
+      "padding_valid": true,
+      "lz4_complete": true,
+      "binary_magic": "DA00",
+      "row_count": 2628,
+      "field_count": 31,
+      "field_types": {
+        "0x20": 29,
+        "0x10": 2
+      },
+      "all_table_bytes_consumed": true,
+      "validation_scope": "All cells structurally parsed; field names and gameplay semantics not mapped"
+    },
+    {
+      "label": "musics.tsv",
+      "url": "https://assets.link-like-lovelive.app/raw/mg/mggpke4bir5wfrrdtkbevtx4ci",
+      "encrypted_bytes": 14096,
+      "decoded_bytes": 53494,
+      "decoded_sha256": "8e863b15310c28f39b4f1a0983229a38e2da68151331dfebdc0f8f4a95a0576e",
+      "padding_valid": true,
+      "lz4_complete": true,
+      "binary_magic": "DA00",
+      "row_count": 236,
+      "field_count": 33,
+      "field_types": {
+        "0x20": 24,
+        "0x10": 9
+      },
+      "all_table_bytes_consumed": true,
+      "validation_scope": "All cells structurally parsed; field names and gameplay semantics not mapped"
+    }
+  ]
+}

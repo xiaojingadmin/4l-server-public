@@ -54,8 +54,15 @@ public class WireServices {
     public static final List<String> RHYTHM_MUSIC_ASSETS = List.of(
             "image_music_thumbnail_{music_id}", "musicscore_{music_id}.csv");
 
+    /** 漫画需要的 label（Python {@code wire_services.COMIC_ASSETS}）。 */
+    public static final List<String> COMIC_ASSETS = List.of(
+            "image_comic_thumbnail_{comics_id}", "image_comic_{comics_id}");
+
     /** 每日重置（04:00）用的时区，Python {@code wire_services._JST}。 */
     public static final ZoneOffset JST = ZoneOffset.ofHours(9);
+
+    private static final DateTimeFormatter PRESENT_TIME_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 
     /** Python {@code next_daily_reset} 的输出格式：{@code 2026-10-08T04:00:00+09:00}。 */
     private static final DateTimeFormatter DAILY_RESET_FORMAT =
@@ -323,6 +330,62 @@ public class WireServices {
             return flag ? "True" : "False";
         }
         return String.valueOf(value);
+    }
+
+    /**
+     * 礼物盒行 -> 客户端 {@code PresentItem} 线形状，对应 Python
+     * {@code wire_services._present_item}。
+     */
+    public static Map<String, Object> presentItem(Map<String, Object> row) {
+        Map<String, Object> item = new LinkedHashMap<>();
+        item.put("DPresentBoxesId", pick(row, "", "DPresentBoxesId", "d_present_boxes_id"));
+        item.put("ItemType", pick(row, 0, "ItemType", "item_type"));
+        item.put("ItemId", pick(row, 0, "ItemId", "item_id"));
+        item.put("LiveId", pick(row, null, "LiveId", "live_id"));
+        item.put("Name", pick(row, "", "Name", "name"));
+        item.put("Comment", pick(row, "", "Comment", "comment"));
+        item.put("Num", pick(row, 0, "Num", "num", "item_num"));
+        item.put("GetTime", presentTime(pick(row, null, "GetTime", "get_time")));
+        item.put("ReceiptLimitTime", pick(row, null, "ReceiptLimitTime", "receipt_limit_time"));
+        item.put("ReceiptedTime", pick(row, null, "ReceiptedTime", "receipted_time"));
+        item.put("LifeTimeType", pick(row, 0, "LifeTimeType", "life_time_type"));
+        item.put("LifeTimeDays", pick(row, null, "LifeTimeDays", "life_time_days"));
+        item.put("LifeTimeDate", pick(row, null, "LifeTimeDate", "life_time_date"));
+        item.put("ExchangeItemData", pick(row, null, "ExchangeItemData", "exchange_item_data"));
+        item.put("ErrorCode", pick(row, "", "ErrorCode", "error_code"));
+        item.put("ErrorMessage", pick(row, "", "ErrorMessage", "error_message"));
+        item.put("ErrorTitle", pick(row, "", "ErrorTitle", "error_title"));
+        return item;
+    }
+
+    /**
+     * 礼物时间：客户端按不可空 DateTime 解析，秒级 Z 字符串会让列表一直请求下一页，
+     * 因此统一成六位微秒。对应 Python {@code wire_services._present_time}。
+     */
+    public static String presentTime(Object value) {
+        if (value instanceof Number number) {
+            return PRESENT_TIME_FORMAT.format(
+                    Instant.ofEpochSecond(number.longValue()).atOffset(ZoneOffset.UTC));
+        }
+        String text;
+        if (value == null || (value instanceof String string && string.isEmpty())) {
+            text = PRESENT_TIME_FORMAT.format(Instant.now().atOffset(ZoneOffset.UTC));
+        } else {
+            text = String.valueOf(value);
+        }
+        if (text.endsWith("Z") && !text.contains(".")) {
+            return text.substring(0, text.length() - 1) + ".000000Z";
+        }
+        return text;
+    }
+
+    private static Object pick(Map<String, Object> row, Object fallback, String... keys) {
+        for (String key : keys) {
+            if (row.containsKey(key) && row.get(key) != null) {
+                return row.get(key);
+            }
+        }
+        return fallback;
     }
 
     private static Map<String, Object> deepCopy(Map<String, Object> value) {

@@ -1,0 +1,104 @@
+{
+  "sticker_info_list": [],
+  "user_card_data_list": [
+    10213030,
+    10223030,
+    10233030,
+    10313050,
+    10323050,
+    10333050,
+    10413030,
+    10423030,
+    10433030,
+    10513010,
+    10523010
+  ],
+  "profile_info": {
+    "player_name": "-",
+    "user_type": 2,
+    "profile_icon_parts_info": "\"\"",
+    "profile_card_parts_info": "\"\"",
+    "fan_level": 11,
+    "birthday": "0001-01-01T00:00:00Z",
+    "is_birthday_changeable": false,
+    "entry_time": "2026-04-10T04:55:01.0988984Z",
+    "player_id": "8439V53GF",
+    "comment": "よろしくお願いします！",
+    "last_login_date": "2026-04-14T10:03:03.2577645Z",
+    "search_guild_key": "",
+    "guild_name": "",
+    "sticker_num": 0,
+    "card_num": 11,
+    "dream_style_num": 0,
+    "friend_num": 0,
+    "friend_max_num": 30,
+    "music_num": 185,
+    "music_max_num": 236,
+    "standard_live_clear_num": 0,
+    "standard_live_top_clear_num": 0,
+    "standard_live_max_num": 900,
+    "standard_live_star_total_num": 0,
+    "grade_live_clear_num": 0,
+    "grade_live_series_top_clear_rank_list": [],
+    "grade_live_top_clear_num": 0,
+    "grade_live_max_num": 0,
+    "fan_level_list": [
+      {
+        "character_id": 1042,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1032,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1043,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1022,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1033,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1031,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1041,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1021,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1052,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1023,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      },
+      {
+        "character_id": 1051,
+        "d_season_fan_level": 1,
+        "member_fan_level": 1
+      }
+    ],
+    "friend_card_info": []
+  }
+}

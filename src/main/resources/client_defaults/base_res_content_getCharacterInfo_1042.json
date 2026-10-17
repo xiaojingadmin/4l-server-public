@@ -1,0 +1,50 @@
+{
+  "collection_character_info": {
+    "character_id": 1042,
+    "name_last": "徒町",
+    "name_first": "小鈴",
+    "latin_alphabet_name_last": "Kachimachi",
+    "latin_alphabet_name_first": "Kosuzu",
+    "character_voice": "葉山風花",
+    "theme_color": "#fad764",
+    "card_list": [
+      {
+        "card_datas_id": 10423030,
+        "voice_list": [
+          {
+            "voices_id": 104230301,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "voices_id": 104230302,
+            "priority": 2,
+            "is_opened": true
+          },
+          {
+            "voices_id": 104230303,
+            "priority": 3,
+            "is_opened": true
+          }
+        ],
+        "movie_list": [
+          {
+            "movies_id": 104230301,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "movies_id": 104230302,
+            "priority": 1,
+            "is_opened": false
+          },
+          {
+            "movies_id": 104230303,
+            "priority": 1,
+            "is_opened": false
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "collection_character_info": {
+    "character_id": 1022,
+    "name_last": "夕霧",
+    "name_first": "綴理",
+    "latin_alphabet_name_last": "Yugiri",
+    "latin_alphabet_name_first": "Tsuzuri",
+    "character_voice": "佐々木琴子",
+    "theme_color": "#ba2636",
+    "card_list": [
+      {
+        "card_datas_id": 10223030,
+        "voice_list": [
+          {
+            "voices_id": 102230301,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "voices_id": 102230302,
+            "priority": 2,
+            "is_opened": true
+          },
+          {
+            "voices_id": 102230303,
+            "priority": 3,
+            "is_opened": true
+          }
+        ],
+        "movie_list": [
+          {
+            "movies_id": 102230301,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "movies_id": 102230302,
+            "priority": 1,
+            "is_opened": false
+          },
+          {
+            "movies_id": 102230303,
+            "priority": 1,
+            "is_opened": false
+          }
+        ]
+      }
+    ]
+  }
+}

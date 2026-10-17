@@ -1,0 +1,50 @@
+{
+  "collection_character_info": {
+    "character_id": 1023,
+    "name_last": "藤島",
+    "name_first": "慈",
+    "latin_alphabet_name_last": "Fujishima",
+    "latin_alphabet_name_first": "Megumi",
+    "character_voice": "月音こな",
+    "theme_color": "#c8c2c6",
+    "card_list": [
+      {
+        "card_datas_id": 10233030,
+        "voice_list": [
+          {
+            "voices_id": 102330301,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "voices_id": 102330302,
+            "priority": 2,
+            "is_opened": true
+          },
+          {
+            "voices_id": 102330303,
+            "priority": 3,
+            "is_opened": true
+          }
+        ],
+        "movie_list": [
+          {
+            "movies_id": 102330301,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "movies_id": 102330302,
+            "priority": 1,
+            "is_opened": false
+          },
+          {
+            "movies_id": 102330303,
+            "priority": 1,
+            "is_opened": false
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "apk": "xapk_extracted/com.oddno.lovelive.apk",
+  "entry": "assets/bin/Data/data.unity3d",
+  "asset_name": "base_res_content_getCharacterInfo_1052",
+  "path_id": 1015,
+  "content_sha256": "f34a2fb3b505dfadc5c72e02e3481dd37f6d7afe43e91fdaaf0f3383f68c85d6",
+  "kind": "Client packaged fallback response, not a live official account response"
+}

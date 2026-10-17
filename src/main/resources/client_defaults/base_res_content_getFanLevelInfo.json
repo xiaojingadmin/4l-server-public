@@ -1,0 +1,502 @@
+{
+  "fan_level_info_list": [
+    {
+      "character_id": 1021,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "レインボーシフォン",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1022,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "レインボーシフォン",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1023,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "レインボーシフォン",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1031,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "ノヴァホワイト",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1032,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "ノヴァホワイト",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1033,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "ノヴァホワイト",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1041,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "ノヴァホワイト",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1042,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "ノヴァホワイト",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1043,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "ノヴァホワイト",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1051,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "ノヴァホワイト",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    },
+    {
+      "character_id": 1052,
+      "d_season_fan_level": 1,
+      "d_season_fan_experience": 0,
+      "member_fan_level": 1,
+      "member_fan_experience": 10,
+      "earn_progress_list": [
+        {
+          "earn_type": 1,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 2,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 3,
+          "total_point": 10,
+          "season_point_history_list": [
+            {
+              "season_id": 10513,
+              "point_history_list": [
+                {
+                  "date": "2026-04-10T04:55:01.467087Z",
+                  "message": "ノヴァホワイト",
+                  "point": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "earn_type": 4,
+          "total_point": 0,
+          "season_point_history_list": null
+        },
+        {
+          "earn_type": 5,
+          "total_point": 0,
+          "season_point_history_list": null
+        }
+      ]
+    }
+  ],
+  "season_id": 10513,
+  "season_fanlevel_point_stock": 0,
+  "season_fanlevel_point_stock_limit": 10000
+}

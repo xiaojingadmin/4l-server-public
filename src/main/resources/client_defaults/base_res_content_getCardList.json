@@ -1,0 +1,620 @@
+{
+  "user_card_data_list": [
+    {
+      "d_card_datas_id": "1f5f2ddd-3e4b-4309-bafa-3f0d9c330d4b",
+      "card_datas_id": 10323050,
+      "card_name": "ノヴァホワイト",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 31,
+        "pure": 24,
+        "cool": 26,
+        "mental": 56,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10323050,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20323050,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1032,
+      "generations_id": 103,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1032,
+        "music_mastery_bonus": 23,
+        "love_correction_value": 115,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 1
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "3aa19907-6914-45ce-9a82-2ab535a14f84",
+      "card_datas_id": 10223030,
+      "card_name": "レインボーシフォン",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 24,
+        "pure": 31,
+        "cool": 24,
+        "mental": 60,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10223030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20223030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1022,
+      "generations_id": 102,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1022,
+        "music_mastery_bonus": 21,
+        "love_correction_value": 105,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 0
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "6ae6943e-0d81-4e7d-84f3-47564e80a433",
+      "card_datas_id": 10413030,
+      "card_name": "ノヴァホワイト",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 24,
+        "pure": 29,
+        "cool": 25,
+        "mental": 60,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10413030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20413030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1041,
+      "generations_id": 104,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1041,
+        "music_mastery_bonus": 12,
+        "love_correction_value": 60,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 1
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "8b619ddc-c05c-4b8b-8e99-269de198688f",
+      "card_datas_id": 10313050,
+      "card_name": "ノヴァホワイト",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 31,
+        "pure": 23,
+        "cool": 25,
+        "mental": 60,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10313050,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20313050,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1031,
+      "generations_id": 103,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1031,
+        "music_mastery_bonus": 26,
+        "love_correction_value": 130,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 1
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "8bd49b47-248c-4b8e-b040-5b871e06648b",
+      "card_datas_id": 10233030,
+      "card_name": "レインボーシフォン",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 32,
+        "pure": 24,
+        "cool": 22,
+        "mental": 60,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10233030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20233030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1023,
+      "generations_id": 102,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1023,
+        "music_mastery_bonus": 22,
+        "love_correction_value": 110,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 0
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "8ddb8628-969c-43c9-b713-36b7af920b87",
+      "card_datas_id": 10213030,
+      "card_name": "レインボーシフォン",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 25,
+        "pure": 29,
+        "cool": 24,
+        "mental": 60,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10213030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20213030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1021,
+      "generations_id": 102,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1021,
+        "music_mastery_bonus": 22,
+        "love_correction_value": 110,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 0
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "93a82239-d6fd-4f55-9e49-793e4420fb9e",
+      "card_datas_id": 10333050,
+      "card_name": "ノヴァホワイト",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 26,
+        "pure": 22,
+        "cool": 29,
+        "mental": 62,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10333050,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20333050,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1033,
+      "generations_id": 103,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1033,
+        "music_mastery_bonus": 24,
+        "love_correction_value": 120,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 1
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "98f956be-e978-4eb4-a62d-af21de764b22",
+      "card_datas_id": 10513010,
+      "card_name": "ノヴァホワイト",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 30,
+        "pure": 22,
+        "cool": 26,
+        "mental": 60,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10513010,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20513010,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1051,
+      "generations_id": 105,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1051,
+        "music_mastery_bonus": 6,
+        "love_correction_value": 30,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 1
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "a68ab974-e438-4083-8b46-bc9950fe8764",
+      "card_datas_id": 10433030,
+      "card_name": "ノヴァホワイト",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 27,
+        "pure": 22,
+        "cool": 28,
+        "mental": 62,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10433030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20433030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1043,
+      "generations_id": 104,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1043,
+        "music_mastery_bonus": 11,
+        "love_correction_value": 55,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 1
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "ce8f6dad-82b6-4ceb-829d-d6dff270373b",
+      "card_datas_id": 10523010,
+      "card_name": "ノヴァホワイト",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 22,
+        "pure": 25,
+        "cool": 31,
+        "mental": 60,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10523010,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20523010,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1052,
+      "generations_id": 105,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1052,
+        "music_mastery_bonus": 7,
+        "love_correction_value": 35,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 1
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    },
+    {
+      "d_card_datas_id": "d48135b4-37ed-4e0c-ad39-c6e52fe2caab",
+      "card_datas_id": 10423030,
+      "card_name": "ノヴァホワイト",
+      "style_level": 1,
+      "max_style_level": 30,
+      "limit_break_times": 0,
+      "max_limit_break_times": 4,
+      "card_parameters": {
+        "smile": 30,
+        "pure": 24,
+        "cool": 27,
+        "mental": 56,
+        "beat_point": 100
+      },
+      "skill_list": [
+        {
+          "skill_type": 1,
+          "card_skill_series_id": 10423030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        },
+        {
+          "skill_type": 2,
+          "card_skill_series_id": 20423030,
+          "skill_level": 1,
+          "max_skill_level": 10
+        }
+      ],
+      "character_id": 1042,
+      "generations_id": 104,
+      "series_type": 0,
+      "card_sort_order": 0,
+      "character_bonus": {
+        "character_id": 1042,
+        "music_mastery_bonus": 11,
+        "love_correction_value": 55,
+        "music_mastery_bonus_list": [],
+        "season_fan_level": 1
+      },
+      "is_evolve_possible": false,
+      "is_evolve_max": false,
+      "member_fan_level": 1,
+      "is_limit_break": false,
+      "is_style_level_up": false,
+      "rhythm_game_skill_list": [
+        {
+          "rhythm_game_skill_type": 1,
+          "skill_level": 1
+        },
+        {
+          "rhythm_game_skill_type": 2,
+          "skill_level": 1
+        }
+      ]
+    }
+  ]
+}

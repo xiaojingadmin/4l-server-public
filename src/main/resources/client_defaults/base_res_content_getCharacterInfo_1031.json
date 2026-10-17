@@ -1,0 +1,50 @@
+{
+  "collection_character_info": {
+    "character_id": 1031,
+    "name_last": "日野下",
+    "name_first": "花帆",
+    "latin_alphabet_name_last": "Hinoshita",
+    "latin_alphabet_name_first": "Kaho",
+    "character_voice": "楡井希実",
+    "theme_color": "#f8b500",
+    "card_list": [
+      {
+        "card_datas_id": 10313050,
+        "voice_list": [
+          {
+            "voices_id": 103130501,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "voices_id": 103130502,
+            "priority": 2,
+            "is_opened": true
+          },
+          {
+            "voices_id": 103130503,
+            "priority": 3,
+            "is_opened": true
+          }
+        ],
+        "movie_list": [
+          {
+            "movies_id": 103130501,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "movies_id": 103130502,
+            "priority": 1,
+            "is_opened": false
+          },
+          {
+            "movies_id": 103130503,
+            "priority": 1,
+            "is_opened": false
+          }
+        ]
+      }
+    ]
+  }
+}

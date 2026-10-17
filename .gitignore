@@ -30,6 +30,17 @@ application-local.properties
 *.sql.gz
 *.dump
 
+# 随仓库分发的数据（public 自包含运行）；只放行明确的数据文件
+!data/
+!data/master_5.1.0.db
+!data/cards.db
+!data/*.json
+!data/*.md
+!data/MANIFEST.sha256
+
+# H2 运行期文件数据库（由 data/linklike* 生成，不提交）
+data/linklike*
+
 # 抓包、密钥与证书
 capture/
 *.pcap

@@ -1,0 +1,647 @@
+{
+ "schema": "local-step-up-missions/1",
+ "client_version": "5.1.0",
+ "resource_version": "R2604100",
+ "missions": {
+  "94001": {
+   "Id": 94001,
+   "Name": "いずれかの楽曲の難易度NORMALを1回クリアしよう",
+   "MissionConditionType": 902,
+   "MissionConditionNum": 1,
+   "MissionConditionDetail": 1,
+   "NextMissionsId": 94002,
+   "SortOrder": 1,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3004000,
+     "Num": 50000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006001,
+     "Num": 50
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006111,
+     "Num": 1000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006121,
+     "Num": 1000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006131,
+     "Num": 1000
+    }
+   ]
+  },
+  "94002": {
+   "Id": 94002,
+   "Name": "育成でいずれかのメンバーカードのレベルを30にしよう",
+   "MissionConditionType": 31,
+   "MissionConditionNum": 30,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94003,
+   "SortOrder": 2,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3004000,
+     "Num": 50000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005011,
+     "Num": 200
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005021,
+     "Num": 200
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005031,
+     "Num": 200
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005041,
+     "Num": 200
+    }
+   ]
+  },
+  "94003": {
+   "Id": 94003,
+   "Name": "いずれかの楽曲を5回クリアしよう",
+   "MissionConditionType": 901,
+   "MissionConditionNum": 5,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94004,
+   "SortOrder": 3,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3004000,
+     "Num": 100000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006002,
+     "Num": 50
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006112,
+     "Num": 200
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006122,
+     "Num": 200
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006132,
+     "Num": 200
+    }
+   ]
+  },
+  "94004": {
+   "Id": 94004,
+   "Name": "育成でいずれかのメンバーカードのセンタースキル、またはスキルを強化しよう",
+   "MissionConditionType": 41,
+   "MissionConditionNum": 1,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94005,
+   "SortOrder": 4,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005012,
+     "Num": 120
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005022,
+     "Num": 120
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005032,
+     "Num": 120
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005042,
+     "Num": 120
+    }
+   ]
+  },
+  "94005": {
+   "Id": 94005,
+   "Name": "育成でいずれかのメンバーカードを1回特訓しよう",
+   "MissionConditionType": 40,
+   "MissionConditionNum": 1,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94006,
+   "SortOrder": 5,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005011,
+     "Num": 200
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005021,
+     "Num": 200
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005031,
+     "Num": 200
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005041,
+     "Num": 200
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005012,
+     "Num": 60
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005022,
+     "Num": 60
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005032,
+     "Num": 60
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005042,
+     "Num": 60
+    }
+   ]
+  },
+  "94006": {
+   "Id": 94006,
+   "Name": "いずれかの楽曲の難易度HARD以上を1回クリアしよう",
+   "MissionConditionType": 902,
+   "MissionConditionNum": 1,
+   "MissionConditionDetail": 21,
+   "NextMissionsId": 94007,
+   "SortOrder": 6,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3009000,
+     "Num": 5
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006001,
+     "Num": 100
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006111,
+     "Num": 1000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006121,
+     "Num": 1000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006131,
+     "Num": 1000
+    }
+   ]
+  },
+  "94007": {
+   "Id": 94007,
+   "Name": "ミュージックPt.を消費して楽曲を1つ解放しよう",
+   "MissionConditionType": 14,
+   "MissionConditionNum": 1,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94008,
+   "SortOrder": 7,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3009000,
+     "Num": 5
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006002,
+     "Num": 50
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005012,
+     "Num": 120
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005022,
+     "Num": 120
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005032,
+     "Num": 120
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005042,
+     "Num": 120
+    }
+   ]
+  },
+  "94008": {
+   "Id": 94008,
+   "Name": "いずれかの楽曲を10回クリアしよう",
+   "MissionConditionType": 901,
+   "MissionConditionNum": 10,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94009,
+   "SortOrder": 8,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3004000,
+     "Num": 150000
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3001002,
+     "Num": 3
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006002,
+     "Num": 100
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006112,
+     "Num": 300
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006122,
+     "Num": 300
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006132,
+     "Num": 300
+    }
+   ]
+  },
+  "94009": {
+   "Id": 94009,
+   "Name": "編成でおすすめ編成を1回使用しよう",
+   "MissionConditionType": 113,
+   "MissionConditionNum": 1,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94010,
+   "SortOrder": 9,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006002,
+     "Num": 100
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005013,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005023,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005033,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005043,
+     "Num": 25
+    }
+   ]
+  },
+  "94010": {
+   "Id": 94010,
+   "Name": "「10連カードパックチケット（2025/H1）」を使用してガチャを引こう",
+   "MissionConditionType": 100,
+   "MissionConditionNum": 10,
+   "MissionConditionDetail": 1040001,
+   "NextMissionsId": 94011,
+   "SortOrder": 10,
+   "Rewards": [
+    {
+     "ItemType": 1,
+     "ItemId": 3006301,
+     "Num": 3
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006003,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006113,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006123,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006133,
+     "Num": 25
+    }
+   ]
+  },
+  "94011": {
+   "Id": 94011,
+   "Name": "1プレイの間にスキルを合計7回発動させよう",
+   "MissionConditionType": 931,
+   "MissionConditionNum": 7,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94012,
+   "SortOrder": 11,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3001002,
+     "Num": 1
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3004000,
+     "Num": 150000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006003,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006113,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006123,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006133,
+     "Num": 25
+    }
+   ]
+  },
+  "94012": {
+   "Id": 94012,
+   "Name": "センタースキルを1回発動させよう",
+   "MissionConditionType": 933,
+   "MissionConditionNum": 1,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94013,
+   "SortOrder": 12,
+   "Rewards": [
+    {
+     "ItemType": 1,
+     "ItemId": 3006301,
+     "Num": 3
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3001002,
+     "Num": 2
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3004000,
+     "Num": 200000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006003,
+     "Num": 50
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006113,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006123,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006133,
+     "Num": 25
+    }
+   ]
+  },
+  "94013": {
+   "Id": 94013,
+   "Name": "1プレイの間にボルテージLv.を8以上にしよう",
+   "MissionConditionType": 941,
+   "MissionConditionNum": 8,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94014,
+   "SortOrder": 13,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3001002,
+     "Num": 2
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3004000,
+     "Num": 250000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005013,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005023,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005033,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3005043,
+     "Num": 25
+    }
+   ]
+  },
+  "94014": {
+   "Id": 94014,
+   "Name": "いずれかの楽曲でスコアを1500000以上獲得しよう",
+   "MissionConditionType": 911,
+   "MissionConditionNum": 1500000,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 94015,
+   "SortOrder": 14,
+   "Rewards": [
+    {
+     "ItemType": 1,
+     "ItemId": 3006301,
+     "Num": 3
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3001002,
+     "Num": 3
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3004000,
+     "Num": 300000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006003,
+     "Num": 50
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006113,
+     "Num": 50
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006123,
+     "Num": 50
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006133,
+     "Num": 50
+    }
+   ]
+  },
+  "94015": {
+   "Id": 94015,
+   "Name": "いずれかの楽曲でFULL COMBOを1回達成しよう",
+   "MissionConditionType": 921,
+   "MissionConditionNum": 1,
+   "MissionConditionDetail": 0,
+   "NextMissionsId": 0,
+   "SortOrder": 15,
+   "Rewards": [
+    {
+     "ItemType": 3,
+     "ItemId": 3002210,
+     "Num": 1
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3001002,
+     "Num": 3
+    },
+    {
+     "ItemType": 3,
+     "ItemId": 3004000,
+     "Num": 500000
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006114,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006124,
+     "Num": 25
+    },
+    {
+     "ItemType": 1,
+     "ItemId": 3006134,
+     "Num": 25
+    }
+   ]
+  }
+ }
+}

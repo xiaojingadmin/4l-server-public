@@ -1,0 +1,50 @@
+{
+  "collection_character_info": {
+    "character_id": 1032,
+    "name_last": "村野",
+    "name_first": "さやか",
+    "latin_alphabet_name_last": "Murano",
+    "latin_alphabet_name_first": "Sayaka",
+    "character_voice": "野中ここな",
+    "theme_color": "#5383c3",
+    "card_list": [
+      {
+        "card_datas_id": 10323050,
+        "voice_list": [
+          {
+            "voices_id": 103230501,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "voices_id": 103230502,
+            "priority": 2,
+            "is_opened": true
+          },
+          {
+            "voices_id": 103230503,
+            "priority": 3,
+            "is_opened": true
+          }
+        ],
+        "movie_list": [
+          {
+            "movies_id": 103230501,
+            "priority": 1,
+            "is_opened": true
+          },
+          {
+            "movies_id": 103230502,
+            "priority": 1,
+            "is_opened": false
+          },
+          {
+            "movies_id": 103230503,
+            "priority": 1,
+            "is_opened": false
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -2,8 +2,12 @@ package com.linklike.server.resource;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.linklike.server.config.ServerProperties;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,11 +49,14 @@ public class ClientDefaults {
     private static final String CLASSPATH_ROOT = "client_defaults/";
 
     private final ObjectMapper mapper;
+    private final ServerProperties config;
     private final PathMatchingResourcePatternResolver resolver;
     private final Map<String, Optional<Object>> cache = new java.util.concurrent.ConcurrentHashMap<>();
+    private volatile boolean externalDirWarned;
 
-    public ClientDefaults(ObjectMapper mapper) {
+    public ClientDefaults(ObjectMapper mapper, ServerProperties config) {
         this.mapper = mapper;
+        this.config = config;
         this.resolver = new PathMatchingResourcePatternResolver(getClass().getClassLoader());
     }
 
@@ -121,14 +128,16 @@ public class ClientDefaults {
 
     /** 启动日志用：把「缺客户端抽取产物」这件事明确说出来，不静默。 */
     public void logAvailability() {
+        String external = externalDir();
         List<String> extracted = fileNames(EXTRACTED_PREFIX);
         if (extracted.isEmpty()) {
-            log.warn("client_defaults 里没有 {}*.json（客户端抽取产物）。"
+            log.warn("client_defaults 里没有 {}*.json（客户端抽取产物）{}"
                             + "依赖它们的功能（初始卡、资料模板、收藏角色信息）会按「本机无此数据」处理，"
                             + "相关接口返回 501 而不是编造内容。",
-                    EXTRACTED_PREFIX);
+                    EXTRACTED_PREFIX, external.isEmpty() ? "。" : "（外部目录 " + external + "）。");
         } else {
-            log.info("client_defaults: {} 个客户端抽取文件可用", extracted.size());
+            log.info("client_defaults: {} 个客户端抽取文件可用{}", extracted.size(),
+                    external.isEmpty() ? "" : "（外部目录 " + external + "）");
         }
     }
 
@@ -141,6 +150,19 @@ public class ClientDefaults {
     // ------------------------------------------------------------------
 
     private Optional<Object> load(String fileName) {
+        String external = externalDir();
+        if (!external.isEmpty()) {
+            Path path = Path.of(external, fileName);
+            if (Files.isRegularFile(path)) {
+                try (InputStream in = Files.newInputStream(path)) {
+                    return Optional.ofNullable(mapper.readValue(in, new TypeReference<Object>() {
+                    }));
+                } catch (IOException e) {
+                    log.warn("读取外部 client_defaults/{} 失败: {}", fileName, e.getMessage());
+                    return Optional.empty();
+                }
+            }
+        }
         String location = "classpath*:" + CLASSPATH_ROOT + fileName;
         try {
             Resource[] resources = resolver.getResources(location);
@@ -160,21 +182,55 @@ public class ClientDefaults {
         return Optional.empty();
     }
 
+    /** 配置的客户端抽取目录；未配置或无效时返回空串。 */
+    private String externalDir() {
+        String dir = config.getClientDefaultsDir();
+        if (dir == null || dir.isBlank()) {
+            return "";
+        }
+        Path path = Path.of(dir.trim());
+        if (!Files.isDirectory(path)) {
+            if (!externalDirWarned) {
+                externalDirWarned = true;
+                log.warn("LINKLIKE_CLIENT_DEFAULTS_DIR={} 不是目录，回退到 classpath 的 client_defaults",
+                        path);
+            }
+            return "";
+        }
+        return path.toString();
+    }
+
     /** 枚举 {@code client_defaults/} 下的文件名（去掉目录与 {@code .json} 后缀）。 */
     private List<String> classpathNames() {
-        List<String> names = new ArrayList<>();
+        Map<String, String> names = new TreeMap<>();
+        String external = externalDir();
+        if (!external.isEmpty()) {
+            Path dir = Path.of(external);
+            if (Files.isDirectory(dir)) {
+                try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.json")) {
+                    for (Path file : stream) {
+                        String name = file.getFileName().toString();
+                        names.put(name.substring(0, name.length() - ".json".length()),
+                                name.substring(0, name.length() - ".json".length()));
+                    }
+                } catch (IOException e) {
+                    log.warn("枚举外部 client_defaults 目录 {} 失败: {}", dir, e.getMessage());
+                }
+            }
+        }
         try {
             Resource[] resources = resolver.getResources("classpath*:" + CLASSPATH_ROOT + "*.json");
             for (Resource resource : resources) {
                 String fileName = resource.getFilename();
                 if (fileName != null && fileName.endsWith(".json")) {
-                    names.add(fileName.substring(0, fileName.length() - ".json".length()));
+                    String name = fileName.substring(0, fileName.length() - ".json".length());
+                    names.put(name, name);
                 }
             }
         } catch (IOException e) {
             log.warn("枚举 client_defaults 目录失败: {}", e.getMessage());
         }
-        return names;
+        return new ArrayList<>(names.values());
     }
 
 }

@@ -51,6 +51,8 @@ linklike:
   # 目录型接口（表情、歌曲……）按这些 label 过滤掉客户端渲染不出来的条目；
   # 目录不存在时不过滤，与 Python 版「本机没有解码目录」的行为一致。
   resource-catalog-dir: ${LINKLIKE_RESOURCE_CATALOG_DIR:build/catalog}
+  # 客户端抽取产物目录；为空时只读 classpath，设置后优先读外部目录（例如本机参考数据目录）。
+  client-defaults-dir: ${LINKLIKE_CLIENT_DEFAULTS_DIR:}
   # 每个请求写一份 JSON 日志到 logs 目录，便于对照客户端行为排查。
   log-requests: ${LINKLIKE_LOG_REQUESTS:true}
   log-dir: ${LINKLIKE_LOG_DIR:build/server-profiles/5.1.0/logs}

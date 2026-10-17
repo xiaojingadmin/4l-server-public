@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/linklike;MODE=MariaDB;AUTO_SERVER=TRUE;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+
+logging:
+  level:
+    com.linklike.server: INFO

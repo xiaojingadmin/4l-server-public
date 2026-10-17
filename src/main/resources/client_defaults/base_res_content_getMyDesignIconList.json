@@ -1,0 +1,74 @@
+{
+  "my_design_list": [
+    {
+      "d_profile_my_designs_id": "c2be368c-3737-4030-b545-e78da0e5284d",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム1",
+      "is_setting": true
+    },
+    {
+      "d_profile_my_designs_id": "380dc6c3-edc3-46cf-ab8b-b763b4f94e92",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム2",
+      "is_setting": false
+    },
+    {
+      "d_profile_my_designs_id": "59efcf80-0427-46a1-8ca2-ace37bbd521b",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム3",
+      "is_setting": false
+    },
+    {
+      "d_profile_my_designs_id": "f4d136ec-d573-4b54-9060-eaec2ca5cb47",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム4",
+      "is_setting": false
+    },
+    {
+      "d_profile_my_designs_id": "086f0515-dafd-46f1-b5d7-758d7dc2edad",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム5",
+      "is_setting": false
+    },
+    {
+      "d_profile_my_designs_id": "9e090159-8693-4802-8b73-20b8ef80b8fe",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム6",
+      "is_setting": false
+    },
+    {
+      "d_profile_my_designs_id": "7491b4e6-da3f-4a2d-9f14-d326e12d09ea",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム7",
+      "is_setting": false
+    },
+    {
+      "d_profile_my_designs_id": "7c95be3d-24d6-4237-a74d-f197be37f3aa",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム8",
+      "is_setting": false
+    },
+    {
+      "d_profile_my_designs_id": "f61dad60-a939-4cce-a51d-76ccae146da9",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム9",
+      "is_setting": false
+    },
+    {
+      "d_profile_my_designs_id": "a010f795-4cec-46e3-af1d-462d0bbd6662",
+      "my_design_type": 2,
+      "my_design_parts_info": "{}",
+      "my_design_name": "カスタム10",
+      "is_setting": false
+    }
+  ]
+}

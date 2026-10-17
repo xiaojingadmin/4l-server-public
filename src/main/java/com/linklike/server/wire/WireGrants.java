@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.sql.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -73,9 +75,7 @@ public class WireGrants {
     private static final Set<String> WALLET_COLUMNS =
             Set.of("JewelFree", "JewelPaid", "MusicPoint", "StickerPointNum");
 
-    private static final String ITEM_QUERY =
-            "SELECT Id, Name, ItemType, ItemCategory, Rarity, LimitNum "
-                    + "FROM master_items WHERE Id = ?";
+    private static final String ITEM_QUERY = "SELECT * FROM master_items WHERE Id = ?";
 
     private final JdbcTemplate jdbc;
 
@@ -98,28 +98,48 @@ public class WireGrants {
      */
     public boolean available() {
         Boolean cached = masterAvailable;
-        if (cached == null) {
-            cached = probe();
-            masterAvailable = cached;
+        if (Boolean.TRUE.equals(cached)) {
+            return true;
         }
-        return cached;
+        // 只有「表不存在 / 表为空」这种明确结果才缓存；连接异常下次重试。
+        Boolean probed = probe();
+        if (probed == null) {
+            return false;
+        }
+        masterAvailable = probed;
+        return probed;
     }
 
-    private boolean probe() {
+    /** @return true/false 为明确结果；null 表示本次探测因连接错误无法判断 */
+    private Boolean probe() {
         try {
-            Long found = jdbc.queryForObject(
-                    "SELECT COUNT(*) FROM information_schema.tables "
-                            + "WHERE table_schema = DATABASE() AND table_name = 'master_items'",
-                    Long.class);
-            if (found == null || found == 0) {
+            Boolean exists = jdbc.execute((ConnectionCallback<Boolean>) connection -> {
+                try (ResultSet tables = connection.getMetaData().getTables(
+                        connection.getCatalog(), null, "%", new String[]{"TABLE"})) {
+                    while (tables.next()) {
+                        if ("master_items".equalsIgnoreCase(tables.getString("TABLE_NAME"))) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            });
+            if (!Boolean.TRUE.equals(exists)) {
                 log.warn("库里没有 master_items（Python 侧 admin/catalog.py 的提取产物）："
                         + "节奏游戏结算不发奖励，直接按「master catalog is unavailable」拒绝整单。");
                 return false;
             }
+            Long rows = jdbc.queryForObject("SELECT COUNT(*) FROM master_items", Long.class);
+            if (rows == null || rows == 0) {
+                log.warn("master_items 存在但为空：按「master catalog is unavailable」处理，"
+                        + "避免结算成功却静默跳过所有奖励。");
+                return false;
+            }
             return true;
         } catch (DataAccessException e) {
-            log.warn("查询 master_items 是否存在失败：{}", e.getMostSpecificCause().getMessage());
-            return false;
+            log.warn("查询 master_items 是否可用失败（下次请求重试）：{}",
+                    e.getMostSpecificCause().getMessage());
+            return null;
         }
     }
 
