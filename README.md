@@ -1,233 +1,165 @@
-# Link! Like! Love Live! 5.1.0 本地服务端（Spring Boot 版）
+# Link! Like! Love Live! 5.1.0 本地服务端 — 部署教程
 
-这是 Python 版本地私服的 Spring Boot 移植。协议行为、错误码形状、响应头与字段
-编码规则都以 Python 版为唯一依据；移植过程中不做「顺手改进」，以免客户端行为偏移。
+这是《Link! Like! Love Live!》5.1.0 版本的本地私服（Python 版的 Spring Boot 移植），
+运行所需的全部数据已随仓库分发，克隆下来就能部署，不需要外部数据目录。
 
-- 原项目：`xiaojingadmin/4l-server`（Python 标准库实现）
-- 本仓库：`xiaojingadmin/4l-server-public`
-- 目标版本：**只支持 5.1.0 协议**
-
-技术栈：Java 17 / Spring Boot 3.2.5 / Spring Data JPA / Flyway / MariaDB。
+> ⚠️ 本服务面向**隔离的本地测试**，登录校验与会话过期都不满足公开部署要求，**不要暴露到公网**。
 
 ---
 
-## 快速开始
+## 一、前置条件
 
-运行所需数据已随仓库分发，不需要外部数据目录。
+| 依赖 | 要求 | 说明 |
+| --- | --- | --- |
+| JDK | 17 或更高 | 仅运行（用别人打好的 jar）也需要 |
+| Maven | 3.8+ | 只有自己编译时需要 |
+| MariaDB | 10.6+ | 方式 A 需要；没有的话用方式 B（H2），零额外依赖 |
+| 客户端 | 5.1.0 版 | 服务端协议只针对 5.1.0，更高版本客户端未验证 |
+
+克隆仓库：
+
+```powershell
+git clone <本仓库地址> 4l-server
+cd 4l-server
+```
+
+（可选）校验随仓库分发的数据文件完整性：
+
+```powershell
+# 在仓库根目录执行，应输出 85 行 OK
+sha256sum -c data/MANIFEST.sha256
+```
+
+---
+
+## 二、选择数据库方式
+
+服务端支持两种数据库，二选一：
+
+| | 方式 A：MariaDB（默认） | 方式 B：H2 文件库 |
+| --- | --- | --- |
+| 适用 | 想要完整功能、长期使用 | 快速体验、没有 MariaDB 的机器 |
+| 额外依赖 | 需安装并运行 MariaDB | 无（数据库文件在 `data/` 下自动生成） |
+| 启动命令 | `mvn spring-boot:run` | `mvn spring-boot:run -Dspring-boot.run.profiles=h2` |
+
+两种方式启动时都会自动初始化表结构（Flyway），并在 `master_items` 表为空时从随仓库的
+`master_items_5.1.0.json`（939 行物品主表）写入种子数据。
+
+> H2 模式的限制：只自动导入 `master_items`；卡片成长、抽卡、商店结算等尚未迁移的领域
+> 接口仍按 501 处理，和 Python 版「缺 master 表」的行为一致。
+
+---
+
+## 三、启动服务
 
 ### 方式 A：MariaDB（默认）
 
-```powershell
-# 1. 准备 MariaDB（默认连接串 mysql://root@127.0.0.1:3306/linkura_5_1_0）
-#    库不存在且有 CREATE 权限时会自动建库，表结构由 Flyway 管理。
-#    启动时会把 client_defaults/master_items_<version>.json 写入空的 master_items。
+1. 安装并启动 MariaDB（默认连接 `127.0.0.1:3306`，账号 `root`，无密码）。
+2. 直接启动，库不存在且有 CREATE 权限时会自动建库：
 
-# 2. 编译并启动
-mvn spring-boot:run
+   ```powershell
+   mvn spring-boot:run
+   ```
 
-# 3. 健康检查
-curl http://127.0.0.1:8081/health
-```
+3. 看到启动日志后做健康检查：
 
-### 方式 B：H2 文件库（不需要 MariaDB）
+   ```powershell
+   curl http://127.0.0.1:8081/health
+   ```
+
+### 方式 B：H2 文件库
 
 ```powershell
 mvn spring-boot:run -Dspring-boot.run.profiles=h2
-# 数据库文件：data/linklike.mv.db
 curl http://127.0.0.1:8081/health
 ```
 
-H2 模式只自动导入 `master_items`；其它 master 表尚未迁移的领域接口仍按 501/空目录处理。
+数据库文件会生成在 `data/linklike.mv.db`，删除它即可重置存档。
 
-打包与运行：
+### 打包成 jar 运行（生产推荐）
 
 ```powershell
 mvn -DskipTests package
 java -jar target/linklike-server-5.1.0.jar
+# H2 方式：
 java -jar target/linklike-server-5.1.0.jar --spring.profiles.active=h2
 ```
 
+首次启动会注册 309 条路由（95 条已实现 + 214 条显式 501），日志里可据此确认数据加载正常。
+
 ---
 
-## 配置
+## 四、客户端接入
 
-配置在 `src/main/resources/application.yml`，全部键都可用环境变量覆盖。
+1. 服务端监听 `0.0.0.0:8081`（可用 `LINKLIKE_PORT` 改），客户端需要指向这台机器的 8081 端口。
+2. 按你使用的客户端改法，把 API 地址指向 `http://<服务器IP>:8081`。
+3. 客户端首次登录会自动创建新账号（本仓库不含任何真实账号数据）。
+
+若启用了 API Key（见下节），客户端还需要带上匹配的 `X-Api-Key` 请求头。
+
+---
+
+## 五、配置
+
+全部配置都在 `src/main/resources/application.yml`，所有键都可用环境变量覆盖：
 
 | 环境变量 | 默认值 | 说明 |
 | --- | --- | --- |
 | `LINKLIKE_PORT` | `8081` | 监听端口 |
-| `LINKLIKE_DATABASE_URL` | `jdbc:mariadb://127.0.0.1:3306/linkura_5_1_0` | 数据库连接串，也接受 Python 版格式 `mysql://user:pass@host:port/db` |
+| `LINKLIKE_DATABASE_URL` | `jdbc:mariadb://127.0.0.1:3306/linkura_5_1_0` | 数据库连接串；也接受 Python 版格式 `mysql://user:pass@host:port/db`，会自动转换 |
 | `LINKLIKE_DATABASE_USER` / `LINKLIKE_DATABASE_PASSWORD` | `root` / 空 | 数据库账号 |
 | `LINKLIKE_API_KEY` | `off` | 设为非 `off` 后请求必须匹配 `X-Api-Key`，否则 401 |
 | `LINKLIKE_REQUIRE_BEARER` | `false` | `true` 时强制所有 `/v1` 接口带有效 Bearer |
 | `LINKLIKE_LOG_REQUESTS` | `true` | 每个请求写一份脱敏 JSON 日志 |
 | `LINKLIKE_LOG_DIR` | `build/server-profiles/5.1.0/logs` | 请求日志目录 |
-| `LINKLIKE_RESOURCE_CATALOG_DIR` | `build/catalog` | 已解码资源目录（仓库已带 5.1.0/6.0.0），目录型接口据此过滤 |
-| `LINKLIKE_CLIENT_DEFAULTS_DIR` | 空 | 可选外部抽取目录；为空时读 classpath 的 `client_defaults/`。运行不需要设置 |
-| `LINKLIKE_OFFICIAL_API` | `false` | 保留键；当前 Java 版尚未实现官方 API 回源，设为 `true` 也不会改变空列表行为 |
+| `LINKLIKE_RESOURCE_CATALOG_DIR` | `build/catalog` | 已解码资源目录（仓库已带 5.1.0/6.0.0），目录型接口据此过滤，保持默认即可 |
+| `LINKLIKE_CLIENT_DEFAULTS_DIR` | 空 | 可选外部抽取目录；为空时读仓库内置的 `client_defaults/`，**部署时不需要设置** |
+| `LINKLIKE_OFFICIAL_API` | `false` | 保留键；当前 Java 版尚未实现官方 API 回源 |
 
-`LINKLIKE_RESOURCE_CATALOG_DIR` 指向 `verify_resource_catalog.py --output-dir` 的产物，
-里面按 `<client_version>-<Rversion>/catalog_entries.json` 分版本存放。目录型接口（表情、
-歌曲……）会据此丢掉资源包里没有对应 label 的条目 —— 客户端加载界面遇到不存在的资源会一直
-等下去，所以这一步不能省。**目录不存在时不过滤**，与 Python 版「本机没有解码目录」的行为
-一致；启动日志会明确写明过滤是否生效。
-
-`LINKLIKE_DATABASE_URL` 写成 Python 版格式时，`mysql://user:pass@host:3306/db` 会被
-转换成对应的 JDBC 连接串，方便直接复用原项目的配置。
-
----
-
-## 目录结构
-
-```
-src/main/java/com/linklike/server/
-├─ LinkLikeServerApplication.java   # 启动类
-├─ config/        ServerProperties, MasterItemsSeeder # 配置与物品主表初始化
-├─ protocol/      J, WireCodec, WireModels, WireError, ErrorCodes
-│                 # 内部 PascalCase 数据 <-> 线上 snake_case 字段的编解码
-├─ resource/      ResourceManifest, ResourceChecksum, ResourceCatalogLabels
-│                 # 资源版本解析（CRC-64 + VLQ + Base32）、XXH64 下载校验和、
-│                 # 已解码资源目录的 label 集合
-├─ domain/        Player, PlayerState, RefCatalogEntry, SessionRecord, IdempotencyKey
-├─ repository/    对应的 Spring Data JPA 仓库
-├─ service/       PlayerStore, PlayerContext     # 玩家/会话/状态的持久化门面
-├─ web/           GameHeaders, ...               # /v1 响应头与 HTTP 层
-└─ wire/          WireRouter, WireModule, WireHandler, WireRequest, WireServices,
-│                 WireShop, WireDeckModule, WireAccountModule, 各 wire_* 模块
-src/main/resources/
-├─ application.yml / application-h2.yml
-├─ wire_models.json            # 949 个协议模型定义（运行时读取）
-├─ endpoints.json              # 353 个 5.1.0 API 方法清单
-├─ login_bonus_periods.json    # 登录奖励周期种子数据
-├─ client_defaults/            # 68 个客户端抽取/静态主表文件（含 5.1.0/6.0.0 物品表）
-└─ db/migration/V1__init.sql   # Flyway 初始 schema
-build/catalog/                  # 已解码资源目录（5.1.0 与 6.0.0）
-data/                           # master_5.1.0.db、cards.db、物品 JSON、校验清单与来源说明
-```
-
----
-
-## 迁移进度
-
-`wire_routes_5_1_0.json` 记录 Python 版支持的 315 条路径。默认 MariaDB 配置下实际实现 95 条，
-其余 214 条由 `RouteSnapshot` 注册为显式 501（连同别名共注册 309 条路由）—— 客户端看到的
-都是「未实现」，排查日志里能区分「还没移植」和「路径不存在」。
-
-已完整移植的模块：
-
-| Python | Java | 范围 |
-| --- | --- | --- |
-| `wire_api.py` 内联分支 | `WireApiModule` | 登录 / 注册 / 连携 / 教程 / 资料 / 首页 |
-| `wire_catalog.py` | `WireCatalog` | 客户端静态实体与参考目录 |
-| `wire_state.py` | `WireState` | 资料与首页读取模型 |
-| `wire_login_bonus.py` | `WireLoginBonus` | 登录奖励板与盖章 |
-| `wire_services.py`（部分） | `WireServices` | 资源过滤、目录叠加、日界、礼物盒行 |
-| `wire_shop.py`（部分） | `WireShop` | 道具持有数与新手任务进度 |
-| `wire_decks.py` | `WireDeckModule` | `/v1/user/deck/*` 全部 10 条 |
-| `wire_account.py` | `WireAccountModule` | 首页设置、公告、礼物盒、资料、收藏浏览、商店目录读取 |
-| `wire_rhythm.py` | `WireRhythmModule` | 节奏游戏与 SHOW live |
-
-两个接口暂时保留 501，原因写在这里避免被当成遗漏：
-
-- `/v1/common/get_header_announs`：Python 版返回 JSON 数组，而当前 `WireHandler` 契约只承载
-  对象；用 `{}` 冒充会让客户端反序列化失败。
-- `/v1/item_exchange/get_list`：依赖 `wire_shop` 的限购/解锁结算层（重置周期、Adv/Music
-  解锁、兑换状态），尚未移植，不能用未叠加的目录行冒充已结算结果。
-
-### 数据已随仓库分发
-
-运行数据已经复制进本目录，运行时不再访问外部参考服务端。
-
-| 路径 | 内容 |
-| --- | --- |
-| `src/main/resources/client_defaults/` | 68 个文件：20 个抽取结果 + 20 个 `.source.json`（合计 40 个 `base_res_content_*.json`）、静态 master JSON、`master_tsv/standardqueststages.tsv`、5.1.0/6.0.0 `master_items_*.json` |
-| `build/catalog/5.1.0-R2604100/` | 5.1.0 资源目录（`catalog_entries.json`、`verification.json`、samples、编码 blob） |
-| `build/catalog/6.0.0-R2606100/` | 6.0.0 资源目录，结构相同 |
-| `data/master_5.1.0.db` | 5.1.0 主表 SQLite（items 939 行） |
-| `data/cards.db` | 卡片主表 SQLite |
-| `data/master_items_5.1.0.json` | 939 行物品主表（12 列） |
-| `data/master_items_6.0.0.json` | 958 行物品主表（12 列） |
-| `data/MANIFEST.sha256` | 85 个随仓库数据文件的 SHA-256（client_defaults 68、catalog 12、data 5） |
-| `data/PROVENANCE.md` | 来源路径、导出命令与版本说明（来源信息集中在这里） |
-
-`MasterItemsSeeder` 在 MariaDB 或 H2 启动时检查 `master_items`：表为空时从
-`master_items_<clientVersion>.json` 建表并写入；已有数据则跳过。物品详情优先读数据库，
-数据库没有该行时才用静态 JSON 回退。没有 MariaDB 时使用 `h2` profile，不要依赖静态
-回退去启动默认 MariaDB 配置。
-
-外部目录的取用规则：外部文件存在时优先；外部文件不存在时回退 classpath；外部文件存在但
-解析失败时返回空并告警，**不会**静默改用 classpath；目录不存在时告警并回退 classpath。
-5.1.0/6.0.0 物品表都随仓库提供；服务端协议目标仍是 5.1.0，切换到 6.0.0 需要另行验证。
-
----
-
-## 与 Python 版的结构对应
-
-| Python | Java | 说明 |
-| --- | --- | --- |
-| `server.py` 的 `_users` / `_sessions` 字典 | `PlayerStore` + `PlayerContext` | 不再维护内存缓存，每次请求按需装载、显式保存 |
-| `server.py` 的 `build_common_game_headers` | `web/GameHeaders` | `/v1` 成功响应的游戏响应头 |
-| `wire_api.encode` | `protocol/WireCodec` | 只输出模型声明过的属性，嵌套模型递归编码 |
-| 各 `wire_*.py` 的 `ROUTES` + `dispatch` | `wire/*Module` 实现 `WireModule` | 一个模块注册自己的全部路由 |
-| `wire_services.py` 的目录/资源标签辅助函数 | `wire/WireServices` | 目前只有 `catalog_labels`/`with_resources`/`served`/`overlay` 这一层；该文件其余部分移植时继续往这里加 |
-| `build/catalog/<client>-<Rversion>/catalog_entries.json` | `resource/ResourceCatalogLabels` | 已解码资源目录的 label 集合，目录类接口据此过滤 |
-| `entity_schema.py` 动态建表 | `db/migration/V1__init.sql` | 改为显式 schema：核心标量独立成列，其余状态按 JSON 行存储 |
-| `resource_manifest.py` | `resource/ResourceManifest` | 已与 Python 版逐值比对通过 |
-| `resource_checksum.py` | `resource/ResourceChecksum` | 已与 Python 版逐值比对通过 |
-
-### 玩家状态为什么改成 JSON 行
-
-Python 版按 949 个协议模型动态生成「每个标量一列」的表，嵌套列表再拆子表。这在 JPA
-里无法映射，所以改成：
-
-1. `players` —— 需要被查询、索引的核心标量字段，一列一个；
-2. `player_state` —— 其余标量与全部集合型状态，按 `state_key` 存 JSON 行；
-3. `ref_catalogs` —— 官方 master / 参考目录，按 `catalog_key + entity_id` 存 JSON。
-
-键名沿用 Python 版的 PascalCase 拼写（`Cards`、`Decks`、`RhythmGameDecks`……），
-这样移植过来的业务代码能保持一对一的可读性，也不必随协议版本改表结构。
-
----
-
-## 开发
-
-编译校验（不写 `target/`，适合并行开发）：
+示例：改端口 + 指定远程 MariaDB：
 
 ```powershell
-mvn -B -q dependency:build-classpath -Dmdep.outputFile=cp.txt   # 首次
-powershell -NoProfile -File tools\verify-compile.ps1
+$env:LINKLIKE_PORT = "9090"
+$env:LINKLIKE_DATABASE_URL = "mysql://game:secret@192.168.1.10:3306/linkura_5_1_0"
+mvn spring-boot:run
 ```
-
-### 变更行覆盖率
-
-`tools/changed_line_coverage.py` 只统计本 lane 改动过的 Java 文件里、JaCoCo 认定为可执行的行。
-`pom.xml` 不绑定 JaCoCo 插件；按下面三条命令手动生成报告（JaCoCo 0.8.12 的 agent 与 CLI
-jar 已在本机 Maven 仓库；缺失时可用 `mvn dependency:get` 拉取）：
-
-```powershell
-mvn -B clean test "-DargLine=-javaagent:$env:USERPROFILE\.m2\repository\org\jacoco\org.jacoco.agent\0.8.12\org.jacoco.agent-0.8.12-runtime.jar=destfile=target/jacoco.exec"
-
-java -jar "$env:USERPROFILE\.m2\repository\org\jacoco\org.jacoco.cli\0.8.12\org.jacoco.cli-0.8.12-nodeps.jar" report target/jacoco.exec --classfiles target/classes --sourcefiles src/main/java --xml target/jacoco.xml
-
-python tools/changed_line_coverage.py
-```
-
-当前 lane（`MasterItemsSeeder.java` 42 行、`WireGrants.java` 23 行）的预期结果是：
-`"covered": 65, "executable": 65, "percent": 100.0`，`uncoveredLines` 为空。
 
 ---
 
-## 已知限制
+## 六、常见问题（FAQ）
 
-与 Python 版一致：本服务面向隔离的本地测试，**不要暴露到公网**。登录校验、第三方身份
-验证与会话过期都不满足公开部署要求。约 40 个写接口（付费、领奖、体力恢复、直播礼物等）
-在认证后显式返回 501，因为本地没有可核实的定价或结算规则；未实现的路径同样返回 501，
-不会用空对象伪装成功。
+**Q：启动时报数据库连接失败？**
+方式 A 先确认 MariaDB 已启动、账号密码与 `LINKLIKE_DATABASE_*` 一致；本机没有 MariaDB
+就直接用方式 B（`--spring.profiles.active=h2`），不需要任何数据库安装。
 
-数据与运行限制：
+**Q：`/health` 正常但客户端一直转圈？**
+确认客户端指向的 IP:端口正确；再查启动日志里「资源目录过滤」是否生效——目录型接口会按
+`build/catalog` 里解码好的资源 label 过滤，客户端加载界面遇到不存在的资源会一直等待。
+仓库已自带 5.1.0/6.0.0 两套目录，保持 `LINKLIKE_RESOURCE_CATALOG_DIR` 默认值即可。
 
-- `users.db`/`users.json` 未迁入；public 不含真实账号、会话或进度，首次运行创建新账号。
-- 默认 MariaDB 路径仍需要本机 MariaDB；`h2` profile 用目录内文件库，适合没有 MariaDB 的机器。
-- H2 只自动初始化 `master_items`；卡片成长、抽卡、商店结算等尚未迁移领域仍需要完整 master_* 数据。
-- 5.1.0 与 6.0.0 数据都已随仓库提供，但协议模型与业务代码仍以 5.1.0 为目标。
-- `data/` 约 3.9 MB、`build/catalog/` 约 60 MB；若托管平台有限制，使用 Git LFS 或 release asset，`data/MANIFEST.sha256` 用于校验。
+**Q：某个接口返回 501？**
+这是有意的：Python 版未实现的 214 条路径、以及约 40 个本地无法核实定价/结算规则的写接口
+（付费、领奖、直播礼物等）都会显式 501，不会用空对象伪装成功。登录/首页/卡组/商店目录等
+核心链路已完整实现。
+
+**Q：想重置存档？**
+H2 方式：停服后删除 `data/linklike.mv.db`。MariaDB 方式：删库或清空 `players` 表后重启。
+
+**Q：数据文件校验失败？**
+在仓库根目录重新执行 `sha256sum -c data/MANIFEST.sha256`，失败的文件用 `git checkout -- <文件>`
+恢复；来源与版本说明见 `data/PROVENANCE.md`。
+
+---
+
+## 附：仓库结构速查
+
+```
+src/main/resources/client_defaults/   # 68 个客户端抽取/静态主表文件（含 5.1.0/6.0.0 物品表）
+build/catalog/                        # 已解码资源目录（5.1.0-R2604100 与 6.0.0-R2606100）
+data/                                 # master_5.1.0.db、cards.db、物品 JSON、校验清单与来源说明
+src/main/resources/application.yml    # 全部配置（环境变量可覆盖）
+src/main/java/com/linklike/server/    # 服务端源码（config/protocol/resource/service/web/wire）
+```
+
+完整的设计说明（协议移植对照、玩家状态存储设计、路由实现范围）见原版 README 历史，
+或直接阅读源码注释。
