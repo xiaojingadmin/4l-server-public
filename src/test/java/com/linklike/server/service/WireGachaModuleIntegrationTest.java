@@ -441,4 +441,76 @@ class WireGachaModuleIntegrationTest {
     private static Map<String, Object> asMap(Object value) {
         return (Map<String, Object>) value;
     }
+
+    // ------------------------------------------------------------------
+    // 天井奖励
+    // ------------------------------------------------------------------
+
+    /** 奖池档位来自 {@code GachaPrizes.GachaPlayCount}，不是猜的。 */
+    @Test
+    void prizeReceiveGrantsTheTierOnceWhenPlayCountIsReached() {
+        long seriesId = 1050318L;
+        player.put("gacha_states", new ArrayList<>(List.of(
+                J.map("gacha_series_id", seriesId, "exec_count", 25, "paid_day", "",
+                        "paid_count", 0))));
+
+        // 第 20 抽档位（1050318002）已达成，第 30 抽档位尚未达成。
+        Map<String, Object> result = call("/v1/gacha/set_prize_receive",
+                J.map("gacha_series_id", seriesId, "gacha_prize_id", 1050318002L));
+        assertEquals(true, result.get("result"));
+
+        List<Map<String, Object>> receipts = player.rowsSnapshot("gacha_prize_receipts");
+        assertEquals(1, receipts.size());
+        assertEquals(List.of(1050318002L),
+                J.listOrEmpty(receipts.get(0).get("received_gacha_prize_list")).stream()
+                        .map(value -> J.longOr(value, 0L)).toList());
+    }
+
+    @Test
+    void prizeReceiveIsRefusedBeforeTheTierIsReached() {
+        long seriesId = 1050318L;
+        player.put("gacha_states", new ArrayList<>(List.of(
+                J.map("gacha_series_id", seriesId, "exec_count", 25, "paid_day", "",
+                        "paid_count", 0))));
+
+        WireError error = assertThrows(WireError.class, () ->
+                call("/v1/gacha/set_prize_receive",
+                        J.map("gacha_series_id", seriesId, "gacha_prize_id", 1050318003L)));
+        assertEquals(400, error.status());
+        assertTrue(player.rowsSnapshot("gacha_prize_receipts").isEmpty());
+    }
+
+    @Test
+    void prizeReceiveIsRefusedTwiceForTheSameTier() {
+        long seriesId = 1050318L;
+        player.put("gacha_states", new ArrayList<>(List.of(
+                J.map("gacha_series_id", seriesId, "exec_count", 25, "paid_day", "",
+                        "paid_count", 0))));
+        call("/v1/gacha/set_prize_receive",
+                J.map("gacha_series_id", seriesId, "gacha_prize_id", 1050318002L));
+
+        WireError error = assertThrows(WireError.class, () ->
+                call("/v1/gacha/set_prize_receive",
+                        J.map("gacha_series_id", seriesId, "gacha_prize_id", 1050318002L)));
+        assertEquals(400, error.status());
+        assertEquals(1, J.listOrEmpty(player.rowsSnapshot("gacha_prize_receipts").get(0)
+                .get("received_gacha_prize_list")).size());
+    }
+
+    /** 读接口的 {@code received_gacha_prize_list} 必须反映真实账本，不能恒为空。 */
+    @Test
+    void seriesListReportsTheReceivedPrizeLedger() {
+        long seriesId = 1050316L;
+        player.put("gacha_prize_receipts", new ArrayList<>(List.of(
+                J.map("gacha_series_id", seriesId,
+                        "received_gacha_prize_list", new ArrayList<>(List.of(1050318001L))))));
+
+        Map<String, Object> result = call("/v1/gacha/get_series_list", J.map());
+
+        Map<String, Object> row = J.rowsOr(result.get("gacha_series_list")).stream()
+                .filter(item -> ((Number) item.get("gacha_series_id")).longValue() == seriesId)
+                .findFirst().orElseThrow();
+        assertEquals(List.of(1050318001L), J.listOrEmpty(row.get("received_gacha_prize_list"))
+                .stream().map(value -> J.longOr(value, 0L)).toList());
+    }
 }

@@ -68,7 +68,7 @@ public class WireGachaModule implements WireModule {
             "Items", "Cards", "PetalCoinNum", "FanLevelDetails", "MemberFanLevels",
             "FanLevels", "FanLevel", "gacha_states", "gacha_points", "gacha_receipts",
             "select_ticket_balances", "select_ticket_exchange_receipts",
-            "gacha_point_exchange_receipts", "beginner_missions");
+            "gacha_point_exchange_receipts", "beginner_missions", "gacha_prize_receipts");
 
     private final WireServices services;
     private final WireCardMint mint;
@@ -94,6 +94,7 @@ public class WireGachaModule implements WireModule {
         router.register("/v1/gacha/set_purchase", this::purchase);
         router.register("/v1/gacha/set_select_ticket_exchange", this::selectTicketExchange);
         router.register("/v1/gacha/set_guarantee_point_exchange", this::guaranteePointExchange);
+        router.register("/v1/gacha/set_prize_receive", this::setPrizeReceive);
     }
 
     // ------------------------------------------------------------------
@@ -131,6 +132,97 @@ public class WireGachaModule implements WireModule {
             }
         }
         return null;
+    }
+
+    // ------------------------------------------------------------------
+    // 天井奖池（GachaPrizes / GachaPrizeDatas）
+    // ------------------------------------------------------------------
+
+    /** {@code ClientDefaults} 里 master 表的行缓存；两张表各读一次。 */
+    private volatile Map<Long, Map<Long, Map<String, Object>>> prizesBySeries;
+
+    private static List<Map<String, Object>> tableRows(Map<String, Object> master, String table) {
+        Map<String, Object> node = J.nodeOrEmpty(master.get("tables"));
+        return J.rowsOr(J.nodeOrEmpty(node.get(table)).get("rows"));
+    }
+
+    private Map<String, Object> gachaMaster() {
+        return defaults.object("gacha_master_5.1.0-R2604100").orElseGet(LinkedHashMap::new);
+    }
+
+    /**
+     * 各卡池的天井档位：{@code GachaPrizeId -> {play_count, items}}。
+     *
+     * <p>档位由 {@code GachaPrizes.GachaPlayCount} 决定，奖励明细在
+     * {@code GachaPrizeDatas}。两张表必须自洽（每档都有明细、Id 不重复），否则按缺失处理 ——
+     * 与本地其它静态表一致，不猜阈值、不发假奖励。
+     */
+    private Map<Long, Map<Long, Map<String, Object>>> prizesBySeries() {
+        Map<Long, Map<Long, Map<String, Object>>> cached = prizesBySeries;
+        if (cached != null) {
+            return cached;
+        }
+        synchronized (this) {
+            if (prizesBySeries == null) {
+                prizesBySeries = loadPrizes();
+            }
+            return prizesBySeries;
+        }
+    }
+
+    private Map<Long, Map<Long, Map<String, Object>>> loadPrizes() {
+        Map<String, Object> master = gachaMaster();
+        Map<Long, List<Map<String, Object>>> items = new LinkedHashMap<>();
+        for (Map<String, Object> row : tableRows(master, "gachaprizedatas.tsv")) {
+            items.computeIfAbsent(J.longOr(row.get("GachaPrizeId"), -1L), key -> new ArrayList<>())
+                    .add(row);
+        }
+        for (List<Map<String, Object>> rows : items.values()) {
+            rows.sort(java.util.Comparator.comparingInt(row -> J.intOr(row.get("OrderId"), 0)));
+        }
+        Map<Long, Map<Long, Map<String, Object>>> out = new LinkedHashMap<>();
+        for (Map<String, Object> row : tableRows(master, "gachaprizes.tsv")) {
+            long prizeId = J.longOr(row.get("Id"), -1L);
+            long seriesId = J.longOr(row.get("GachaSeriesId"), -1L);
+            List<Map<String, Object>> detail = items.get(prizeId);
+            if (prizeId < 0 || seriesId < 0 || detail == null) {
+                continue;
+            }
+            out.computeIfAbsent(seriesId, key -> new LinkedHashMap<>())
+                    .put(prizeId, J.map(
+                            "gacha_prize_id", prizeId,
+                            "play_count", J.longOr(row.get("GachaPlayCount"), 0L),
+                            "items", detail));
+        }
+        return out;
+    }
+
+    /** 该卡池已达成（抽数够）的档位，按 {@code play_count} 升序。 */
+    private List<Map<String, Object>> reachedPrizes(long seriesId, long execCount) {
+        List<Map<String, Object>> rows = new ArrayList<>();
+        for (Map<String, Object> prize : prizesBySeries()
+                .getOrDefault(seriesId, Map.of()).values()) {
+            if (J.longOr(prize.get("play_count"), Long.MAX_VALUE) <= execCount) {
+                rows.add(prize);
+            }
+        }
+        rows.sort(java.util.Comparator.comparingLong(
+                prize -> J.longOr(prize.get("play_count"), 0L)));
+        return rows;
+    }
+
+    /** 账号里该卡池已领取的档位 id（{@code received_gacha_prize_list} 的真实来源）。 */
+    private static List<Object> receivedPrizes(PlayerContext player, long seriesId) {
+        List<Object> out = new ArrayList<>();
+        for (Map<String, Object> row : player.rowsSnapshot("gacha_prize_receipts")) {
+            if (J.longOr(row.get("gacha_series_id"), Long.MIN_VALUE) != seriesId) {
+                continue;
+            }
+            for (Object id : J.listOrEmpty(row.get("received_gacha_prize_list"))) {
+                out.add(J.longOr(id, 0L));
+            }
+        }
+        return out;
     }
 
     /** {@code _time}：主数据里是 {@code 2025-11-20 03:00:00}（UTC，无时区后缀）。 */
@@ -367,7 +459,7 @@ public class WireGachaModule implements WireModule {
                             J.longOr(J.nodeOrEmpty(pool.get("master"))
                                     .get("GachaExchangePointId"), 0L)),
                     "user_series_exec_count", state.get("exec_count"),
-                    "received_gacha_prize_list", new ArrayList<>(),
+                    "received_gacha_prize_list", receivedPrizes(player, sid),
                     "user_single_ticket_num", ticketCount(player, pool),
                     "user_consective_ticket_num", 0,
                     "is_single_enable", enabled && J.longOr(price.get("SingleGachaPrice"), 0L) > 0,
@@ -984,6 +1076,69 @@ public class WireGachaModule implements WireModule {
             player.put("gacha_point_exchange_receipts", receipts);
             request.store().save(player);
             return J.map("receipt_items", WireServices.deepCopyJson(items));
+        } catch (RuntimeException e) {
+            rollback(player, before);
+            throw e;
+        }
+    }
+
+    /**
+     * 天井奖励领取 —— {@code GachaPrizes.GachaPlayCount} 是门槛，{@code exec_count} 是进度，
+     * 三个字段都来自可核实的主数据与账号状态，不猜。
+     *
+     * <p>只接受「抽数已达门槛且这一档没领过」的请求；同一档重复领取回 400，
+     * 与 Python 侧任务领奖的判定口径一致。
+     */
+    private Map<String, Object> setPrizeReceive(WireRequest request) {
+        PlayerContext player = request.requirePlayer();
+        long seriesId = WireServices.integer(request.body(), "gacha_series_id", (Long) null,
+                1, Integer.MAX_VALUE);
+        long prizeId = WireServices.integer(request.body(), "gacha_prize_id", (Long) null,
+                1, Long.MAX_VALUE);
+
+        Map<String, Object> prize = prizesBySeries()
+                .getOrDefault(seriesId, Map.of()).get(prizeId);
+        if (prize == null) {
+            throw WireError.notFound("Local gacha prize not found");
+        }
+        long execCount = J.longOr(stateRow(player, seriesId).get("exec_count"), 0L);
+        if (execCount < J.longOr(prize.get("play_count"), Long.MAX_VALUE)) {
+            throw WireError.badRequest("Gacha prize " + prizeId + " is not reachable yet");
+        }
+        List<Object> received = receivedPrizes(player, seriesId);
+        if (received.contains(prizeId)) {
+            throw WireError.badRequest("Gacha prize " + prizeId + " has already been received");
+        }
+
+        Map<String, Object> before = begin(player);
+        try {
+            for (Map<String, Object> item : J.rowsOr(prize.get("items"))) {
+                shop.grantReward(player, J.map(
+                        "ItemType", J.intOr(item.get("ItemType"), 0),
+                        "ItemId", J.intOr(item.get("ItemId"), 0),
+                        "Num", J.intOr(item.get("ItemNum"), 0)));
+            }
+            List<Map<String, Object>> receipts =
+                    new ArrayList<>(player.rowsSnapshot("gacha_prize_receipts"));
+            Map<String, Object> row = null;
+            for (Map<String, Object> candidate : receipts) {
+                if (J.longOr(candidate.get("gacha_series_id"), Long.MIN_VALUE) == seriesId) {
+                    row = candidate;
+                    break;
+                }
+            }
+            if (row == null) {
+                row = J.map("gacha_series_id", seriesId, "received_gacha_prize_list",
+                        new ArrayList<>());
+                receipts.add(row);
+            }
+            List<Object> owned = new ArrayList<>(J.listOrEmpty(
+                    row.get("received_gacha_prize_list")));
+            owned.add(prizeId);
+            row.put("received_gacha_prize_list", owned);
+            player.put("gacha_prize_receipts", receipts);
+            request.store().save(player);
+            return J.map("result", true);
         } catch (RuntimeException e) {
             rollback(player, before);
             throw e;

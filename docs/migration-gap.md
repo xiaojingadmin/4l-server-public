@@ -4,12 +4,13 @@ Python 版快照（`wire_api.SUPPORTED`）共 **315** 条路径，去掉 6 条�
 **309** 条，**309 条全部有真实 handler**，没有一条还靠 `RouteSnapshot` 兜底成「未实现」
 （`WireRouter.pending()` 为 0，日志为 `已注册 309 条（已实现 309，快照兜底 501 0）`）。
 
-- **308 条**与 Python 版语义一致地实现（读接口照原样返回，写接口照原样结算）。
+- **306 条**与 Python 版语义一致地实现（读接口照原样返回，写接口照原样结算）。
   其中 `mission/get_list` 有一处刻意增强：Python 只回目录原值（`achieved_num`
   恒为 0），Java 版按账号真实状态派生进度（见下「关卡任务进度」）。
-- **1 条**原本在 Python 版 `UNIMPLEMENTED_WRITES` 里、现在已有真实结算：
-  `step_up_beginner_mission/set_reward`（见下「任务领奖」）。
-- **33 条**仍是「有 handler 的 501」：要真实的付费、定价或归属规则，本地没有可核实的
+- **3 条**原本在 Python 版 `UNIMPLEMENTED_WRITES` 里、现在已有真实结算：
+  `step_up_beginner_mission/set_reward` 与 `gacha/set_prize_receive`
+  （见「任务领奖」「抽卡天井奖励」），其中 `set_prize_receive` 的读接口也一并修正。
+- **32 条**仍是「有 handler 的 501」：要真实的付费、定价或归属规则，本地没有可核实的
   依据，宁可不做，也不发明数值。清单见下。
 
 ## 任务领奖（已实现）
@@ -88,17 +89,36 @@ Python 版快照（`wire_api.SUPPORTED`）共 **315** 条路径，去掉 6 条�
 `H2ProfileSmokeTest.everySnapshotRouteHasAHandler` 断言 `WireRouter.pending()` 为空，
 所以以后新增未移植路径会直接让构建失败，而不是静默退回 501。
 
-## 显式 501 的写接口（33 条）
+## 抽卡天井奖励（已实现，但当前卡池不可达）
+
+`/v1/gacha/set_prize_receive` 的判定链全部来自可核实数据：门槛取
+`gacha_master_5.1.0-R2604100.json` 的 `gachaprizes.tsv.GachaPlayCount`，进度取账号
+`gacha_states.exec_count`，奖励明细取 `gachaprizedatas.tsv`（按 `OrderId` 排序），
+领取记录写账号键 `gacha_prize_receipts`。重复领取与未达门槛都返回 400，整体失败回滚。
+
+同时修正了读接口：`get_series_list` 的 `received_gacha_prize_list` 原来恒为空数组
+（Python 也如此），现在按账号账本返回。
+
+**限制**：`gachaprizes` 只覆盖系列 `1050318` 与 `1050408`（40 个档位），而
+`gacha_catalog.json` 里可抽的 9 个池（`1050316`、`1050505/06/09/10/11`、
+`1055001/02/03`）与这两个系列**没有交集**。也就是说这段结算逻辑本身可测、可核对，
+但当前阵容下没有可实际触达的卡池；等主数据补上对应系列的档位后自动生效。
+77 个奖池道具在 `shop_catalog.items` 中全部可解析，`ItemType` 仅有 1 和 3，都在
+`grantReward` 的支持范围内。
+
+## 显式 501 的写接口（32 条）
 
 这些接口要真实的定价、归属、资格校验和原子结算；本地没有可核实的规则，宁可不做。
-其中 32 条与 Python `UNIMPLEMENTED_WRITES` 一一对应，`mission/receive_common_mission_reward` 是清单里唯一一条「定义已拿到、缺推进规则」的。
-注意它们是「有 handler 的 501」：路径存在、认证先过，然后拒绝，和 Python 的返回码一致。
+其中 7 条来自 Python `wire_account.UNIMPLEMENTED_WRITES`（该清单原 8 条，
+`gacha/set_prize_receive` 已改为真实结算）；另外 25 条是 Java 侧遇到缺失主数据或
+未核实定价时自行返回的 501，Python 对应分支返回的是同一个码。
+`mission/receive_common_mission_reward` 是其中唯一一条「定义已拿到、缺推进规则」的。
+注意它们都是「有 handler 的 501」：路径存在、认证先过，然后拒绝。
 
 ### 商店 / 交换 / 抽卡点数
 
 - `/v1/jewel_shop/set_purchase`
 - `/v1/jewel_shop/set_membership_purchase`
-- `/v1/gacha/set_prize_receive`
 - `/v1/profile/use_fanlevel_point_stocks`
 
 ### 章节点数

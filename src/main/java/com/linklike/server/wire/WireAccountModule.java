@@ -62,7 +62,6 @@ public class WireAccountModule implements WireModule {
             "/v1/profile/use_fanlevel_point_stocks",
             "/v1/jewel_shop/set_purchase",
             "/v1/jewel_shop/set_membership_purchase",
-            "/v1/gacha/set_prize_receive",
             "/v1/chapter/claim_point_reward",
             "/v1/chapter/claim_point_rewards",
             "/v1/chapter/receive_mission_point",
