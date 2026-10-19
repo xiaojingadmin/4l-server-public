@@ -65,7 +65,6 @@ class WireCardModuleIntegrationTest {
         ClientDefaults defaults = new ClientDefaults(mapper, config);
         WireModels models = new WireModels(mapper);
         WireCardMaster master = new WireCardMaster(defaults);
-        new WireFanCatalog(master);
         WireShop shop = new WireShop(defaults);
         router = new WireRouter(
                 List.of(new WireCardModule(master, shop, new WireCodec(models),

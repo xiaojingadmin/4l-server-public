@@ -84,7 +84,10 @@ public class WireStoryModule implements WireModule {
         if (status != null && status != WATCHABLE_ABLE) {
             throw WireError.badRequest("Adventure is not watchable");
         }
-        Map<String, Object>[] episode = storyEpisode(advId);
+        Map<String, Object>[] episode = storyEpisode(
+                WireServices.overlayNested(services.refs("story_months"),
+                        player.rows("activity_records"), "adv_series_id",
+                        "adv_info_list", "adv_data_id", INNER_FIELDS, GROUP_FIELDS), advId);
         List<Object> rewards = new ArrayList<>(
                 J.listOrEmpty(J.nodeOrEmpty(episode[1]).get("watch_reward_list")));
         Object series = episode[0] == null ? null : episode[0].get("adv_series_id");
@@ -105,7 +108,10 @@ public class WireStoryModule implements WireModule {
                 || J.intOr(spec.get("AdvUnlockItemNum"), 0) <= 0) {
             throw WireError.badRequest("Adventure does not require an unlock item");
         }
-        Map<String, Object>[] episode = storyEpisode(advId);
+        Map<String, Object>[] episode = storyEpisode(
+                WireServices.overlayNested(services.refs("story_months"),
+                        player.rows("activity_records"), "adv_series_id",
+                        "adv_info_list", "adv_data_id", INNER_FIELDS, GROUP_FIELDS), advId);
         if (episode[1] == null || !(episode[0].get("adv_series_id") instanceof Integer)) {
             throw WireError.notFound("Local adventure not found");
         }
@@ -171,10 +177,13 @@ public class WireStoryModule implements WireModule {
         return row;
     }
 
-    /** 目录里这一话所属的月份与章节；找不到时返回 {@code {null, null}}。 */
+    /**
+     * 目录里这一话所属的月份与章节；找不到时返回 {@code {null, null}}。
+     * 月份表由调用方取好后传入：{@code refs} 每调一次都深拷贝整个目录。
+     */
     @SuppressWarnings("unchecked")
-    private Map<String, Object>[] storyEpisode(int advId) {
-        for (Map<String, Object> month : services.refs("story_months")) {
+    private Map<String, Object>[] storyEpisode(List<Map<String, Object>> months, int advId) {
+        for (Map<String, Object> month : months) {
             for (Map<String, Object> row : J.rowsOr(month.get("adv_info_list"))) {
                 if (J.intOr(row.get("adv_data_id"), Integer.MIN_VALUE) == advId) {
                     return new Map[] {month, row};

@@ -77,6 +77,8 @@ public class WireCardMint {
                 J.nodeOrEmpty(master().get("characters")).get(String.valueOf(row.get("CharactersId"))));
 
         List<Map<String, Object>> skills = new ArrayList<>();
+        // 技能三种类型：1=SpecialAppeal、2=Skill、3=Attribute。第三项的 series 就是
+        // AttributeId，与 Python admin/grants.py 的 mint_card 一致，不是笔误。
         Object[][] skillSeries = {
                 {1, row.get("SpecialAppealSeriesId")},
                 {2, row.get("SkillSeriesId")},

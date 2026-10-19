@@ -2,7 +2,6 @@ package com.linklike.server.wire;
 
 import com.linklike.server.config.ServerProperties;
 import com.linklike.server.protocol.J;
-import com.linklike.server.protocol.WireCodec;
 import com.linklike.server.service.PlayerContext;
 import java.time.Instant;
 import java.util.ArrayList;

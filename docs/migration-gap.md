@@ -7,7 +7,7 @@ Python 版快照（`wire_api.SUPPORTED`）共 **315** 条路径，去掉 6 条�
 - **306 条**与 Python 版语义一致地实现（读接口照原样返回，写接口照原样结算）。
   其中 `mission/get_list` 有一处刻意增强：Python 只回目录原值（`achieved_num`
   恒为 0），Java 版按账号真实状态派生进度（见下「关卡任务进度」）。
-- **3 条**原本在 Python 版 `UNIMPLEMENTED_WRITES` 里、现在已有真实结算：
+- **2 条**原本在 Python 版 `UNIMPLEMENTED_WRITES` 里、现在已有真实结算：
   `step_up_beginner_mission/set_reward` 与 `gacha/set_prize_receive`
   （见「任务领奖」「抽卡天井奖励」），其中 `set_prize_receive` 的读接口也一并修正。
 - **32 条**仍是「有 handler 的 501」：要真实的付费、定价或归属规则，本地没有可核实的
@@ -109,9 +109,10 @@ Python 版快照（`wire_api.SUPPORTED`）共 **315** 条路径，去掉 6 条�
 ## 显式 501 的写接口（32 条）
 
 这些接口要真实的定价、归属、资格校验和原子结算；本地没有可核实的规则，宁可不做。
-其中 7 条来自 Python `wire_account.UNIMPLEMENTED_WRITES`（该清单原 8 条，
-`gacha/set_prize_receive` 已改为真实结算）；另外 25 条是 Java 侧遇到缺失主数据或
-未核实定价时自行返回的 501，Python 对应分支返回的是同一个码。
+其中 12 条来自 Python 的两张 `UNIMPLEMENTED_WRITES` 清单（`wire_account` 8 条 +
+`wire_services` 6 条，去重后共 14 条，其中 `gacha/set_prize_receive` 与
+`step_up_beginner_mission/set_reward` 已改为真实结算）；另外 20 条是 Java 侧遇到缺失
+主数据或未核实定价时自行返回的 501，Python 对应分支返回的是同一个码。
 `mission/receive_common_mission_reward` 是其中唯一一条「定义已拿到、缺推进规则」的。
 注意它们都是「有 handler 的 501」：路径存在、认证先过，然后拒绝。
 
