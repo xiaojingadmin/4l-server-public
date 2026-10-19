@@ -7,9 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +26,9 @@ import com.linklike.server.protocol.WireModels;
 import com.linklike.server.resource.ClientDefaults;
 import com.linklike.server.resource.ResourceCatalogLabels;
 import com.linklike.server.wire.RouteSnapshot;
+import com.linklike.server.wire.WireHandler;
 import com.linklike.server.wire.WireMissionModule;
+import com.linklike.server.wire.WireRequest;
 import com.linklike.server.wire.WireRouter;
 import com.linklike.server.wire.WireServices;
 import com.linklike.server.wire.WireShop;
@@ -318,6 +325,100 @@ class WireMissionRewardTest {
             }
         }
         return null;
+    }
+
+    // ------------------------------------------------------------------
+    // 横幅奖励
+    // ------------------------------------------------------------------
+
+    @Test
+    void bannerRewardFailureLeavesNothingPersisted() {
+        // 奖励列表里只要有一条不可核实，grantReward 就抛 501，handler 不会走到 save。
+        // 前面几条已写进本请求的 PlayerContext（和 Python 一样是就地改），靠 dispatch
+        // 的 @Transactional 整体回滚丢弃，所以这里只锁「没有落库」这条不变量。
+        WireShop spied = spy(shop);
+        doReturn(List.of(
+                J.map("ItemType", 3, "ItemId", 1002001, "Num", 1000),
+                J.map("ItemType", 2, "ItemId", 2003071, "Num", 1)))
+                .when(spied).bannerRewards(anyInt());
+        WireRouter bannerRouter = new WireRouter(
+                List.of(new WireMissionModule(spied,
+                        new WireServices(mock(RefCatalogStore.class),
+                                new ResourceCatalogLabels(new ServerProperties(),
+                                        new ObjectMapper())))),
+                new RouteSnapshot(new ObjectMapper()));
+
+        player.put("beginner_missions", beginnerGroupsAllClaimed(91));
+
+        WireError error = assertThrows(WireError.class, () -> {
+            WireHandler handler = bannerRouter.resolve("/v1/beginner_mission/set_banner_reward");
+            assertNotNull(handler);
+            handler.handle(new WireRequest("/v1/beginner_mission/set_banner_reward",
+                    J.map("mission_type", 91), Map.of(), player, store, new ObjectMapper(),
+                    new ServerProperties()));
+        });
+
+        assertEquals(501, error.status());
+        verify(store, never()).save(any());
+        // is_received 只写在 draft 副本上，失败时不会传播到账号状态。
+        assertFalse(J.boolOr(firstGroup(player, 91).get("is_received"), true));
+    }
+
+    @Test
+    void bannerRewardSucceedsOnceEveryMissionOfThatTypeIsClaimed() {
+        player.put("beginner_missions", beginnerGroupsAllClaimed(91));
+        long jewelBefore = player.entity().jewelFree;
+
+        Map<String, Object> result = call("/v1/beginner_mission/set_banner_reward",
+                J.map("mission_type", 91));
+
+        assertTrue(result.isEmpty());
+        assertEquals(jewelBefore + 1000, player.entity().jewelFree);
+        assertTrue(J.boolOr(firstGroup(player, 91).get("is_received"), false));
+        verify(store).save(player);
+    }
+
+    @Test
+    void bannerRewardIsRejectedOnSecondClaim() {
+        player.put("beginner_missions", beginnerGroupsAllClaimed(91));
+        call("/v1/beginner_mission/set_banner_reward", J.map("mission_type", 91));
+
+        WireError error = assertThrows(WireError.class,
+                () -> call("/v1/beginner_mission/set_banner_reward", J.map("mission_type", 91)));
+
+        assertEquals(400, error.status());
+    }
+
+    /** 把某一类新手任务全部标成已达成且未领取，只留横幅奖励可领。 */
+    private List<Map<String, Object>> beginnerGroupsAllClaimed(int missionType) {
+        List<Map<String, Object>> missions = new ArrayList<>();
+        for (Map<String, Object> spec : shop.missionSpecs(missionType)) {
+            missions.add(J.map("mission_id", J.intOr(spec.get("Id"), 0),
+                    "achieved_num", J.intOr(spec.get("Condition"), 0),
+                    "status", WireShop.BEGINNER_MISSION_COMPLETED));
+        }
+        return new ArrayList<>(List.of(
+                J.map("mission_type", missionType, "is_received", false,
+                        "mission_list", missions)));
+    }
+
+    private static Map<String, Object> firstGroup(PlayerContext player, int missionType) {
+        for (Map<String, Object> group : player.rowsSnapshot("beginner_missions")) {
+            if (J.intOr(group.get("mission_type"), -1) == missionType) {
+                return group;
+            }
+        }
+        throw new AssertionError("缺少新手任务分组 " + missionType);
+    }
+
+    private Map<String, Object> call(String path, Map<String, Object> body) {
+        WireHandler handler = router.resolve(path);
+        assertNotNull(handler, path + " 未注册");
+        @SuppressWarnings("unchecked")
+        Map<String, Object> result = (Map<String, Object>) handler.handle(
+                new WireRequest(path, body, Map.of(), player, store, new ObjectMapper(),
+                        new ServerProperties()));
+        return result;
     }
 
     private Map<String, Object> missionRow(int missionType, int missionId) {

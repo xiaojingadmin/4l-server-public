@@ -104,6 +104,9 @@ public class WireMissionModule implements WireModule {
             throw new WireError(501, "Missing verified banner reward definition");
         }
         // 与 Python 一样先在本请求的副本上判定，再改状态；失败时副本整体丢弃。
+        // 注意 grantReward 是就地改 player 的：中途抛 501 时前几条已在内存里入账，
+        // 需要靠 dispatch 的 @Transactional 回滚才不会留下半笔奖励。别把这个方法
+        // 挪出事务边界，否则一条 501 就能让「未领取」与「已入账」并存。
         List<Map<String, Object>> draft = WireShop.copyMissions(player);
         List<Map<String, Object>> rows = new ArrayList<>();
         for (Map<String, Object> spec : specs) {

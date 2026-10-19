@@ -172,6 +172,18 @@ class WireStoryModuleIntegrationTest {
     }
 
     @Test
+    void watchingAnEpisodeWithoutAnUnlockSpecReturnsNoRewards() {
+        // 主数据里没有这条 adv_unlocks（Python 的 adv_spec 返回 None）时，
+        // _watchable_status 返回 None，play_adv_data 不算锁定、也不抛错，
+        // 只回一个空的 watch_reward_list。
+        Map<String, Object> result = call("/v1/activity_record/play_adv_data",
+                Map.of("adv_data_id", 99999999));
+
+        assertEquals(List.of(), J.rowsOr(result.get("watch_reward_list")));
+        assertTrue(player.rows("activity_records").isEmpty());
+    }
+
+    @Test
     void notifyMonthDisplayedCreatesTheAccountRow() {
         call("/v1/activity_record/notify_month_displayed", Map.of("adv_series_id", SERIES));
 
