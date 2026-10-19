@@ -68,7 +68,8 @@ class WireCardModuleIntegrationTest {
         new WireFanCatalog(master);
         WireShop shop = new WireShop(defaults);
         router = new WireRouter(
-                List.of(new WireCardModule(master, shop, new WireCodec(models))),
+                List.of(new WireCardModule(master, shop, new WireCodec(models),
+                        new WireFanCatalog(master))),
                 new RouteSnapshot(mapper));
 
         store = mock(PlayerStore.class);

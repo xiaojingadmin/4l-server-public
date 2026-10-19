@@ -2,7 +2,6 @@ package com.linklike.server.wire;
 
 import com.linklike.server.protocol.J;
 import com.linklike.server.protocol.WireModels;
-import com.linklike.server.resource.ClientDefaults;
 import com.linklike.server.service.PlayerContext;
 import com.linklike.server.service.RefCatalogStore;
 import java.util.ArrayList;
@@ -31,31 +30,27 @@ public class WireCardMint {
 
     private static final String INITIAL_CARDS = "initial_cards";
 
-    private final ClientDefaults defaults;
     private final RefCatalogStore catalogs;
     private final WireModels models;
+    private final WireCardMaster masterData;
+    private final WireFanLevel.Catalog fanCatalog;
 
-    private volatile Map<String, Object> master;
-
-    public WireCardMint(ClientDefaults defaults, RefCatalogStore catalogs, WireModels models) {
-        this.defaults = defaults;
+    public WireCardMint(RefCatalogStore catalogs, WireModels models, WireCardMaster masterData,
+                        WireFanLevel.Catalog fanCatalog) {
         this.catalogs = catalogs;
         this.models = models;
+        this.masterData = masterData;
+        this.fanCatalog = fanCatalog;
     }
 
     /** 卡主数据（{@code cards} / {@code rarities} / {@code characters} / 上限表）。 */
     public Map<String, Object> master() {
-        Map<String, Object> cached = master;
-        if (cached == null) {
-            cached = defaults.object("card_master_5.1.0").orElseGet(LinkedHashMap::new);
-            master = cached;
-        }
-        return cached;
+        return masterData.master();
     }
 
     /** 主数据 {@code CardDatas} 行；缺失返回 null。 */
     public Map<String, Object> card(long cardDatasId) {
-        return J.nodeOr(J.nodeOrEmpty(master().get("cards")).get(String.valueOf(cardDatasId)));
+        return masterData.card(cardDatasId);
     }
 
     /**
@@ -147,7 +142,7 @@ public class WireCardMint {
         List<Map<String, Object>> cards = new ArrayList<>(player.rows("Cards"));
         cards.add(card);
         player.put("Cards", cards);
-        WireFanLevel.obtained(player, card);
+        WireFanLevel.obtained(player, fanCatalog, card);
         return card;
     }
 

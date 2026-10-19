@@ -62,6 +62,9 @@ public class WireServices {
     /** 每日重置（04:00）用的时区，Python {@code wire_services._JST}。 */
     public static final ZoneOffset JST = ZoneOffset.ofHours(9);
 
+    /** Python {@code wire_services.PRESENT_PAGE_SIZE}；本地分页策略，不是推导出的奖励规则。 */
+    public static final int PRESENT_PAGE_SIZE = 50;
+
     private static final DateTimeFormatter PRESENT_TIME_FORMAT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 
@@ -83,7 +86,13 @@ public class WireServices {
 
     /** 导入的参考目录（例如 {@code sticker_collection}）的全部行，对应 Python {@code _refs}。 */
     public List<Map<String, Object>> refs(String catalogKey) {
-        return new ArrayList<>(catalogs.list(catalogKey));
+        // Python 的 _refs 会 deepcopy：调用方常在这份数据上原地改写（overlay/filter），
+        // 直接返回缓存行会把改动写回目录本身。
+        List<Map<String, Object>> rows = new ArrayList<>(catalogs.list(catalogKey).size());
+        for (Map<String, Object> row : catalogs.list(catalogKey)) {
+            rows.add(copyRow(row));
+        }
+        return rows;
     }
 
     /**

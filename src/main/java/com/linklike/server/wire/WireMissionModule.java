@@ -152,10 +152,8 @@ public class WireMissionModule implements WireModule {
 
     private Map<String, Object> serviceMissions(WireRequest request) {
         PlayerContext player = request.requirePlayer();
-        // 进度是账号状态的派生值：先在读接口上刷新，客户端拿到的才是当前真实进度。
-        if (shop.refreshServiceMissions(player)) {
-            request.store().save(player);
-        }
+        // 纯读：任务进度由同步流程写进 service_missions，读接口只做 overlay，
+        // 与 Python 的 /v1/mission/get_list 一致（不在 GET 上产生写操作）。
         return J.map(
                 "mission_list", WireServices.overlayNested(
                         services.refs("mission_groups"),

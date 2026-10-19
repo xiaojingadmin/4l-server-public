@@ -71,9 +71,13 @@ class WireShopModuleIntegrationTest {
                 new ResourceCatalogLabels(config, mapper));
         WireStore wireStore = new WireStore(defaults, catalogs);
         WireCatalog catalog = new WireCatalog(defaults, catalogs, models);
-        WireCardMint mint = new WireCardMint(defaults, catalogs, models);
+        com.linklike.server.wire.WireCardMaster cardMaster =
+                new com.linklike.server.wire.WireCardMaster(defaults);
+        WireCardMint mint = new WireCardMint(catalogs, models, cardMaster,
+                new com.linklike.server.wire.WireFanCatalog(cardMaster));
         router = new WireRouter(
-                List.of(new WireShopModule(wireStore, mint, catalog, services)),
+                List.of(new WireShopModule(wireStore, mint, catalog, services,
+                        new com.linklike.server.wire.WireFanCatalog(cardMaster))),
                 new RouteSnapshot(mapper));
 
         store = mock(PlayerStore.class);

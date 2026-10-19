@@ -42,11 +42,14 @@ public class WireCardModule implements WireModule {
     private final WireCardMaster master;
     private final WireShop shop;
     private final WireCodec codec;
+    private final WireFanLevel.Catalog fanCatalog;
 
-    public WireCardModule(WireCardMaster master, WireShop shop, WireCodec codec) {
+    public WireCardModule(WireCardMaster master, WireShop shop, WireCodec codec,
+                          WireFanLevel.Catalog fanCatalog) {
         this.master = master;
         this.shop = shop;
         this.codec = codec;
+        this.fanCatalog = fanCatalog;
     }
 
     @Override
@@ -265,7 +268,7 @@ public class WireCardModule implements WireModule {
         }
         long points = WireFanLevel.limitBreakPoints(
                 master.cardSeries(row.get("CardSeriesId")), times);
-        Map<String, Object> fan = fanGain(player, card, points, WireFanLevel.EARN_LIMIT_BREAK);
+        Map<String, Object> fan = fanGain(player, fanCatalog, card, points, WireFanLevel.EARN_LIMIT_BREAK);
 
         Map<String, Object> before = snapshot(player);
         try {
@@ -320,7 +323,7 @@ public class WireCardModule implements WireModule {
 
         long points = WireFanLevel.evolutionPoints(check.series,
                 check.next.get("EvolveTimes"));
-        Map<String, Object> fan = fanGain(player, card, points, WireFanLevel.EARN_EVOLUTION);
+        Map<String, Object> fan = fanGain(player, fanCatalog, card, points, WireFanLevel.EARN_EVOLUTION);
 
         Map<String, Object> before = snapshot(player);
         try {
@@ -720,10 +723,11 @@ public class WireCardModule implements WireModule {
     }
 
     /** 卡片的粉丝点数草稿（{@code fanlevel.draft} + {@code add_points}）。 */
-    private static Map<String, Object> fanGain(PlayerContext player, Map<String, Object> card,
-                                               long points, int earnType) {
+    private static Map<String, Object> fanGain(PlayerContext player,
+                                               WireFanLevel.Catalog fanCatalog,
+                                               Map<String, Object> card, long points, int earnType) {
         Map<String, Object> fan = WireFanLevel.draft(player, card.get("CharacterId"));
-        WireFanLevel.addPoints(fan, WireFanLevel.catalog(), card.get("CharacterId"), points,
+        WireFanLevel.addPoints(fan, fanCatalog, card.get("CharacterId"), points,
                 earnType, J.str(card.get("CardName")) == null ? "" : J.str(card.get("CardName")),
                 player.longOf("SeasonId", 0L));
         return fan;

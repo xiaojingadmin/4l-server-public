@@ -60,13 +60,15 @@ public class WireShopModule implements WireModule {
     private final WireCardMint mint;
     private final WireCatalog catalog;
     private final WireServices services;
+    private final WireFanLevel.Catalog fanCatalog;
 
     public WireShopModule(WireStore store, WireCardMint mint, WireCatalog catalog,
-                          WireServices services) {
+                          WireServices services, WireFanLevel.Catalog fanCatalog) {
         this.store = store;
         this.mint = mint;
         this.catalog = catalog;
         this.services = services;
+        this.fanCatalog = fanCatalog;
     }
 
     @Override
@@ -684,7 +686,7 @@ public class WireShopModule implements WireModule {
             throw WireError.notFound("Local petal-exchange card not found");
         }
         player.rows("Cards").add(card);
-        WireFanLevel.obtained(player, card);
+        WireFanLevel.obtained(player, fanCatalog, card);
     }
 
     private Set<Long> ownedSeries(PlayerContext player) {

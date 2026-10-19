@@ -21,7 +21,6 @@ public class WireFanCatalog implements WireFanLevel.Catalog {
 
     public WireFanCatalog(WireCardMaster master) {
         this.master = master;
-        WireFanLevel.install(this);
     }
 
     @Override

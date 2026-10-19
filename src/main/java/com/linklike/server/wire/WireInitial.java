@@ -60,7 +60,8 @@ public final class WireInitial {
      *
      * <p>对应 Python 版 {@code wire_initial.grant(player, db)}。
      */
-    public static boolean grant(PlayerContext player, WireCatalog catalog) {
+    public static boolean grant(PlayerContext player, WireCatalog catalog,
+                                WireFanLevel.Catalog fanCatalog) {
         if (!player.entity().registrationComplete) {
             return false;
         }
@@ -73,7 +74,6 @@ public final class WireInitial {
                 cards = seeded;
                 player.put("Cards", cards);
                 changed = true;
-                WireFanLevel.Catalog fanCatalog = WireFanLevel.catalog();
                 for (Map<String, Object> card : cards) {
                     WireFanLevel.cardObtained(player, fanCatalog, card);
                 }

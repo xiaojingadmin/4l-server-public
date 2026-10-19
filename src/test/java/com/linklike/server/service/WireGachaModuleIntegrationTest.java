@@ -66,7 +66,10 @@ class WireGachaModuleIntegrationTest {
 
         WireServices services = new WireServices(refs,
                 new ResourceCatalogLabels(config, mapper));
-        WireCardMint mint = new WireCardMint(defaults, refs, models);
+        com.linklike.server.wire.WireCardMaster cardMaster =
+                new com.linklike.server.wire.WireCardMaster(defaults);
+        WireCardMint mint = new WireCardMint(refs, models, cardMaster,
+                new com.linklike.server.wire.WireFanCatalog(cardMaster));
         WireShop shop = new WireShop(defaults);
         router = new WireRouter(
                 List.of(new WireGachaModule(services, mint, shop, defaults)),

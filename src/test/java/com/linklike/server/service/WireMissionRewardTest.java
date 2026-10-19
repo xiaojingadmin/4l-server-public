@@ -239,7 +239,7 @@ class WireMissionRewardTest {
     @Test
     void officialAccountExportIsReproducedExactly() throws Exception {
         // 基准：官方 /v1/mission/get_list 的 90 条任务 + 同账号的卡片/粉丝等级明细。
-        // 该账号 49 条可派生，全部要与官方 achieved_num 逐条一致。
+        // 该账号 50 条可派生，全部要与官方 achieved_num 逐条一致。
         Map<String, Object> fixture = new ObjectMapper().readValue(
                 getClass().getResourceAsStream("/mission_progress_official.json"),
                 new com.fasterxml.jackson.core.type.TypeReference<Map<String, Object>>() { });

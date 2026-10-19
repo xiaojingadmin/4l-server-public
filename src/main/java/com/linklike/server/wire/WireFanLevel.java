@@ -67,20 +67,6 @@ public final class WireFanLevel {
         Map<String, Object> cardSeries(Object cardSeriesId);
     }
 
-    /** Spring 启动时由 {@link WireFanCatalog} 装入的目录；单测里可以是 null。 */
-    private static volatile Catalog installed;
-
-    public static void install(Catalog catalog) {
-        installed = catalog;
-    }
-
-    /**
-     * 当前可用的目录。包装了 5.1.0 卡主数据之后不再是 null（见 {@link WireFanCatalog}）；
-     * 单测里没有 Spring 上下文时调用方仍要容忍 null。
-     */
-    public static Catalog catalog() {
-        return installed;
-    }
 
     // ------------------------------------------------------------------
     // 读
@@ -277,9 +263,10 @@ public final class WireFanLevel {
         return card;
     }
 
-    /** 用当前 store 打开的目录执行 {@link #cardObtained}（对应 {@code fanlevel.obtained}）。 */
-    public static Map<String, Object> obtained(PlayerContext player, Map<String, Object> card) {
-        return cardObtained(player, catalog(), card);
+    /** 对应 {@code fanlevel.obtained}；目录由调用方注入，不再依赖静态注册。 */
+    public static Map<String, Object> obtained(PlayerContext player, Catalog catalog,
+                                               Map<String, Object> card) {
+        return cardObtained(player, catalog, card);
     }
 
     private static Map<String, Object> seriesRow(Catalog catalog, Map<String, Object> card) {

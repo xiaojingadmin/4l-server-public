@@ -29,7 +29,7 @@ public class WireCardMaster {
         this.defaults = defaults;
     }
 
-    private Map<String, Object> master() {
+    Map<String, Object> master() {
         Map<String, Object> cached = master;
         if (cached == null) {
             cached = defaults.object("card_master_5.1.0").orElseGet(LinkedHashMap::new);
@@ -92,9 +92,9 @@ public class WireCardMaster {
         return rows;
     }
 
-    /** {@code SkillData.MaxSkillLevel}（{@code CardSkillSeriesId}）。 */
+    /** {@code SkillData.MaxSkillLevel}（{@code CardSkillSeriesId}）；缺失按 Python 回落到 1。 */
     public int skillCap(Object cardSkillSeriesId) {
-        return J.intOr(table("skill_caps").get(String.valueOf(cardSkillSeriesId)), 0);
+        return J.intOr(table("skill_caps").get(String.valueOf(cardSkillSeriesId)), 1);
     }
 
     /** {@code MaxLimitBreakTimes}（{@code CardSeriesId}）。 */

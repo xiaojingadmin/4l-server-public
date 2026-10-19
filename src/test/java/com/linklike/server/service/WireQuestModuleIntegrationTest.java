@@ -105,7 +105,10 @@ class WireQuestModuleIntegrationTest {
         WireServices services = new WireServices(refs, labels);
         WireQuestMaster master = new WireQuestMaster(defaults);
         WireShop shop = new WireShop(defaults);
-        WireCardMint mint = new WireCardMint(defaults, refs, new WireModels(mapper));
+        com.linklike.server.wire.WireCardMaster cardMaster =
+                new com.linklike.server.wire.WireCardMaster(defaults);
+        WireCardMint mint = new WireCardMint(refs, new WireModels(mapper), cardMaster,
+                new com.linklike.server.wire.WireFanCatalog(cardMaster));
         WireGrants grants = new WireGrants(mock(JdbcTemplate.class));
         WireQuestModule module = new WireQuestModule(codec, services, master, shop, mint,
                 grants, defaults);

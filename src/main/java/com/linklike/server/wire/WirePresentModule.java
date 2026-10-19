@@ -33,8 +33,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class WirePresentModule implements WireModule {
 
-    /** Python {@code wire_services.PRESENT_PAGE_SIZE}。 */
-    private static final int PRESENT_PAGE_SIZE = 50;
     private static final int RECEIPT_FAILED = 0;
     private static final int RECEIPT_SUCCESS = 1;
 
@@ -96,8 +94,8 @@ public class WirePresentModule implements WireModule {
                 pending.add(row);
             }
         }
-        int from = (int) Math.min(((long) page - 1) * PRESENT_PAGE_SIZE, pending.size());
-        int to = (int) Math.min((long) page * PRESENT_PAGE_SIZE, pending.size());
+        int from = (int) Math.min(((long) page - 1) * WireServices.PRESENT_PAGE_SIZE, pending.size());
+        int to = (int) Math.min((long) page * WireServices.PRESENT_PAGE_SIZE, pending.size());
 
         List<Map<String, Object>> success = new ArrayList<>();
         List<Map<String, Object>> failed = new ArrayList<>();

@@ -49,8 +49,6 @@ public class WireAccountModule implements WireModule {
     private static final int MAX_TEXT = 8192;
     private static final int MAX_ID_LENGTH = 128;
     private static final int PAGE_SIZE = 20;
-    /** Python {@code wire_services.PRESENT_PAGE_SIZE}。 */
-    private static final int PRESENT_PAGE_SIZE = 50;
     private static final int DECORATION_CARD = 1;
     private static final String CARD_HOME_MOVIE = "picture_ur_home_%d.usm";
 
@@ -606,8 +604,8 @@ public class WireAccountModule implements WireModule {
             player.entity().presentBoxCount = items.size();
             request.store().save(player);
         }
-        int from = (int) Math.min(((long) page - 1) * PRESENT_PAGE_SIZE, items.size());
-        int to = (int) Math.min((long) page * PRESENT_PAGE_SIZE, items.size());
+        int from = (int) Math.min(((long) page - 1) * WireServices.PRESENT_PAGE_SIZE, items.size());
+        int to = (int) Math.min((long) page * WireServices.PRESENT_PAGE_SIZE, items.size());
         return encode("PresentBoxGetListResponse", J.map(
                 "TotalCount", items.size(),
                 "Page", page,

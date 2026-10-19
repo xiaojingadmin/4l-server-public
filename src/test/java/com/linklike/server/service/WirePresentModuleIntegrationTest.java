@@ -68,7 +68,10 @@ class WirePresentModuleIntegrationTest {
         WireCodec codec = new WireCodec(models);
         WireShop shop = new WireShop(defaults);
         WireStore wireStore = new WireStore(defaults, mock(com.linklike.server.service.RefCatalogStore.class));
-        WireCardMint mint = new WireCardMint(defaults, mock(RefCatalogStore.class), models);
+        WireCardMint mint = new WireCardMint(mock(RefCatalogStore.class), models,
+                new com.linklike.server.wire.WireCardMaster(defaults),
+                new com.linklike.server.wire.WireFanCatalog(
+                        new com.linklike.server.wire.WireCardMaster(defaults)));
         WireGrants grants = new WireGrants(masterItems());
         WireServices services = new WireServices(mock(RefCatalogStore.class),
                 new ResourceCatalogLabels(config, mapper));

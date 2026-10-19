@@ -88,7 +88,7 @@ java -jar target/linklike-server-5.1.0.jar
 java -jar target/linklike-server-5.1.0.jar --spring.profiles.active=h2
 ```
 
-首次启动会注册 309 条路由（309 条都有 handler，其中 33 条按设计返回 501），日志里可据此确认数据加载正常。
+首次启动会注册 309 条路由（309 条都有 handler，其中 32 条按设计返回 501），日志里可据此确认数据加载正常。
 
 ---
 
