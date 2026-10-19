@@ -162,6 +162,26 @@ class WirePresentModuleIntegrationTest {
     }
 
     @Test
+    void receiveAllContinuesPastAnUngrantableRowInsteadOfFailing() {
+        // 队列中间混一条没有发放路径的记录：它进 receipt_failed_items，前后两条照常入账，
+        // 请求整体仍是 200。发放路径抛 IllegalArgumentException（Python 的 ValueError），
+        // 不能被当成请求级错误冒到 set_item_all 外面。
+        player.put("presents", rows(
+                present("ok-1", 1, UNLOCK_ITEM, 1),
+                present("bad", 7, 90000002L, 1),
+                present("ok-2", 1, UNLOCK_ITEM, 2)));
+
+        Map<String, Object> result = call("/v1/present_box/set_item_all", Map.of("page", 1));
+
+        assertEquals(1, result.get("result"));
+        assertEquals(2, J.rowsOr(result.get("receipt_success_items")).size());
+        assertEquals(1, J.rowsOr(result.get("receipt_failed_items")).size());
+        assertEquals(3L, itemNum(UNLOCK_ITEM));
+        assertEquals(List.of("bad"), player.rows("presents").stream()
+                .map(row -> row.get("DPresentBoxesId")).toList());
+    }
+
+    @Test
     void receiveAllCanIncludeExpiredItems() {
         player.put("presents", rows(
                 J.map("DPresentBoxesId", "expired", "ItemType", 1, "ItemId", UNLOCK_ITEM,

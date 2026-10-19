@@ -88,8 +88,9 @@ public class WireServices {
     public List<Map<String, Object>> refs(String catalogKey) {
         // Python 的 _refs 会 deepcopy：调用方常在这份数据上原地改写（overlay/filter），
         // 直接返回缓存行会把改动写回目录本身。
-        List<Map<String, Object>> rows = new ArrayList<>(catalogs.list(catalogKey).size());
-        for (Map<String, Object> row : catalogs.list(catalogKey)) {
+        List<Map<String, Object>> source = catalogs.list(catalogKey);
+        List<Map<String, Object>> rows = new ArrayList<>(source.size());
+        for (Map<String, Object> row : source) {
             rows.add(copyRow(row));
         }
         return rows;

@@ -135,6 +135,9 @@ public class WirePresentModule implements WireModule {
         try {
             apply(player, itemType, itemId, Math.max(num, 1));
         } catch (IllegalArgumentException | IllegalStateException e) {
+            // 发放路径只抛这两种（对应 Python 的 ValueError / 未知类型），逐条降级成
+            // ReceiptFailedItem；一旦这里冒出 WireError，set_item_all 会在中途变成
+            // 请求级错误，前面几条已入账的记录就只能靠事务回滚收拾。
             return false;
         }
         removePresent(player, presentIdent(row));
