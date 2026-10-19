@@ -10,6 +10,7 @@ import com.linklike.server.wire.WireRequest;
 import com.linklike.server.wire.WireRouter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -67,11 +68,17 @@ class H2ProfileSmokeTest {
     }
 
     @Test
+    void everySnapshotRouteHasAHandler() {
+        assertEquals(Set.of(), router.pending(),
+                "仍是快照兜底 501 的路径：" + router.pending());
+    }
+
+    @Test
     void getTermsHandlerIsImplemented() {
         WireHandler handler = router.resolve("/v1/register/getterms");
         assertNotNull(handler);
-        Map<String, Object> out = handler.handle(new WireRequest(
-                "/v1/register/getterms", Map.of(), Map.of(), null, null, mapper, config));
+        Map<String, Object> out = asMap(handler.handle(new WireRequest(
+                "/v1/register/getterms", Map.of(), Map.of(), null, null, mapper, config)));
         assertTrue(String.valueOf(out.get("terms")).contains("Local development server"));
     }
 
@@ -88,5 +95,10 @@ class H2ProfileSmokeTest {
         System.out.println("TERMS RESPONSE " + terms.getStatusCode() + " " + terms.getBody());
         assertEquals(HttpStatus.OK, terms.getStatusCode());
         assertTrue(terms.getBody().contains("terms"));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Map<String, Object> asMap(Object value) {
+        return (Map<String, Object>) value;
     }
 }

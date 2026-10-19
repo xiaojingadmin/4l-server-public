@@ -48,6 +48,7 @@ public class WireCatalog {
     private static final String INITIAL_CARDS = "initial_cards";
     private static final String HOME_PLANS = "home_plans";
     private static final String PETAL_EXCHANGE_RATES = "petal_exchange_rates";
+    private static final String MISSION_GROUPS = "mission_groups";
 
     private final ClientDefaults defaults;
     private final RefCatalogStore catalogs;
@@ -78,9 +79,11 @@ public class WireCatalog {
         seedCharacters();
         seedInitialCards();
         seedQuestStages();
-        log.info("参考目录：资料模板 {}，角色 {}，初始卡 {}，标准关卡 {}",
+        seedMissionGroups();
+        log.info("参考目录：资料模板 {}，角色 {}，初始卡 {}，标准关卡 {}，任务分组 {}",
                 catalogs.count(PROFILE_DEFAULTS), catalogs.count(CHARACTERS),
-                catalogs.count(INITIAL_CARDS), catalogs.count("quest_stages"));
+                catalogs.count(INITIAL_CARDS), catalogs.count("quest_stages"),
+                catalogs.count(MISSION_GROUPS));
     }
 
     // ------------------------------------------------------------------
@@ -183,6 +186,25 @@ public class WireCatalog {
         seedRows("grade_season_catalog", "grade_season_catalog", "grade_quest_season_id");
         seedRows("grade_quest_stages", "grade_quest_stages", "stage_id");
         seedRows("grade_quest_squares", "grade_quest_squares", "grade_quest_square_id");
+    }
+
+    /**
+     * 任务分组目录 -> {@code mission_groups}，键为 {@code mission_type}。
+     *
+     * <p>Python 版从捕获导入的 ref 目录读这张表；public 仓库不携带捕获，改用
+     * {@code mission_groups.json}（取自官方 {@code /v1/mission/get_list}，进度字段已归零）。
+     * 缺这份文件时 {@code mission/get_list} 只能返回空分组。
+     */
+    private void seedMissionGroups() {
+        List<Map<String, Object>> rows = defaults
+                .object("mission_groups")
+                .map(doc -> J.rowsOr(doc.get("groups")))
+                .orElse(List.of());
+        if (rows.isEmpty()) {
+            log.warn("缺 client_defaults/mission_groups.json，mission/get_list 只能返回空分组");
+            return;
+        }
+        catalogs.seedBatch(MISSION_GROUPS, rows, row -> row.get("mission_type"));
     }
 
     private void seedRows(String fileName, String catalogKey, String identityKey) {

@@ -67,9 +67,19 @@ public final class WireFanLevel {
         Map<String, Object> cardSeries(Object cardSeriesId);
     }
 
-    /** 当前可用的目录；移植 master 导入之前恒为 null。 */
+    /** Spring 启动时由 {@link WireFanCatalog} 装入的目录；单测里可以是 null。 */
+    private static volatile Catalog installed;
+
+    public static void install(Catalog catalog) {
+        installed = catalog;
+    }
+
+    /**
+     * 当前可用的目录。包装了 5.1.0 卡主数据之后不再是 null（见 {@link WireFanCatalog}）；
+     * 单测里没有 Spring 上下文时调用方仍要容忍 null。
+     */
     public static Catalog catalog() {
-        return null;
+        return installed;
     }
 
     // ------------------------------------------------------------------
@@ -137,12 +147,32 @@ public final class WireFanLevel {
     /**
      * 给某角色记 {@code points} 点，返回 {@code [调整前等级, 调整后等级]}。
      *
-     * <p>既可作用在完整账号上，也可作用在 {@link #draft} 的副本上。
+     * <p>直接改账号（Python 里传整个 {@code player} 的写法）。需要「失败不留痕」的调用方
+     * 应改用 {@link #draft} + {@link #addPoints(Map, Catalog, Object, long, int, String, long)}
+     * 这一组，与 Python 在草稿上结算的做法一致。
      */
     public static int[] addPoints(PlayerContext player, Catalog catalog, Object character,
                                   long points, int earnType, String message, long seasonId) {
-        int before = level(player, character);
-        Map<String, Object> detail = detail(player, catalog, character);
+        Map<String, Object> fan = draft(player, character);
+        int[] levels = addPoints(fan, catalog, character, points, earnType, message, seasonId);
+        player.put("FanLevelDetails", fan.get("FanLevelDetails"));
+        player.put("MemberFanLevels", fan.get("MemberFanLevels"));
+        player.put("FanLevels", fan.get("FanLevels"));
+        player.entity().fanLevel = J.longOr(fan.get("FanLevel"), 0L);
+        return levels;
+    }
+
+    /**
+     * 在 {@link #draft} 那样的粉丝字段表上记点数。
+     *
+     * <p>只读写传入的表里的四个键：{@code FanLevelDetails}、{@code MemberFanLevels}、
+     * {@code FanLevels}、{@code FanLevel}。这与 Python {@code fanlevel.add_points} 作用在
+     * 草稿 dict 上的行为一致（草稿里正好就是这四个键）。
+     */
+    public static int[] addPoints(Map<String, Object> fields, Catalog catalog, Object character,
+                                  long points, int earnType, String message, long seasonId) {
+        int before = level(fields, character);
+        Map<String, Object> detail = detail(fields, catalog, character);
         if (points > 0) {
             long experience = J.longOr(detail.get("MemberFanExperience"), 0L) + points;
             detail.put("MemberFanExperience", experience);
@@ -187,9 +217,20 @@ public final class WireFanLevel {
                             catalog.memberFanLevel(experience)));
         }
         int after = J.intOr(detail.get("MemberFanLevel"), 0);
-        mirror(player, character, after);
+        mirror(fields, character, after);
         return new int[] {before, after};
     }
+
+    /** 该角色当前的 {@code MemberFanLevel}（只读草稿表里的行，0 表示没有记录）。 */
+    public static int level(Map<String, Object> fields, Object character) {
+        for (Map<String, Object> row : rowsOf(fields.get("MemberFanLevels"))) {
+            if (sameId(row.get("CharactersId"), character)) {
+                return J.intOr(row.get("MemberFanlevel"), 0);
+            }
+        }
+        return 0;
+    }
+
 
     /** 账号里每张卡的 {@code MemberFanLevel} 按成员等级刷新（返回同一批卡，可能是新对象）。 */
     public static List<Map<String, Object>> applyToCards(PlayerContext player,
@@ -272,16 +313,16 @@ public final class WireFanLevel {
     // 内部
     // ------------------------------------------------------------------
 
-    private static Map<String, Object> detail(PlayerContext player, Catalog catalog,
+    private static Map<String, Object> detail(Map<String, Object> fields, Catalog catalog,
                                               Object character) {
-        List<Map<String, Object>> rows = player.rows("FanLevelDetails");
+        List<Map<String, Object>> rows = rowsOf(fields.get("FanLevelDetails"));
         for (Map<String, Object> row : rows) {
             if (sameId(row.get("CharacterId"), character)) {
                 return row;
             }
         }
         // 从「早于经验记录」的等级起步，这样等级永远不会掉。
-        int known = Math.max(level(player, character), 1);
+        int known = Math.max(level(fields, character), 1);
         Map<String, Object> created = new LinkedHashMap<>();
         created.put("CharacterId", character);
         created.put("DSeasonFanLevel", 0);
@@ -295,11 +336,12 @@ public final class WireFanLevel {
         }
         created.put("EarnProgressList", progress);
         rows.add(created);
+        fields.put("FanLevelDetails", rows);
         return created;
     }
 
-    private static void mirror(PlayerContext player, Object character, int newLevel) {
-        List<Map<String, Object>> levels = player.rows("MemberFanLevels");
+    private static void mirror(Map<String, Object> fields, Object character, int newLevel) {
+        List<Map<String, Object>> levels = rowsOf(fields.get("MemberFanLevels"));
         Map<String, Object> row = null;
         for (Map<String, Object> candidate : levels) {
             if (sameId(candidate.get("CharactersId"), character)) {
@@ -313,9 +355,9 @@ public final class WireFanLevel {
         } else {
             row.put("MemberFanlevel", newLevel);
         }
-        player.put("MemberFanLevels", new ArrayList<>(levels));
+        fields.put("MemberFanLevels", new ArrayList<>(levels));
 
-        List<Map<String, Object>> infos = player.rows("FanLevels");
+        List<Map<String, Object>> infos = rowsOf(fields.get("FanLevels"));
         Map<String, Object> info = null;
         for (Map<String, Object> candidate : infos) {
             if (sameId(candidate.get("CharacterId"), character)) {
@@ -329,13 +371,13 @@ public final class WireFanLevel {
         } else {
             info.put("MemberFanLevel", newLevel);
         }
-        player.put("FanLevels", new ArrayList<>(infos));
+        fields.put("FanLevels", new ArrayList<>(infos));
 
         long total = 0L;
         for (Map<String, Object> candidate : levels) {
             total += J.longOr(candidate.get("MemberFanlevel"), 0L);
         }
-        player.entity().fanLevel = total;
+        fields.put("FanLevel", total);
     }
 
     @SuppressWarnings("unchecked")

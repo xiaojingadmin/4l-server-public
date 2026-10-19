@@ -36,8 +36,10 @@ import org.springframework.stereotype.Component;
  *
  * <p>两处依赖本机运营导入的参考目录：公告（{@code announces}）与商店条目
  * （{@code item_stores}/{@code jewel_shop_items}/{@code memberships}）。目录为空时下发空
- * 列表，不编造内容。{@code /v1/item_exchange/get_list} 依赖 {@code wire_shop} 的限购
- * 结算层，尚未移植，仍由 {@link RouteSnapshot} 注册为 501。
+ * 列表，不编造内容。{@code /v1/item_exchange/*} 的限购结算在 {@link WireShopModule}。
+ *
+ * <p>{@code /v1/common/get_header_announs} 在 Python 版返回的是 JSON 数组，所以这里是
+ * 少数返回 {@code Object}（列表）而非 {@code Map} 的 handler。
  */
 @Component
 public class WireAccountModule implements WireModule {
@@ -47,6 +49,8 @@ public class WireAccountModule implements WireModule {
     private static final int MAX_TEXT = 8192;
     private static final int MAX_ID_LENGTH = 128;
     private static final int PAGE_SIZE = 20;
+    /** Python {@code wire_services.PRESENT_PAGE_SIZE}。 */
+    private static final int PRESENT_PAGE_SIZE = 50;
     private static final int DECORATION_CARD = 1;
     private static final String CARD_HOME_MOVIE = "picture_ur_home_%d.usm";
 
@@ -113,8 +117,7 @@ public class WireAccountModule implements WireModule {
         router.register("/v1/home/set_clock_setting", this::setClockSetting);
         router.register("/v1/home/set_show_retire", this::setShowRetire);
 
-        // /v1/common/get_header_announs 在 Python 版返回的是 JSON 数组（[]），而本项目的
-        // WireHandler 契约只承载对象；这里不注册，仍由 RouteSnapshot 返回 501，避免用 {} 冒充。
+        router.register("/v1/common/get_header_announs", this::headerAnnounces);
         router.register("/v1/announces/list", this::announceList);
         router.register("/v1/announce/list", this::announceList);
         router.register("/v1/announce/detail", this::announceDetail);
@@ -127,6 +130,7 @@ public class WireAccountModule implements WireModule {
         router.register("/v1/user/set_contents_release_effect_history",
                 this::contentsReleaseHistory);
 
+        router.register("/v1/present_box/get_list", this::presentList);
         router.register("/v1/present_box/get_history", this::presentHistory);
         router.register("/v1/present_box/item_detail", this::presentDetail);
 
@@ -388,6 +392,15 @@ public class WireAccountModule implements WireModule {
     // 公告
     // ------------------------------------------------------------------
 
+    /**
+     * Python 版返回的是 JSON 数组 {@code []}（不是 {@code {"announce_list": []}}），
+     * {@link WireHandler} 的返回值类型是 {@code Object}，所以这里直接返回空列表。
+     */
+    private Object headerAnnounces(WireRequest request) {
+        request.requirePlayer();
+        return new ArrayList<>();
+    }
+
     private Map<String, Object> announceList(WireRequest request) {
         request.requirePlayer();
         int type = (int) WireServices.integer(request.body(), "announce_type", 0,
@@ -576,6 +589,30 @@ public class WireAccountModule implements WireModule {
         }
         return encode("UserSetContentsReleaseEffectHistoryResponse", J.map(
                 "ContentsId", contentsId, "Status", 1));
+    }
+
+    /**
+     * Python {@code present_box/get_list}：按存库顺序分页（新奖励追加在尾部），并顺手把
+     * {@code PresentBoxCount} 纠正成实际行数 —— Python 版在同分支里落库。
+     */
+    private Map<String, Object> presentList(WireRequest request) {
+        PlayerContext player = request.requirePlayer();
+        int page = (int) WireServices.integer(request.body(), "page", 1, 1, Integer.MAX_VALUE);
+        List<Map<String, Object>> stored = player.rowsSnapshot("presents");
+        List<Map<String, Object>> items = new ArrayList<>(stored.size());
+        for (Map<String, Object> row : stored) {
+            items.add(WireServices.presentItem(row));
+        }
+        if (player.entity().presentBoxCount != items.size()) {
+            player.entity().presentBoxCount = items.size();
+            request.store().save(player);
+        }
+        int from = (int) Math.min(((long) page - 1) * PRESENT_PAGE_SIZE, items.size());
+        int to = (int) Math.min((long) page * PRESENT_PAGE_SIZE, items.size());
+        return encode("PresentBoxGetListResponse", J.map(
+                "TotalCount", items.size(),
+                "Page", page,
+                "Items", items.subList(from, to)));
     }
 
     private Map<String, Object> presentHistory(WireRequest request) {

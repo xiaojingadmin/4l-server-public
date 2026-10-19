@@ -226,8 +226,8 @@ class WireAccountModuleIntegrationTest {
     private Map<String, Object> call(String path, Map<String, Object> body) {
         WireHandler handler = router.resolve(path);
         assertNotNull(handler, path + " 未注册");
-        return handler.handle(new WireRequest(path, body, Map.of(), player, store, mapper,
-                new ServerProperties()));
+        return asMap(handler.handle(new WireRequest(path, body, Map.of(), player, store, mapper,
+                new ServerProperties())));
     }
 
     private static Map<String, Object> findMission(List<Map<String, Object>> groups, int id) {
@@ -239,5 +239,10 @@ class WireAccountModuleIntegrationTest {
             }
         }
         return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Map<String, Object> asMap(Object value) {
+        return (Map<String, Object>) value;
     }
 }

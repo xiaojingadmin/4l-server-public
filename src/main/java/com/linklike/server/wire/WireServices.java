@@ -1,5 +1,6 @@
 package com.linklike.server.wire;
 
+import com.linklike.server.protocol.J;
 import com.linklike.server.protocol.WireError;
 import com.linklike.server.resource.ResourceCatalogLabels;
 import com.linklike.server.service.PlayerContext;
@@ -96,6 +97,16 @@ public class WireServices {
     }
 
     /**
+     * 本机解码资源里可用的 label 集合；{@code null} 表示没有解码资源目录（不过滤）。
+     *
+     * <p>对应 Python {@code wire_services.resource_labels(store)}，供需要按单个 label
+     * 判断的接口（例如卡池横幅）直接使用。
+     */
+    public Set<String> resourceLabels() {
+        return resourceLabels.current();
+    }
+
+    /**
      * 资源文件确实存在的目录行；本机没有解码资源目录（{@code labels == null}）时返回全部。
      *
      * <p>对应 Python {@code wire_services.with_resources}：行里缺少模板需要的字段时跳过该行，
@@ -176,6 +187,50 @@ public class WireServices {
         }
         for (Map<String, Object> row : keyless) {
             result.add(deepCopy(row));
+        }
+        return result;
+    }
+
+    /**
+     * 两级目录（任务分组 / 剧情月份）的 overlay —— 对应 Python
+     * {@code wire_services._overlay_nested}。
+     *
+     * <p>账号自己的分组行覆盖目录行的 {@code groupFields}，其内层行按 {@code innerKey} 覆盖
+     * 目录内层行的 {@code innerFields}；账号有、目录没有的内层行不会凭空出现（Python 同样
+     * 只遍历目录的内层行）。
+     */
+    public static List<Map<String, Object>> overlayNested(List<Map<String, Object>> groups,
+                                                          List<Map<String, Object>> owned,
+                                                          String key, String inner,
+                                                          String innerKey, Set<String> innerFields,
+                                                          Set<String> groupFields) {
+        Map<String, Map<String, Object>> mine = new LinkedHashMap<>();
+        for (Map<String, Object> group : owned) {
+            for (Map<String, Object> row : J.rowsOr(group.get(inner))) {
+                Object ident = row.get(innerKey);
+                if (ident != null) {
+                    mine.put(String.valueOf(ident), row);
+                }
+            }
+        }
+
+        List<Map<String, Object>> result = new ArrayList<>(groups.size());
+        for (Map<String, Object> group : overlay(groups, owned, key, groupFields)) {
+            List<Map<String, Object>> innerRows = new ArrayList<>();
+            for (Map<String, Object> row : J.rowsOr(group.get(inner))) {
+                Map<String, Object> own = mine.get(String.valueOf(row.get(innerKey)));
+                Map<String, Object> merged = deepCopy(row);
+                if (own != null) {
+                    for (String field : innerFields) {
+                        if (own.containsKey(field)) {
+                            merged.put(field, deepCopyValue(own.get(field)));
+                        }
+                    }
+                }
+                innerRows.add(merged);
+            }
+            group.put(inner, innerRows);
+            result.add(group);
         }
         return result;
     }
@@ -392,6 +447,16 @@ public class WireServices {
         Map<String, Object> out = new LinkedHashMap<>(value.size());
         value.forEach((key, item) -> out.put(key, deepCopyValue(item)));
         return out;
+    }
+
+    /** {@link #deepCopy(Map)} 的对外版本：{@code _rows} 语义的调用方要用。 */
+    public static Map<String, Object> copyRow(Map<String, Object> value) {
+        return deepCopy(value);
+    }
+
+    /** 任意 JSON 值（对象 / 列表 / 标量）的深拷贝；Python {@code copy.deepcopy} 的对应物。 */
+    public static Object deepCopyJson(Object value) {
+        return deepCopyValue(value);
     }
 
     private static Object deepCopyValue(Object value) {

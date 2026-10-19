@@ -42,7 +42,7 @@ public class WireGateway {
     }
 
     /** 一次分发的产物：下发数据与本次装载的玩家（未认证时为 null）。 */
-    public record Result(Map<String, Object> body, PlayerContext player) {
+    public record Result(Object body, PlayerContext player) {
     }
 
     /** 该路径是否有显式 handler（含显式返回 501 的写接口）。 */
@@ -70,7 +70,7 @@ public class WireGateway {
 
         PlayerContext player = loadPlayer(headers);
         WireRequest request = new WireRequest(canonical, body, headers, player, store, mapper, config);
-        Map<String, Object> result = handler.handle(request);
+        Object result = handler.handle(request);
         return new Result(result == null ? new LinkedHashMap<>() : result, player);
     }
 
