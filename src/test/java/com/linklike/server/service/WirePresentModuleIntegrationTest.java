@@ -66,15 +66,12 @@ class WirePresentModuleIntegrationTest {
         ClientDefaults defaults = new ClientDefaults(mapper, config);
         WireModels models = new WireModels(mapper);
         WireCodec codec = new WireCodec(models);
-        WireShop shop = new WireShop(defaults);
         WireStore wireStore = new WireStore(defaults, mock(com.linklike.server.service.RefCatalogStore.class));
-        WireCardMint mint = new WireCardMint(mock(RefCatalogStore.class), models,
+        WireCardMint mint = new WireCardMint(cardCatalogs(), models,
                 new com.linklike.server.wire.WireCardMaster(defaults),
                 new com.linklike.server.wire.WireFanCatalog(
                         new com.linklike.server.wire.WireCardMaster(defaults)));
         WireGrants grants = new WireGrants(masterItems());
-        WireServices services = new WireServices(mock(RefCatalogStore.class),
-                new ResourceCatalogLabels(config, mapper));
 
         WirePresentModule module = new WirePresentModule(codec, grants, mint, wireStore, defaults);
         router = new WireRouter(List.of(module), new RouteSnapshot(mapper));
@@ -115,6 +112,11 @@ class WirePresentModuleIntegrationTest {
 
         assertEquals(1, result.get("result"));
         assertEquals(1, player.rows("Cards").size());
+        // 卡必须来自 5.1.0 主数据（初始 fixture 不存在），而不是空 fixture 拼出来的空壳
+        Map<String, Object> card = player.rows("Cards").get(0);
+        assertEquals(CARD_ID, J.longOr(card.get("CardDatasId"), 0L));
+        assertNotNull(card.get("CardName"));
+        assertTrue(Long.parseLong(String.valueOf(card.get("MaxStyleLevel"))) > 0);
     }
 
     @Test
@@ -181,6 +183,35 @@ class WirePresentModuleIntegrationTest {
                 .map(row -> row.get("DPresentBoxesId")).toList());
     }
 
+    /**
+     * 四种发放分支（卡 / 背包 / 歌曲 / 贴纸）在缺主数据时的失败都必须是「单条降级」。
+     *
+     * <p>{@code receive} 只兜 {@code IllegalArgumentException} / {@code IllegalStateException}；
+     * 若将来某条分支改成抛 {@link com.linklike.server.protocol.WireError}（501），
+     * 这里会直接失败，而不是悄悄把整批 {@code set_item_all} 变成请求级 501。
+     */
+    @Test
+    void everyGrantBranchDegradesPerRowInsteadOfFailingTheRequest() {
+        player.put("presents", rows(
+                present("card", 2, 99999999L, 1),
+                present("item", 1, 99999999L, 1),
+                present("music", 5, 99999999L, 1),
+                present("sticker", 6, 99999999L, 1),
+                present("ok", 1, UNLOCK_ITEM, 1)));
+
+        Map<String, Object> result = call("/v1/present_box/set_item_all", Map.of("page", 1));
+
+        assertEquals(1, result.get("result"));
+        assertEquals(1, J.rowsOr(result.get("receipt_success_items")).size());
+        assertEquals(4, J.rowsOr(result.get("receipt_failed_items")).size());
+        assertEquals(1L, itemNum(UNLOCK_ITEM));
+        // 成功的 "ok" 出箱，四条发不出去的留在箱子里
+        assertEquals(List.of("card", "item", "music", "sticker"),
+                player.rows("presents").stream()
+                        .map(row -> String.valueOf(row.get("DPresentBoxesId")))
+                        .sorted().toList());
+    }
+
     @Test
     void receiveAllCanIncludeExpiredItems() {
         player.put("presents", rows(
@@ -222,6 +253,18 @@ class WirePresentModuleIntegrationTest {
     }
 
     // ------------------------------------------------------------------
+
+    /**
+     * 没有初始卡 fixture 的目录：{@code initial_cards} 一律查不到。
+     *
+     * <p>不能直接用 {@code mock(RefCatalogStore.class)}——Mockito 对 {@code Map} 返回类型
+     * 默认给空 Map 而非 null，{@code mint} 会把空 fixture 当成命中、静默发出空卡。
+     */
+    private static RefCatalogStore cardCatalogs() {
+        RefCatalogStore catalogs = mock(RefCatalogStore.class);
+        when(catalogs.get(anyString(), any())).thenReturn(null);
+        return catalogs;
+    }
 
     /** 最小可用主数据表：解锁道具（ItemType 3）与贴纸 ID 各一行。 */
     private static JdbcTemplate masterItems() {

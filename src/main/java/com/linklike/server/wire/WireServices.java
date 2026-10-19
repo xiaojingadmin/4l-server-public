@@ -215,6 +215,8 @@ public class WireServices {
                                                           String innerKey, Set<String> innerFields,
                                                           Set<String> groupFields) {
         Map<String, Map<String, Object>> mine = new LinkedHashMap<>();
+        // 与 Python 一致：所有 group 的内层行共用一张 key 表。innerKey 在整张目录里
+        // 必须唯一（约定如此），否则后出现的 group 会静默覆盖先出现的。
         for (Map<String, Object> group : owned) {
             for (Map<String, Object> row : J.rowsOr(group.get(inner))) {
                 Object ident = row.get(innerKey);

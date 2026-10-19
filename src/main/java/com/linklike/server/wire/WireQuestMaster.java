@@ -75,14 +75,19 @@ public class WireQuestMaster {
         return copy(J.rowsOr(table("quest_sections").get(String.valueOf(stageId))));
     }
 
-    /** {@code dream_live_master.json}（按 series_id 索引）。 */
+    /**
+     * {@code dream_live_master.json}（按 series_id 索引）。
+     *
+     * <p>返回深拷贝：调用方（{@code dreamMembers} 等）会在 spec 上就地改写，
+     * 直接下发缓存会把改动写回主表。对应 Python 每次读取都重新解析 JSON。
+     */
     public Map<String, Object> dreamMaster() {
         Map<String, Object> cached = dreamMaster;
         if (cached == null) {
             cached = defaults.object("dream_live_master").orElseGet(LinkedHashMap::new);
             dreamMaster = cached;
         }
-        return cached;
+        return WireServices.copyRow(cached);
     }
 
     /**

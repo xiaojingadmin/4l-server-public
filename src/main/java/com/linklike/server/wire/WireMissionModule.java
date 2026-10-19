@@ -20,10 +20,15 @@ import org.springframework.stereotype.Component;
  * <p>领奖只改本账号状态：{@code set_reward} 只接受已达成未领取（status=1）的任务，奖励逐条
  * 走 {@link WireShop#grantReward}，任一奖励不可核实就整体失败、状态不变。
  *
- * <p>进阶新手任务领奖（{@code step_up_beginner_mission/set_reward}）与关卡任务领奖
- * （{@code mission/receive_common_mission_reward}）同样按核实过的目录定义结算；目录行
- * 里奖励为占位值（{@code item_id=0}）或工作量奖励缺乏可核实的目标序列时回 501 而不是
- * 发零奖励。其余 Star / 奖品类写入仍保持 501。
+ * <p>进阶新手任务领奖（{@code step_up_beginner_mission/set_reward}）按核实过的目录定义结算；
+ * 目录行里奖励为占位值（{@code item_id=0}）或工作量奖励缺乏可核实的目标序列时回 501 而不是
+ * 发零奖励。
+ *
+ * <p>关卡任务领奖（{@code mission/receive_common_mission_reward}）<b>仍是显式 501</b>：
+ * 官方目录拿得到，但阶段奖励的 {@code achieved_num} 是独立计数器，三种分组假设都无法从
+ * 账号状态派生（用官方导出逐档核对均不成立，见 {@code docs/migration-gap.md}
+ * 「为什么 mission/receive_common_mission_reward 仍是 501」）。缺推进规则就整块不下发结算。
+ * 其余 Star / 奖品类写入同样保持 501。
  */
 @Component
 public class WireMissionModule implements WireModule {

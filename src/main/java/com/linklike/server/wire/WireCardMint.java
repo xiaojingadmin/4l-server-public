@@ -43,8 +43,8 @@ public class WireCardMint {
         this.fanCatalog = fanCatalog;
     }
 
-    /** 卡主数据（{@code cards} / {@code rarities} / {@code characters} / 上限表）。 */
-    public Map<String, Object> master() {
+    /** 卡主数据（{@code cards} / {@code rarities} / {@code characters} / 上限表）。仅供本类读取。 */
+    private Map<String, Object> master() {
         return masterData.master();
     }
 
@@ -153,11 +153,11 @@ public class WireCardMint {
     // ------------------------------------------------------------------
 
     private int skillCap(long series) {
-        return J.intOr(J.nodeOrEmpty(master().get("skill_caps")).get(String.valueOf(series)), 1);
+        return masterData.skillCap(series);
     }
 
     private int limitBreakCap(long series) {
-        return J.intOr(J.nodeOrEmpty(master().get("limit_break_caps")).get(String.valueOf(series)), 0);
+        return masterData.limitBreakCap(series);
     }
 
     /** {@code cardrarities.EvolutionN_MaxLevel}，从当前进化阶往上找第一个非 0 的行。 */
