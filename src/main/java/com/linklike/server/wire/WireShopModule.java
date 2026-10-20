@@ -816,8 +816,7 @@ public class WireShopModule implements WireModule {
                 "fingerprint", fingerprint,
                 "path", path,
                 "response_body", WireServices.deepCopyJson(response)));
-        request.store().recordIdempotency(player.id(), key, path, fingerprint, response);
-        request.store().save(player);
+        request.store().saveWithIdempotency(player, key, path, fingerprint, response);
         return response;
     }
 

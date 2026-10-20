@@ -198,7 +198,7 @@ class WireGachaModuleIntegrationTest {
             PlayerContext saved = call.getArgument(0);
             atSave.set(WireServices.deepCopyJson(saved.raw("beginner_missions")));
             return null;
-        }).when(store).save(any());
+        }).when(store).saveWithIdempotency(any(), anyString(), anyString(), anyString(), any());
 
         call("/v1/gacha/set_purchase",
                 J.map("gacha_series_id", POOL, "gacha_set_purchase_type", 1),
@@ -387,7 +387,7 @@ class WireGachaModuleIntegrationTest {
             PlayerContext saved = call.getArgument(0);
             atSave.set(WireServices.deepCopyJson(saved.raw("beginner_missions")));
             return null;
-        }).when(store).save(any());
+        }).when(store).saveWithIdempotency(any(), anyString(), anyString(), anyString(), any());
 
         call("/v1/gacha/set_select_ticket_exchange",
                 J.map("select_ticket_exchange_rate_id", 1020002001L),

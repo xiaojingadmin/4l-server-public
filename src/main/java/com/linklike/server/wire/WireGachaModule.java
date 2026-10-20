@@ -853,9 +853,8 @@ public class WireGachaModule implements WireModule {
         Map<String, Object> response = purchaseResponse(player, receipt, now);
         // 抽卡次数计入新手任务 100（按本次抽出张数累加）。
         shop.advance(player, WireShop.BEGINNER_CONDITION_TOTAL_GACHA, 0, results.size());
-        store.recordIdempotency(player.id(), key, "/v1/gacha/set_purchase",
+        store.saveWithIdempotency(player, key, "/v1/gacha/set_purchase",
                 fingerprint, response);
-        store.save(player);
         return response;
     }
 
@@ -1007,9 +1006,8 @@ public class WireGachaModule implements WireModule {
             shop.advance(player, WireShop.BEGINNER_CONDITION_SELECT_TICKET);
             Map<String, Object> response = J.map("receipt_items",
                     WireServices.deepCopyJson(items));
-            request.store().recordIdempotency(player.id(), key,
+            request.store().saveWithIdempotency(player, key,
                     "/v1/gacha/set_select_ticket_exchange", fingerprint, response);
-            request.store().save(player);
             return response;
         } catch (RuntimeException e) {
             rollback(player, before);
@@ -1082,9 +1080,8 @@ public class WireGachaModule implements WireModule {
             player.put("gacha_point_exchange_receipts", receipts);
             Map<String, Object> response = J.map("receipt_items",
                     WireServices.deepCopyJson(items));
-            request.store().recordIdempotency(player.id(), key,
+            request.store().saveWithIdempotency(player, key,
                     "/v1/gacha/set_guarantee_point_exchange", fingerprint, response);
-            request.store().save(player);
             return response;
         } catch (RuntimeException e) {
             rollback(player, before);

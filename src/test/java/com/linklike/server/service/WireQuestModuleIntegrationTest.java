@@ -35,6 +35,7 @@ import com.linklike.server.wire.WireRequest;
 import com.linklike.server.wire.WireRouter;
 import com.linklike.server.wire.WireServices;
 import com.linklike.server.wire.WireShop;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -65,6 +66,7 @@ class WireQuestModuleIntegrationTest {
     private PlayerStore store;
     private PlayerContext player;
     private WireGrants grants;
+    private WireQuestModule module;
     private Map<String, List<Map<String, Object>>> catalogs;
 
     @BeforeEach
@@ -118,7 +120,7 @@ class WireQuestModuleIntegrationTest {
         WireCardMint mint = new WireCardMint(refs, new WireModels(mapper), cardMaster,
                 new com.linklike.server.wire.WireFanCatalog(cardMaster));
         grants = spy(new WireGrants(mock(JdbcTemplate.class)));
-        WireQuestModule module = new WireQuestModule(codec, services, master, shop, mint,
+        module = new WireQuestModule(codec, services, master, shop, mint,
                 grants, defaults);
         router = new WireRouter(List.of(module), new RouteSnapshot(mapper));
 
@@ -385,6 +387,20 @@ class WireQuestModuleIntegrationTest {
                 "/v1/in_quest_live/skip_quest", J.map(
                         "quest_live_type", 1, "stage_id", STANDARD_STAGE, "skip_count", 1)));
         assertEquals("database offline", error.getMessage());
+    }
+
+    @Test
+    void unverifiedDropTypeIsSkippedInsteadOfFailingTheSettlement() throws Exception {
+        when(grants.item(987654L)).thenReturn(J.map("Id", 987654L, "Name", "unverified",
+                "ItemType", 2, "ItemCategory", 0));
+        Method grant = WireQuestModule.class.getDeclaredMethod(
+                "grantQuestDrops", PlayerContext.class, List.class);
+        grant.setAccessible(true);
+
+        grant.invoke(module, player, List.of(
+                J.map("item_id", 987654L, "item_num", 1)));
+
+        assertTrue(player.rowsSnapshot("Items").isEmpty());
     }
 
     // ------------------------------------------------------------------

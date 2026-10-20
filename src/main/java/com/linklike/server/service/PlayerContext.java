@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -21,11 +22,14 @@ public class PlayerContext {
     private final Player entity;
     private final Map<String, Object> state;
     private final Set<String> loadedKeys;
+    private final Map<String, Object> originalState;
 
     PlayerContext(Player entity, Map<String, Object> state) {
         this.entity = entity;
         this.state = state;
         this.loadedKeys = new HashSet<>(state.keySet());
+        this.originalState = new LinkedHashMap<>();
+        state.forEach((key, value) -> originalState.put(key, copyValue(value)));
     }
 
     /** 玩家标量实体；赋值后由 {@link PlayerStore#save(PlayerContext)} 落库。 */
@@ -49,6 +53,23 @@ public class PlayerContext {
 
     Map<String, Object> rawState() {
         return state;
+    }
+
+    /** 本次请求实际改动的已装载键；内容相等但被重新赋值不算改动。 */
+    Set<String> changedKeys() {
+        Set<String> changed = new HashSet<>();
+        for (String key : loadedKeys) {
+            if (!Objects.equals(originalState.get(key), state.get(key))) {
+                changed.add(key);
+            }
+        }
+        return changed;
+    }
+
+    /** 落库成功后的新基准，避免同一请求内重复 save 时把旧改动再算一次。 */
+    void markSaved() {
+        originalState.clear();
+        state.forEach((key, value) -> originalState.put(key, copyValue(value)));
     }
 
     // ------------------------------------------------------------------
@@ -209,5 +230,19 @@ public class PlayerContext {
             }
         }
         return null;
+    }
+
+    private static Object copyValue(Object value) {
+        if (value instanceof Map<?, ?> map) {
+            Map<String, Object> copy = new LinkedHashMap<>();
+            map.forEach((key, item) -> copy.put(String.valueOf(key), copyValue(item)));
+            return copy;
+        }
+        if (value instanceof List<?> list) {
+            List<Object> copy = new ArrayList<>(list.size());
+            list.forEach(item -> copy.add(copyValue(item)));
+            return copy;
+        }
+        return value;
     }
 }

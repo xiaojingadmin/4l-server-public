@@ -46,6 +46,9 @@ Python 版快照（`wire_api.SUPPORTED`）共 **315** 条路径，去掉 6 条�
 `players.version` 使用 JPA 乐观锁；旧快照落库时返回 409，不再静默覆盖另一请求。
 `x-idempotency-key` 除写入账号回执 JSON 外，还会写入带
 `(player_id, idem_key)` 主键的 `idempotency_keys` 表，由数据库唯一约束裁决并发同键请求。
+幂等键插入与受保护状态通过 `PlayerStore.saveWithIdempotency` 在同一事务提交；关注/好友等
+多账号写入使用 `saveAll`，避免一个账号成功、另一个失败。只有状态实际变化时才递增
+`players.version`，未变化的保存不会制造伪冲突。
 `in_quest_live/set_finish` 允许对 `done` 状态重放：沿用首次结算的胜负、首通标志与掉落，
 只刷新 report/score，并跳过第二次发奖与新手任务推进。
 

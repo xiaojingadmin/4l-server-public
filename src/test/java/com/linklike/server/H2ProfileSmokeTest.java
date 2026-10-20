@@ -171,12 +171,66 @@ class H2ProfileSmokeTest {
     @Test
     void idempotencyTableRejectsAConcurrentDuplicateKey() {
         PlayerContext player = store.createGuest("Idempotent Writer", "idem-token");
-        store.recordIdempotency(player.id(), "same-key", "/v1/test", "hash",
+        store.saveWithIdempotency(player, "same-key", "/v1/test", "hash",
                 Map.of("result", true));
 
-        WireError error = assertThrows(WireError.class, () -> store.recordIdempotency(
-                player.id(), "same-key", "/v1/test", "hash", Map.of("result", true)));
+        WireError error = assertThrows(WireError.class, () -> store.saveWithIdempotency(
+                player, "same-key", "/v1/test", "hash", Map.of("result", true)));
         assertEquals(409, error.status());
+    }
+
+    @Test
+    void failedStateSaveRollsBackItsIdempotencyKey() {
+        PlayerContext created = store.createGuest("Rollback Writer", "idem-rollback-token");
+        PlayerContext stale = store.loadById(created.id());
+        PlayerContext winner = store.loadById(created.id());
+        assertNotNull(stale);
+        assertNotNull(winner);
+        winner.entity().jewelFree = 1;
+        store.save(winner);
+
+        stale.put("Cards", new ArrayList<>(List.of(Map.of("CardDatasId", 10104000))));
+        WireError error = assertThrows(WireError.class, () -> store.saveWithIdempotency(
+                stale, "rolled-back-key", "/v1/test", "hash", Map.of("result", true)));
+        assertEquals(409, error.status());
+        assertEquals(0L, jdbc.queryForObject(
+                "SELECT COUNT(*) FROM idempotency_keys WHERE player_id = ? AND idem_key = ?",
+                Long.class, created.id(), "rolled-back-key"));
+    }
+
+    @Test
+    void unchangedSavesDoNotBumpTheVersionOrConflict() {
+        PlayerContext created = store.createGuest("Read Only Writer", "unchanged-token");
+        PlayerContext first = store.loadById(created.id());
+        PlayerContext second = store.loadById(created.id());
+        assertNotNull(first);
+        assertNotNull(second);
+        long version = first.entity().version;
+
+        store.save(first);
+        store.save(second);
+
+        assertEquals(version, store.loadById(created.id()).entity().version);
+    }
+
+    @Test
+    void saveAllRollsBackEveryPlayerWhenOneFails() {
+        PlayerContext created = store.createGuest("Pair Writer", "pair-token");
+        PlayerContext stale = store.loadById(created.id());
+        PlayerContext winner = store.loadById(created.id());
+        assertNotNull(stale);
+        assertNotNull(winner);
+        winner.entity().jewelFree = 1;
+        store.save(winner);
+
+        PlayerContext first = store.loadById(created.id());
+        assertNotNull(first);
+        first.put("Cards", new ArrayList<>(List.of(Map.of("CardDatasId", 10104000))));
+        stale.put("Cards", new ArrayList<>(List.of(Map.of("CardDatasId", 10104001))));
+
+        WireError error = assertThrows(WireError.class, () -> store.saveAll(first, stale));
+        assertEquals(409, error.status());
+        assertTrue(store.loadById(created.id()).rowsSnapshot("Cards").isEmpty());
     }
 
     @Test

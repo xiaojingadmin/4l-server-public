@@ -1755,6 +1755,11 @@ public class WireQuestModule implements WireModule {
                         (int) J.longOr(drop.get("item_num"), 0L));
             } catch (IllegalArgumentException ignored) {
                 // 本地没有核实的发放路径就跳过这一条，其余照发。
+            } catch (WireError error) {
+                if (error.status() != 501) {
+                    throw error;
+                }
+                // 与 Python 的「不可核实奖励」一致：只跳过这一条，数据访问故障仍然上抛。
             }
         }
     }

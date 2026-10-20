@@ -103,8 +103,7 @@ public class WireSocialModule implements WireModule {
                 target.put("FollowedPlayers", theirs);
                 target.put("FollowCount", theirs.size());
                 player.put("FollowerCount", Math.max(0, player.intOf("FollowerCount", 0) - 1));
-                request.store().save(target);
-                request.store().save(player);
+                request.store().saveAll(target, player);
             }
             return resultCode(0);
         }
@@ -132,8 +131,7 @@ public class WireSocialModule implements WireModule {
         } else {
             target.put("FollowerCount", Math.max(0, target.intOf("FollowerCount", 0) - 1));
         }
-        request.store().save(target);
-        request.store().save(player);
+        request.store().saveAll(target, player);
         return resultCode(0);
     }
 
@@ -441,8 +439,7 @@ public class WireSocialModule implements WireModule {
                 "PlayerId", ident));
         player.put("FriendOutgoingRequests", requests);
         target.entity().isAlreadyReadFriendRequest = false;
-        request.store().save(target);
-        request.store().save(player);
+        request.store().saveAll(target, player);
         return boolResult(true);
     }
 
@@ -479,8 +476,7 @@ public class WireSocialModule implements WireModule {
         if (!befriend(player, owner)) {
             return boolResult(false);
         }
-        request.store().save(owner);
-        request.store().save(player);
+        request.store().saveAll(owner, player);
         return boolResult(true);
     }
 
@@ -493,16 +489,19 @@ public class WireSocialModule implements WireModule {
                 throw WireError.notFound("Local friend request not found");
             }
         }
+        List<PlayerContext> touched = new ArrayList<>();
         for (String ident : wanted) {
             PlayerContext owner = incoming.get(ident);
             boolean ok = befriend(player, owner);
-            request.store().save(owner);
+            touched.add(owner);
             if (!ok) {
-                request.store().save(player);
+                touched.add(player);
+                request.store().saveAll(touched.toArray(PlayerContext[]::new));
                 return boolResult(false);
             }
         }
-        request.store().save(player);
+        touched.add(player);
+        request.store().saveAll(touched.toArray(PlayerContext[]::new));
         return boolResult(true);
     }
 
@@ -515,12 +514,14 @@ public class WireSocialModule implements WireModule {
                 throw WireError.notFound("Local friend request not found");
             }
         }
+        List<PlayerContext> touched = new ArrayList<>();
         for (String ident : wanted) {
             PlayerContext owner = incoming.get(ident);
             owner.put("FriendOutgoingRequests", withoutRequest(owner, ident));
-            request.store().save(owner);
+            touched.add(owner);
         }
-        request.store().save(player);
+        touched.add(player);
+        request.store().saveAll(touched.toArray(PlayerContext[]::new));
         return boolResult(true);
     }
 
@@ -536,8 +537,7 @@ public class WireSocialModule implements WireModule {
         dropRequestsBetween(player, target);
         player.entity().friendCount = WireFriends.friendIds(player).size();
         target.entity().friendCount = WireFriends.friendIds(target).size();
-        request.store().save(target);
-        request.store().save(player);
+        request.store().saveAll(target, player);
         return boolResult(true);
     }
 

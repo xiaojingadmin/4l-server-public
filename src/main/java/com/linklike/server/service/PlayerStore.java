@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.OptimisticLockingFailureException;
@@ -153,19 +154,52 @@ public class PlayerStore {
     }
 
     /**
-     * 落库：玩家标量字段 + 本次装载过的全部状态键。
+     * 落库：玩家标量字段 + 本次请求实际改动的状态键。
      *
-     * <p>状态按「已装载即写回」处理，避免调用方修改了 {@link PlayerContext#rows(String)}
-     * 返回的可变集合却忘记标脏而丢数据。
+     * <p>装载时保存一份状态快照；调用方通过 {@link PlayerContext#rows(String)} 等可变引用
+     * 修改内容后，保存阶段比较快照找出真正变化的键。这样既不会忘记标脏，也不会把未变化的
+     * 大 JSON 行重复写回。
      */
     @Transactional
     public void save(PlayerContext context) {
+        saveState(context);
+    }
+
+    /** 同一事务内保存多个账号；用于关注、好友等一次请求修改两个玩家的接口。 */
+    @Transactional
+    public void saveAll(PlayerContext... contexts) {
+        Map<String, PlayerContext> unique = new LinkedHashMap<>();
+        for (PlayerContext context : contexts) {
+            unique.put(context.id(), context);
+        }
+        // 固定按玩家 ID 顺序加锁，两个互相关注/加好友的请求不会形成反向锁序。
+        for (String playerId : unique.keySet().stream().sorted().toList()) {
+            saveState(unique.get(playerId));
+        }
+    }
+
+    /**
+     * 幂等键与受保护状态在同一事务内提交。
+     *
+     * <p>直接调用 handler 时没有 {@code WireGateway} 的外层事务，单独写 key 再 save 会把
+     * “已占键但状态未落库”永久留下；因此生产调用点统一改用这个方法。
+     */
+    @Transactional
+    public void saveWithIdempotency(PlayerContext context, String key, String route,
+                                    String fingerprint, Object response) {
+        insertIdempotency(context.id(), key, route, fingerprint, response);
+        saveState(context);
+    }
+
+    private void saveState(PlayerContext context) {
         try {
             Player managed = players.save(context.entity());
-            // state-only 变更不会让 Hibernate 自动 UPDATE players；强制递增版本，
-            // 让同一账号的并发 JSON 状态写入也能被乐观锁识别。
-            entities.lock(managed, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
-            for (String key : context.loadedKeys()) {
+            Set<String> changed = context.changedKeys();
+            // state-only 变更不会让 Hibernate 自动 UPDATE players；有变化时才强制递增版本。
+            if (!changed.isEmpty()) {
+                entities.lock(managed, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+            }
+            for (String key : changed) {
                 Object value = context.rawState().get(key);
                 if (value == null) {
                     states.deleteOne(context.id(), key);
@@ -175,6 +209,7 @@ public class PlayerStore {
             }
             players.flush();
             context.entity().version = managed.version;
+            context.markSaved();
         } catch (OptimisticLockingFailureException e) {
             throw WireError.conflict(
                     "Player state changed concurrently; retry the request");
@@ -187,9 +222,8 @@ public class PlayerStore {
      * <p>收据 JSON 仍用于重放响应；这张表只负责让两个同时到达的同键请求在唯一约束上
      * 分出胜负，避免它们都在各自快照里“没查到回执”后重复结算。
      */
-    @Transactional
-    public void recordIdempotency(String playerId, String key, String route,
-                                  String fingerprint, Object response) {
+    private void insertIdempotency(String playerId, String key, String route,
+                                   String fingerprint, Object response) {
         try {
             jdbc.update("INSERT INTO idempotency_keys "
                             + "(player_id, idem_key, route, request_hash, response, created_at) "
