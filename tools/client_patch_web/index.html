@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LinkLike 客户端地址补丁（浏览器本地）</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0e1117;--card:#171c26;--line:#2b3445;--text:#e8eefc;--muted:#96a2b8;--accent:#74b9ff;--ok:#58d68d;--warn:#f6c85f;--bad:#ff7b7b}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 15% 0%,#1b2940 0,transparent 38%),var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+    main{width:min(860px,calc(100% - 32px));margin:48px auto}.title{font-size:30px;line-height:1.2;margin:0 0 10px}.sub{color:var(--muted);margin:0 0 26px}
+    .privacy{display:inline-flex;gap:8px;align-items:center;border:1px solid #2f5d45;background:rgba(88,214,141,.08);color:#9be7b8;border-radius:999px;padding:6px 12px;font-size:13px;margin-bottom:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015)),var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 22px 70px rgba(0,0,0,.3)}
+    .drop{display:block;border:1.5px dashed #3c4b64;border-radius:14px;padding:38px 20px;text-align:center;cursor:pointer;transition:.2s}.drop:hover,.drop.drag{border-color:var(--accent);background:rgba(116,185,255,.06)}
+    .icon{font-size:42px;line-height:1;margin-bottom:8px}.hint{color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}@media(max-width:680px){.grid{grid-template-columns:1fr}}
+    label.field{display:block;color:var(--muted);font-size:13px}label.field input{width:100%;margin-top:6px;border:1px solid var(--line);border-radius:10px;background:#0b1018;color:var(--text);padding:11px 12px;font:14px ui-monospace,SFMono-Regular,Consolas,monospace}
+    .button{display:inline-flex;align-items:center;justify-content:center;margin-top:18px;border:0;border-radius:10px;padding:12px 22px;background:var(--accent);color:#08111e;font-weight:750;cursor:pointer}.button:disabled{opacity:.45;cursor:not-allowed}
+    .bar{height:8px;background:#0b1018;border-radius:99px;overflow:hidden;margin-top:18px;display:none}.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#4aa8ff,#8f7dff);transition:width .18s}
+    .status{margin-top:14px;color:var(--muted);white-space:pre-wrap}.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+    .result{display:none;margin-top:22px;padding:18px;border:1px solid var(--line);border-radius:12px;background:#101620}.result a{color:var(--accent);font-weight:700}.meta{font-size:13px;color:var(--muted);margin-top:8px;word-break:break-all}
+    details{margin-top:14px}summary{cursor:pointer;color:var(--accent)}pre{overflow:auto;max-height:320px;background:#0b1018;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px}.report-link{display:inline-block;margin-top:10px;font-size:13px}
+    .config{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-size:12px;color:var(--muted)}code{background:#0b1018;border:1px solid var(--line);padding:2px 6px;border-radius:6px;color:#cad7ee}
+  </style>
+</head>
+<body><main>
+  <h1 class="title">APK / IPA 地址自动补丁</h1>
+  <p class="sub">选择原始 5.1.0 客户端，地址替换和重新打包全部在当前浏览器内完成。</p>
+  <div class="privacy">本地处理 · 文件不会上传到服务器</div>
+  <section class="card">
+    <div id="drop" class="drop">
+      <div class="icon">⇪</div>
+      <div id="fileName">点击选择或拖入 .apk / .ipa</div>
+      <div class="hint">仅接受 5.1.0 IL2CPP v31 客户端 · 浏览器端上限 4 GiB</div>
+    </div>
+    <input id="file" type="file" accept=".apk,.ipa" hidden>
+    <div class="grid">
+      <label class="field">API 地址
+        <input id="apiOrigin" value="https://linklike.lovelive-series.cn" spellcheck="false">
+      </label>
+      <label class="field">资源地址
+        <input id="assetOrigin" value="https://assets-link-like.lovelive-series.cn" spellcheck="false">
+      </label>
+    </div>
+    <button id="submit" class="button" disabled>开始在浏览器内 Patch</button>
+    <div id="bar" class="bar"><i></i></div>
+    <div id="status" class="status"></div>
+    <div id="result" class="result"></div>
+  </section>
+  <div class="config">
+    <span>支持 Chrome/Edge 80+、Firefox 113+、Safari 16.4+</span>
+    <span>输出未签名，APK/IPA 下载后需要自行重签</span>
+  </div>
+  <noscript>需要启用 JavaScript 才能在浏览器本地完成补丁。</noscript>
+</main>
+<script type="module" src="app.js"></script>
+</body></html>

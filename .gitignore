@@ -42,7 +42,6 @@ application-local.properties
 
 # H2 运行期文件数据库（由 data/linklike* 生成，不提交）
 data/linklike*
-data/client-patch-web/
 
 # 抓包、密钥与证书
 capture/

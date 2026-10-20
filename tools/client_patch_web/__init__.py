@@ -1,1 +1,1 @@
-"""Web upload service for patching APK/IPA client addresses."""
+"""Browser-only APK/IPA address patcher and its static file server."""
