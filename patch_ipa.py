@@ -33,6 +33,7 @@ import argparse
 import hashlib
 import json
 import os
+import shutil
 import sys
 from pathlib import Path
 import zipfile
@@ -92,7 +93,15 @@ def add_ats(plist):
     return plist[:root] + ATS_BLOCK + plist[root:]
 
 
-def repack(source, destination, replacements, report):
+def _is_apk_signature_entry(name):
+    upper = name.upper()
+    return (upper.startswith('META-INF/')
+            and (upper.endswith('.SF') or upper.endswith('.RSA')
+                 or upper.endswith('.DSA') or upper.endswith('.EC')
+                 or upper == 'META-INF/MANIFEST.MF'))
+
+
+def repack(source, destination, replacements, report, *, drop_signatures=False):
     """Copy every zip member, replacing a few entries, preserving permissions.
 
     Rewriting the whole zip is required because global-metadata.dat sits inside
@@ -102,13 +111,21 @@ def repack(source, destination, replacements, report):
         infos = src.infolist()
         with zipfile.ZipFile(destination, 'w', zipfile.ZIP_DEFLATED) as out:
             written = {'replaced': [], 'copied': 0}
+            out.comment = src.comment
             for info in infos:
                 name = info.filename.replace('\\', '/')
-                content = src.read(info)
+                info.filename = name
+                if drop_signatures and _is_apk_signature_entry(name):
+                    continue
                 if name in replacements:
-                    content = replacements[name]
+                    out.writestr(info, replacements[name])
                     written['replaced'].append(name)
-                out.writestr(info, content)
+                else:
+                    # Stream members so a large APK/IPA does not have to hold an
+                    # entire unpacked asset (or a compressed bomb) in memory.
+                    with src.open(info) as source_entry, out.open(
+                            info, 'w', force_zip64=info.file_size >= 2 ** 31) as target_entry:
+                        shutil.copyfileobj(source_entry, target_entry, 1024 * 1024)
                 written['copied'] += 1
             report['repack'] = written
     report['output'] = str(destination)

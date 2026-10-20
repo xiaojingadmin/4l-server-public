@@ -3,20 +3,39 @@ Original APK metadata only; never blind-replace bytes or modify native code.
 """
 import hashlib
 import struct
+from urllib.parse import urlsplit
 from patch_assets import OLD, STRING_TYPE_INDEX, _layout, _encode_length, _decode_length, patch as validate_original
 from patch_metadata import literal_records
 
 CDN_ORIGIN = 'https://assets-link-like.lovelive-series.cn'
 
 
-def normalize_origin(value):
+def normalize_origin(value, *, allow_any_origin=False):
+    if allow_any_origin:
+        text = value.strip().rstrip('/')
+        if (not text or text.endswith(':') or any(character.isspace() for character in text)
+                or any(ord(character) < 0x20 or ord(character) == 0x7f for character in text)):
+            raise ValueError('Expected an http(s) asset origin without a path')
+        try:
+            url = urlsplit(text)
+            port = url.port
+            encoded = text.encode('ascii')
+        except (ValueError, UnicodeEncodeError) as error:
+            raise ValueError('Asset URL has an invalid port or non-ASCII host') from error
+        if (url.scheme not in ('http', 'https') or not url.hostname
+                or not url.hostname.strip('.') or url.path
+                or url.query or url.fragment or url.username or url.password
+                or len(encoded) > 200
+                or (port is not None and not 1 <= port <= 65535)):
+            raise ValueError('Expected an http(s) asset origin without a path')
+        return text
     if value not in (CDN_ORIGIN, CDN_ORIGIN + '/'):
         raise ValueError('Expected private HTTPS asset origin: ' + CDN_ORIGIN)
     return CDN_ORIGIN
 
 
-def patch(data, origin=CDN_ORIGIN, *, string_type_index=None):
-    target = normalize_origin(origin).encode('ascii')
+def patch(data, origin=CDN_ORIGIN, *, string_type_index=None, allow_any_origin=False):
+    target = normalize_origin(origin, allow_any_origin=allow_any_origin).encode('ascii')
     # Reuse strict discovery, overlap, type and full-string validation. Discard
     # the loopback output: its verified report identifies the original regions.
     _, discovery = validate_original(

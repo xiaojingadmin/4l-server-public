@@ -13,6 +13,8 @@ cp.txt
 build/server-profiles/
 build/asset-cache/
 build/custom-cdn/
+build/apk-local/
+build/ipa-local/
 logs/
 *.log
 
@@ -40,11 +42,15 @@ application-local.properties
 
 # H2 运行期文件数据库（由 data/linklike* 生成，不提交）
 data/linklike*
+data/client-patch-web/
 
 # 抓包、密钥与证书
 capture/
 *.pcap
 *.pcapng
+*.apk
+*.ipa
+*.xapk
 *.pem
 *.key
 *.p12
@@ -52,6 +58,8 @@ capture/
 *.keystore
 
 # ---- 开发临时文件 ----
+__pycache__/
+*.py[cod]
 # 移植过程中的比对脚本、离线核对工具与中间产物
 scratch/
 

@@ -100,6 +100,17 @@ java -jar target/linklike-server-5.1.0.jar --spring.profiles.active=h2
 
 若启用了 API Key（见下节），客户端还需要带上匹配的 `X-Api-Key` 请求头。
 
+### APK / IPA 地址补丁 Web
+
+仓库附带独立的上传式补丁页面，可让用户直接提交原始 5.1.0 APK 或 IPA，自动修改 API 与资源地址后下载：
+
+```bash
+python3 tools/client_patch_web/server.py --host 0.0.0.0 --port 8090
+```
+
+APK 需要 `apksigner`（可选 `zipalign`）才能自动生成可安装包；IPA 默认输出未签名包，需使用自己的 Apple 证书重签，也可配置 `zsign` 自动重签。地址、证书和大小限制等配置见
+[`tools/client_patch_web/README.md`](tools/client_patch_web/README.md)。
+
 ---
 
 ## 五、配置
