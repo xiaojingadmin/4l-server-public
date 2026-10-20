@@ -167,19 +167,19 @@ public class WireGrants {
     public Map<String, Object> receivableItem(long itemId) {
         Map<String, Object> item = item(itemId);
         if (item == null) {
-            throw new IllegalArgumentException("Unknown item " + itemId);
+            throw new UnverifiedRewardException("Unknown item " + itemId);
         }
         int kind = J.intOr(item.get("ItemType"), 0);
         if (WALLET_ITEMS.containsKey((int) itemId)) {
             return item;
         }
         if (!INVENTORY_TYPES.contains(kind)) {
-            throw new IllegalArgumentException(String.format(
+            throw new UnverifiedRewardException(String.format(
                     "%s (ItemType %d) cannot be granted: no verified inventory path",
                     nameOf(item, itemId), kind));
         }
         if (kind == ITEM_TYPE_RESOURCE && J.intOr(item.get("ItemCategory"), 0) == 0) {
-            throw new IllegalArgumentException(String.format(
+            throw new UnverifiedRewardException(String.format(
                     "%s is a client-side resource without a local wallet", nameOf(item, itemId)));
         }
         return item;
@@ -308,6 +308,13 @@ public class WireGrants {
     private static String nameOf(Map<String, Object> item, long itemId) {
         String name = J.nonEmpty(item.get("Name"));
         return name == null ? String.valueOf(itemId) : name;
+    }
+
+    /** 本地没有可核实发放路径；调用方可逐条跳过，其余参数/数据错误不应被吞掉。 */
+    public static class UnverifiedRewardException extends IllegalArgumentException {
+        public UnverifiedRewardException(String message) {
+            super(message);
+        }
     }
 
     /**

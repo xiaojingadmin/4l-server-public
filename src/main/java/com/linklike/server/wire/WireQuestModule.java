@@ -83,7 +83,7 @@ public class WireQuestModule implements WireModule {
 
     /** 结算会改动的账号字段；落库失败时按 Python 的做法整体还原。 */
     private static final List<String> SETTLED_KEYS =
-            List.of("StylePoint", "Items", "Cards", "quest_stage_states",
+            List.of("StylePoint", "Items", "quest_stage_states",
                     "learning_live_progress", "RhythmMusic", "beginner_missions");
 
     private final WireCodec codec;
@@ -927,10 +927,13 @@ public class WireQuestModule implements WireModule {
 
         // 已结算的重放以落库结果为准，不能拿重发时的分数重新判定通关；只允许刷新
         // report/score 这类展示字段，掉落、星级与发奖均保持首次结算的值。
-        boolean won = replay ? state.questResult : questStars(state.stageId, score) > 0;
+        int stars = replay ? 0 : questStars(state.stageId, score);
+        boolean won = replay ? state.questResult : stars > 0;
         int flags = won ? RESULT_WON : 0;
-        List<Map<String, Object>> drops = replay
-                ? new ArrayList<>(state.drops) : new ArrayList<>();
+        List<Map<String, Object>> drops = new ArrayList<>();
+        if (replay && state.drops != null) {
+            drops.addAll(state.drops);
+        }
         long storedScore = score == null
                 ? (replay ? state.score : 0L) : score;
         Map<String, Object> before = snapshot(player, SETTLED_KEYS);
@@ -939,8 +942,7 @@ public class WireQuestModule implements WireModule {
                 flags |= (state.firstClear ? RESULT_FIRST_CLEAR : 0)
                         | (state.firstComplete ? RESULT_FIRST_COMPLETE : 0);
             } else if (won) {
-                flags |= recordStageClear(player, state.stageId,
-                        questStars(state.stageId, score));
+                flags |= recordStageClear(player, state.stageId, stars);
                 drops = rollQuestDrops(state.stageId);
                 grantQuestDrops(player, drops);
                 addStylePoint(player, master.stageStylePoint(state.stageId));
@@ -1753,7 +1755,7 @@ public class WireQuestModule implements WireModule {
             try {
                 grants.grantItem(player, J.longOr(drop.get("item_id"), 0L),
                         (int) J.longOr(drop.get("item_num"), 0L));
-            } catch (IllegalArgumentException ignored) {
+            } catch (WireGrants.UnverifiedRewardException ignored) {
                 // 本地没有核实的发放路径就跳过这一条，其余照发。
             } catch (WireError error) {
                 if (error.status() != 501) {

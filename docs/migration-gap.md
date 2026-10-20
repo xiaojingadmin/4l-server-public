@@ -39,7 +39,9 @@ Python 版快照（`wire_api.SUPPORTED`）共 **315** 条路径，去掉 6 条�
 为唯一权威来源，全部通过 `WireGrants.walletValue/setWallet` 读写；不再向
 `player_state` 另写同名键。点数是整数单位，不涉及分/主单位换算或舍入；累加使用
 `Math.addExact`，溢出时返回 400 而不是回绕。奖励、商店购买、学习曲解放与展示接口因此
-读取的是同一份余额。
+读取的是同一份余额。启动时 `LegacyWalletMigration` 会把旧账号残留的
+`player_state.MusicPoint` / `StickerPointNum` 以 `max(players 列, state)` 合并回列并删除
+旧行，避免升级后余额归零。
 
 ### 并发与幂等
 
@@ -48,7 +50,9 @@ Python 版快照（`wire_api.SUPPORTED`）共 **315** 条路径，去掉 6 条�
 `(player_id, idem_key)` 主键的 `idempotency_keys` 表，由数据库唯一约束裁决并发同键请求。
 幂等键插入与受保护状态通过 `PlayerStore.saveWithIdempotency` 在同一事务提交；关注/好友等
 多账号写入使用 `saveAll`，避免一个账号成功、另一个失败。只有状态实际变化时才递增
-`players.version`，未变化的保存不会制造伪冲突。
+`players.version`，未变化的保存不会制造伪冲突。`idempotency_keys` 保留 30 天，并在下次
+写入时按玩家清理过期行。`players` 的写入必须走 `PlayerStore`；直接用 JDBC
+`UPDATE players` 会绕过 `version` 校验，不应在业务代码中使用。
 `in_quest_live/set_finish` 允许对 `done` 状态重放：沿用首次结算的胜负、首通标志与掉落，
 只刷新 report/score，并跳过第二次发奖与新手任务推进。
 

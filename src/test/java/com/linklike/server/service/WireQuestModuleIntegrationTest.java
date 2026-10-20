@@ -35,6 +35,7 @@ import com.linklike.server.wire.WireRequest;
 import com.linklike.server.wire.WireRouter;
 import com.linklike.server.wire.WireServices;
 import com.linklike.server.wire.WireShop;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -401,6 +402,20 @@ class WireQuestModuleIntegrationTest {
                 J.map("item_id", 987654L, "item_num", 1)));
 
         assertTrue(player.rowsSnapshot("Items").isEmpty());
+    }
+
+    @Test
+    void invalidDropQuantityStillFailsInsteadOfBeingSwallowed() throws Exception {
+        when(grants.item(987655L)).thenReturn(J.map("Id", 987655L, "Name", "valid",
+                "ItemType", 1, "ItemCategory", 1));
+        Method grant = WireQuestModule.class.getDeclaredMethod(
+                "grantQuestDrops", PlayerContext.class, List.class);
+        grant.setAccessible(true);
+
+        InvocationTargetException error = assertThrows(InvocationTargetException.class,
+                () -> grant.invoke(module, player, List.of(
+                        J.map("item_id", 987655L, "item_num", 0))));
+        assertTrue(error.getCause() instanceof IllegalArgumentException);
     }
 
     // ------------------------------------------------------------------

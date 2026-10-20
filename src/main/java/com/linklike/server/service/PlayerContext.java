@@ -3,6 +3,7 @@ package com.linklike.server.service;
 import com.linklike.server.domain.Player;
 import com.linklike.server.protocol.J;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -59,9 +60,17 @@ public class PlayerContext {
     Set<String> changedKeys() {
         Set<String> changed = new HashSet<>();
         for (String key : loadedKeys) {
-            if (!Objects.equals(originalState.get(key), state.get(key))) {
-                changed.add(key);
+            Object before = originalState.get(key);
+            Object after = state.get(key);
+            if (Objects.equals(before, after)) {
+                continue;
             }
+            // rows()/nodeOrCreate() 会在只读访问时惰性创建空集合。账号里本来没有这个键时，
+            // 空集合不应被当成需要落库的改动，否则纯读也可能制造 409。
+            if (!originalState.containsKey(key) && emptyContainer(after)) {
+                continue;
+            }
+            changed.add(key);
         }
         return changed;
     }
@@ -244,5 +253,10 @@ public class PlayerContext {
             return copy;
         }
         return value;
+    }
+
+    private static boolean emptyContainer(Object value) {
+        return (value instanceof Collection<?> collection && collection.isEmpty())
+                || (value instanceof Map<?, ?> map && map.isEmpty());
     }
 }

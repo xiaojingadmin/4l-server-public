@@ -10,6 +10,7 @@ import com.linklike.server.protocol.J;
 import com.linklike.server.protocol.WireError;
 import com.linklike.server.service.PlayerContext;
 import com.linklike.server.service.PlayerStore;
+import com.linklike.server.service.LegacyWalletMigration;
 import com.linklike.server.web.WireGateway;
 import com.linklike.server.wire.WireGrants;
 import com.linklike.server.wire.WireHandler;
@@ -71,6 +72,9 @@ class H2ProfileSmokeTest {
 
     @Autowired
     private WireGateway gateway;
+
+    @Autowired
+    private LegacyWalletMigration legacyWalletMigration;
 
     @Test
     void h2SeedsMasterItemsAndGrantsAreAvailable() {
@@ -199,6 +203,21 @@ class H2ProfileSmokeTest {
     }
 
     @Test
+    void expiredIdempotencyRowsArePrunedOnTheNextWrite() {
+        PlayerContext player = store.createGuest("Idem TTL", "idem-ttl-token");
+        jdbc.update("INSERT INTO idempotency_keys "
+                        + "(player_id, idem_key, route, request_hash, response, created_at) "
+                        + "VALUES (?, ?, ?, ?, ?, ?)",
+                player.id(), "old-key", "/v1/test", "hash", "{}", 0L);
+
+        store.saveWithIdempotency(player, "new-key", "/v1/test", "hash", Map.of("ok", true));
+
+        assertEquals(0L, jdbc.queryForObject(
+                "SELECT COUNT(*) FROM idempotency_keys WHERE player_id = ? AND idem_key = ?",
+                Long.class, player.id(), "old-key"));
+    }
+
+    @Test
     void unchangedSavesDoNotBumpTheVersionOrConflict() {
         PlayerContext created = store.createGuest("Read Only Writer", "unchanged-token");
         PlayerContext first = store.loadById(created.id());
@@ -211,6 +230,21 @@ class H2ProfileSmokeTest {
         store.save(second);
 
         assertEquals(version, store.loadById(created.id()).entity().version);
+    }
+
+    @Test
+    void lazilyCreatedEmptyStateDoesNotBumpTheVersion() {
+        PlayerContext created = store.createGuest("Lazy State", "lazy-state-token");
+        PlayerContext player = store.loadById(created.id());
+        assertNotNull(player);
+        long version = player.entity().version;
+
+        player.rows("Cards");
+        store.save(player);
+
+        PlayerContext reloaded = store.loadById(created.id());
+        assertEquals(version, reloaded.entity().version);
+        assertFalse(reloaded.has("Cards"));
     }
 
     @Test
@@ -255,6 +289,27 @@ class H2ProfileSmokeTest {
         assertEquals(1L, jdbc.queryForObject(
                 "SELECT COUNT(*) FROM idempotency_keys WHERE player_id = ? AND idem_key = ?",
                 Long.class, created.id(), "gacha-progress-save"));
+    }
+
+    @Test
+    void legacyWalletStateIsMergedByMaximumAndRemoved() {
+        PlayerContext player = store.createGuest("Legacy Wallet", "legacy-wallet-token");
+        player.entity().musicPoint = 10;
+        player.entity().stickerPointNum = 3;
+        store.save(player);
+        jdbc.update("INSERT INTO player_state (player_id, state_key, payload) VALUES (?, ?, ?)",
+                player.id(), "MusicPoint", "5");
+        jdbc.update("INSERT INTO player_state (player_id, state_key, payload) VALUES (?, ?, ?)",
+                player.id(), "StickerPointNum", "7");
+
+        assertEquals(2, legacyWalletMigration.migrate());
+
+        PlayerContext reloaded = store.loadById(player.id());
+        assertNotNull(reloaded);
+        assertEquals(10L, reloaded.entity().musicPoint);
+        assertEquals(7L, reloaded.entity().stickerPointNum);
+        assertFalse(reloaded.has("MusicPoint"));
+        assertFalse(reloaded.has("StickerPointNum"));
     }
 
     private static Map<String, Object> missionRow(List<Map<String, Object>> groups, int missionId) {

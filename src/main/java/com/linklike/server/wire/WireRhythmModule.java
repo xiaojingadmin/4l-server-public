@@ -674,7 +674,7 @@ public class WireRhythmModule implements WireModule {
             try {
                 grants.grantItem(player, J.longOr(reward.get("RewardItemId"), 0),
                         J.intOr(reward.get("RewardNum"), 0));
-            } catch (IllegalArgumentException ignored) {
+            } catch (WireGrants.UnverifiedRewardException ignored) {
                 // 这一条没有本地发放路径，跳过它。
             }
         }

@@ -39,6 +39,7 @@ public class PlayerStore {
     /** 官方 Link!Like ID 是 9 位大写字母数字（玩家 ID 同时也是好友搜索键）。 */
     private static final String PLAYER_ID_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int PLAYER_ID_LENGTH = 9;
+    private static final long IDEMPOTENCY_RETENTION_SECONDS = 30L * 24 * 60 * 60;
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
@@ -172,7 +173,7 @@ public class PlayerStore {
         for (PlayerContext context : contexts) {
             unique.put(context.id(), context);
         }
-        // 固定按玩家 ID 顺序加锁，两个互相关注/加好友的请求不会形成反向锁序。
+        // 固定按玩家 ID 顺序 flush；真正的一致性仍由各行的乐观锁版本校验保证。
         for (String playerId : unique.keySet().stream().sorted().toList()) {
             saveState(unique.get(playerId));
         }
@@ -224,12 +225,16 @@ public class PlayerStore {
      */
     private void insertIdempotency(String playerId, String key, String route,
                                    String fingerprint, Object response) {
+        long now = Instant.now().getEpochSecond();
         try {
+            jdbc.update("DELETE FROM idempotency_keys "
+                            + "WHERE player_id = ? AND created_at < ?",
+                    playerId, now - IDEMPOTENCY_RETENTION_SECONDS);
             jdbc.update("INSERT INTO idempotency_keys "
                             + "(player_id, idem_key, route, request_hash, response, created_at) "
                             + "VALUES (?, ?, ?, ?, ?, ?)",
                     playerId, key, route, fingerprint, serialize(response),
-                    Instant.now().getEpochSecond());
+                    now);
         } catch (DataIntegrityViolationException e) {
             throw WireError.conflict("Idempotency key already used");
         }
