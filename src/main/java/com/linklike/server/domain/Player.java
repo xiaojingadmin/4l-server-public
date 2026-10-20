@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import java.time.Instant;
 
 /**
@@ -23,6 +24,10 @@ public class Player {
     @Id
     @Column(name = "player_id")
     public String playerId;
+
+    /** 乐观锁版本；并发请求不再用旧快照静默覆盖对方。 */
+    @Version
+    public long version;
 
     /** 旧格式玩家 ID，短 ID 迁移后仍可用它登录。 */
     public String loginAlias;

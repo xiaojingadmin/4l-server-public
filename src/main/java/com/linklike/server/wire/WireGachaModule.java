@@ -851,9 +851,10 @@ public class WireGachaModule implements WireModule {
         player.put("gacha_receipts", receipts);
 
         Map<String, Object> response = purchaseResponse(player, receipt, now);
-        store.save(player);
         // 抽卡次数计入新手任务 100（按本次抽出张数累加）。
         shop.advance(player, WireShop.BEGINNER_CONDITION_TOTAL_GACHA, 0, results.size());
+        store.saveWithIdempotency(player, key, "/v1/gacha/set_purchase",
+                fingerprint, response);
         return response;
     }
 
@@ -1002,9 +1003,12 @@ public class WireGachaModule implements WireModule {
                     new ArrayList<>(player.rowsSnapshot("select_ticket_exchange_receipts"));
             receipts.add(receipt);
             player.put("select_ticket_exchange_receipts", receipts);
-            request.store().save(player);
             shop.advance(player, WireShop.BEGINNER_CONDITION_SELECT_TICKET);
-            return J.map("receipt_items", WireServices.deepCopyJson(items));
+            Map<String, Object> response = J.map("receipt_items",
+                    WireServices.deepCopyJson(items));
+            request.store().saveWithIdempotency(player, key,
+                    "/v1/gacha/set_select_ticket_exchange", fingerprint, response);
+            return response;
         } catch (RuntimeException e) {
             rollback(player, before);
             throw e;
@@ -1074,8 +1078,11 @@ public class WireGachaModule implements WireModule {
                     new ArrayList<>(player.rowsSnapshot("gacha_point_exchange_receipts"));
             receipts.add(receipt);
             player.put("gacha_point_exchange_receipts", receipts);
-            request.store().save(player);
-            return J.map("receipt_items", WireServices.deepCopyJson(items));
+            Map<String, Object> response = J.map("receipt_items",
+                    WireServices.deepCopyJson(items));
+            request.store().saveWithIdempotency(player, key,
+                    "/v1/gacha/set_guarantee_point_exchange", fingerprint, response);
+            return response;
         } catch (RuntimeException e) {
             rollback(player, before);
             throw e;
@@ -1295,6 +1302,8 @@ public class WireGachaModule implements WireModule {
         before.put("__jewelFree", entity.jewelFree);
         before.put("__jewelPaid", entity.jewelPaid);
         before.put("__jewelPaidGoogle", entity.jewelPaidGoogle);
+        before.put("__musicPoint", entity.musicPoint);
+        before.put("__stickerPointNum", entity.stickerPointNum);
         before.put("__fanLevel", entity.fanLevel);
         return before;
     }
@@ -1314,6 +1323,8 @@ public class WireGachaModule implements WireModule {
         entity.jewelFree = (Long) before.get("__jewelFree");
         entity.jewelPaid = (Long) before.get("__jewelPaid");
         entity.jewelPaidGoogle = (Long) before.get("__jewelPaidGoogle");
+        entity.musicPoint = (Long) before.get("__musicPoint");
+        entity.stickerPointNum = (Long) before.get("__stickerPointNum");
         entity.fanLevel = (Long) before.get("__fanLevel");
     }
 }

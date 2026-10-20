@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
@@ -421,11 +422,30 @@ public class WireShop {
      * @return 是否有任何一行的进度发生变化
      */
     public boolean refreshServiceMissions(PlayerContext player) {
-        List<Map<String, Object>> groups = WireServices.rows(player, "service_missions");
+        DerivedServiceMissions derived = deriveServiceMissions(player);
+        if (derived.changed()) {
+            player.put("service_missions", derived.groups());
+        }
+        return derived.changed();
+    }
+
+    /**
+     * 关卡任务进度的只读派生结果。
+     *
+     * <p>{@code /v1/mission/get_list} 是 GET 语义：这里只基于账号快照生成一份草稿，
+     * 不把派生结果写回 {@link PlayerContext}，也不触发 {@code PlayerStore.save}。这样既保证
+     * 新账号能立即看到真实进度，又不会让并发读取争抢玩家行或互相覆盖状态。
+     */
+    public List<Map<String, Object>> derivedServiceMissions(PlayerContext player) {
+        return deriveServiceMissions(player).groups();
+    }
+
+    private DerivedServiceMissions deriveServiceMissions(PlayerContext player) {
+        Object raw = player.raw("service_missions");
+        List<Map<String, Object>> groups = copyGroups(raw);
         Map<String, Integer> counters = missionCounters(player);
         List<Map<String, Object>> specs = serviceMissions();
         List<Integer> types = serviceMissionTypes();
-        boolean changed = false;
         for (int i = 0; i < specs.size(); i++) {
             Map<String, Object> spec = specs.get(i);
             int transition = missionInt(spec, "transition_contents_id");
@@ -442,13 +462,20 @@ public class WireShop {
             if (achieved != before || !row.containsKey("is_achieved")) {
                 row.put("achieved_num", achieved);
                 row.put("is_achieved", isAchieved);
-                changed = true;
             }
         }
-        if (changed) {
-            player.put("service_missions", groups);
+        return new DerivedServiceMissions(groups, !Objects.equals(raw, groups));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static List<Map<String, Object>> copyGroups(Object raw) {
+        if (!(raw instanceof List<?>)) {
+            return new ArrayList<>();
         }
-        return changed;
+        return (List<Map<String, Object>>) WireServices.deepCopyJson(raw);
+    }
+
+    private record DerivedServiceMissions(List<Map<String, Object>> groups, boolean changed) {
     }
 
     /** 单条任务的派生进度；{@code null} 表示本地无可信来源（不写该行）。 */
@@ -868,13 +895,13 @@ public class WireShop {
             throw new WireError(501, "Reward type " + itemType + " has not been verified");
         }
         if (ident == catalogInt(catalog, "sisca_item_id")) {
-            player.entity().jewelFree += num;
+            WireGrants.addWallet(player, "JewelFree", num);
             return;
         }
         Map<String, Object> item = requireItem(catalog, ident);
         String wallet = WireGrants.WALLET_ITEMS.get(ident);
         if (wallet != null) {
-            long total = WireGrants.walletValue(player, wallet) + num;
+            long total = WireGrants.addWallet(player, wallet, num);
             long limit = J.longOr(item.get("LimitNum"), 0);
             WireGrants.setWallet(player, wallet, limit > 0 ? Math.min(total, limit) : total);
             return;

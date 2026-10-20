@@ -2,6 +2,7 @@ package com.linklike.server.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,6 +28,7 @@ import com.linklike.server.wire.WireRouter;
 import com.linklike.server.wire.WireServices;
 import com.linklike.server.wire.WireShopModule;
 import com.linklike.server.wire.WireStore;
+import com.linklike.server.wire.WireStoreModule;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -75,9 +77,10 @@ class WireShopModuleIntegrationTest {
                 new com.linklike.server.wire.WireCardMaster(defaults);
         WireCardMint mint = new WireCardMint(catalogs, models, cardMaster,
                 new com.linklike.server.wire.WireFanCatalog(cardMaster));
-        router = new WireRouter(
-                List.of(new WireShopModule(wireStore, mint, catalog, services,
-                        new com.linklike.server.wire.WireFanCatalog(cardMaster))),
+        router = new WireRouter(List.of(
+                new WireShopModule(wireStore, mint, catalog, services,
+                        new com.linklike.server.wire.WireFanCatalog(cardMaster)),
+                new WireStoreModule(wireStore, services, config)),
                 new RouteSnapshot(mapper));
 
         store = mock(PlayerStore.class);
@@ -88,6 +91,7 @@ class WireShopModuleIntegrationTest {
         entity.playerName = "Tester";
         entity.jewelFree = 3000L;
         entity.jewelPaid = 500L;
+        entity.stickerPointNum = 50L;
         Map<String, Object> state = new LinkedHashMap<>();
         state.put("Items", new ArrayList<>(List.of(J.map("ItemCategory", 1,
                 "UserItemList", new ArrayList<>(List.of(
@@ -96,7 +100,6 @@ class WireShopModuleIntegrationTest {
                         item("i-c", 3011001L, 400)))))));
         state.put("Cards", new ArrayList<>());
         state.put("Stickers", new ArrayList<>());
-        state.put("StickerPointNum", 50L);
         player = new PlayerContext(entity, state);
     }
 
@@ -274,6 +277,10 @@ class WireShopModuleIntegrationTest {
                 Map.of("sticker_exchanges_id", STICKER_LISTING), "sticker-1");
 
         assertEquals(30L, result.get("sticker_point_num"));
+        assertEquals(30L, player.entity().stickerPointNum);
+        assertNull(player.raw("StickerPointNum"));
+        Map<String, Object> listed = call("/v1/sticker_exchange/get_list", Map.of(), null);
+        assertEquals(30L, listed.get("sticker_point_num"));
         List<Map<String, Object>> stickers = J.rowsOr(player.raw("Stickers"));
         assertEquals(1, stickers.size());
         assertEquals(90000002, stickers.get(0).get("StickersId"));
@@ -284,14 +291,15 @@ class WireShopModuleIntegrationTest {
 
     @Test
     void stickerExchangeRefusesWhenPointsAreShort() {
-        player.put("StickerPointNum", 5L);
+        player.entity().stickerPointNum = 5L;
 
         WireError error = assertThrows(WireError.class, () -> call(
                 "/v1/sticker_exchange/set_purchase",
                 Map.of("sticker_exchanges_id", STICKER_LISTING), "sticker-1"));
 
         assertEquals("Not enough sticker points", error.getMessage());
-        assertEquals(5L, player.raw("StickerPointNum"));
+        assertEquals(5L, player.entity().stickerPointNum);
+        assertNull(player.raw("StickerPointNum"));
     }
 
     @Test

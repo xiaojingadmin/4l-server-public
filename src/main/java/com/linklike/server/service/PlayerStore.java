@@ -9,6 +9,8 @@ import com.linklike.server.protocol.WireError;
 import com.linklike.server.repository.PlayerRepository;
 import com.linklike.server.repository.PlayerStateRepository;
 import com.linklike.server.repository.SessionRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.HexFormat;
@@ -16,7 +18,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,19 +39,25 @@ public class PlayerStore {
     /** 官方 Link!Like ID 是 9 位大写字母数字（玩家 ID 同时也是好友搜索键）。 */
     private static final String PLAYER_ID_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int PLAYER_ID_LENGTH = 9;
+    private static final long IDEMPOTENCY_RETENTION_SECONDS = 30L * 24 * 60 * 60;
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
     private final PlayerRepository players;
     private final SessionRepository sessions;
     private final PlayerStateRepository states;
+    private final JdbcTemplate jdbc;
+    private final EntityManager entities;
     private final ObjectMapper mapper;
 
     public PlayerStore(PlayerRepository players, SessionRepository sessions,
-                       PlayerStateRepository states, ObjectMapper mapper) {
+                       PlayerStateRepository states, JdbcTemplate jdbc,
+                       EntityManager entities, ObjectMapper mapper) {
         this.players = players;
         this.sessions = sessions;
         this.states = states;
+        this.jdbc = jdbc;
+        this.entities = entities;
         this.mapper = mapper;
     }
 
@@ -143,21 +155,88 @@ public class PlayerStore {
     }
 
     /**
-     * 落库：玩家标量字段 + 本次装载过的全部状态键。
+     * 落库：玩家标量字段 + 本次请求实际改动的状态键。
      *
-     * <p>状态按「已装载即写回」处理，避免调用方修改了 {@link PlayerContext#rows(String)}
-     * 返回的可变集合却忘记标脏而丢数据。
+     * <p>装载时保存一份状态快照；调用方通过 {@link PlayerContext#rows(String)} 等可变引用
+     * 修改内容后，保存阶段比较快照找出真正变化的键。这样既不会忘记标脏，也不会把未变化的
+     * 大 JSON 行重复写回。
      */
     @Transactional
     public void save(PlayerContext context) {
-        players.save(context.entity());
-        for (String key : context.loadedKeys()) {
-            Object value = context.rawState().get(key);
-            if (value == null) {
-                states.deleteOne(context.id(), key);
-            } else {
-                states.save(new PlayerState(context.id(), key, serialize(value)));
+        saveState(context);
+    }
+
+    /** 同一事务内保存多个账号；用于关注、好友等一次请求修改两个玩家的接口。 */
+    @Transactional
+    public void saveAll(PlayerContext... contexts) {
+        Map<String, PlayerContext> unique = new LinkedHashMap<>();
+        for (PlayerContext context : contexts) {
+            unique.put(context.id(), context);
+        }
+        // 固定按玩家 ID 顺序 flush；真正的一致性仍由各行的乐观锁版本校验保证。
+        for (String playerId : unique.keySet().stream().sorted().toList()) {
+            saveState(unique.get(playerId));
+        }
+    }
+
+    /**
+     * 幂等键与受保护状态在同一事务内提交。
+     *
+     * <p>直接调用 handler 时没有 {@code WireGateway} 的外层事务，单独写 key 再 save 会把
+     * “已占键但状态未落库”永久留下；因此生产调用点统一改用这个方法。
+     */
+    @Transactional
+    public void saveWithIdempotency(PlayerContext context, String key, String route,
+                                    String fingerprint, Object response) {
+        insertIdempotency(context.id(), key, route, fingerprint, response);
+        saveState(context);
+    }
+
+    private void saveState(PlayerContext context) {
+        try {
+            Player managed = players.save(context.entity());
+            Set<String> changed = context.changedKeys();
+            // state-only 变更不会让 Hibernate 自动 UPDATE players；有变化时才强制递增版本。
+            if (!changed.isEmpty()) {
+                entities.lock(managed, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
             }
+            for (String key : changed) {
+                Object value = context.rawState().get(key);
+                if (value == null) {
+                    states.deleteOne(context.id(), key);
+                } else {
+                    states.save(new PlayerState(context.id(), key, serialize(value)));
+                }
+            }
+            players.flush();
+            context.entity().version = managed.version;
+            context.markSaved();
+        } catch (OptimisticLockingFailureException e) {
+            throw WireError.conflict(
+                    "Player state changed concurrently; retry the request");
+        }
+    }
+
+    /**
+     * 在独立表中登记幂等键，供并发请求做数据库级唯一性判定。
+     *
+     * <p>收据 JSON 仍用于重放响应；这张表只负责让两个同时到达的同键请求在唯一约束上
+     * 分出胜负，避免它们都在各自快照里“没查到回执”后重复结算。
+     */
+    private void insertIdempotency(String playerId, String key, String route,
+                                   String fingerprint, Object response) {
+        long now = Instant.now().getEpochSecond();
+        try {
+            jdbc.update("DELETE FROM idempotency_keys "
+                            + "WHERE player_id = ? AND created_at < ?",
+                    playerId, now - IDEMPOTENCY_RETENTION_SECONDS);
+            jdbc.update("INSERT INTO idempotency_keys "
+                            + "(player_id, idem_key, route, request_hash, response, created_at) "
+                            + "VALUES (?, ?, ?, ?, ?, ?)",
+                    playerId, key, route, fingerprint, serialize(response),
+                    now);
+        } catch (DataIntegrityViolationException e) {
+            throw WireError.conflict("Idempotency key already used");
         }
     }
 

@@ -7,9 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,6 +35,8 @@ import com.linklike.server.wire.WireRequest;
 import com.linklike.server.wire.WireRouter;
 import com.linklike.server.wire.WireServices;
 import com.linklike.server.wire.WireShop;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -60,6 +66,8 @@ class WireQuestModuleIntegrationTest {
     private WireRouter router;
     private PlayerStore store;
     private PlayerContext player;
+    private WireGrants grants;
+    private WireQuestModule module;
     private Map<String, List<Map<String, Object>>> catalogs;
 
     @BeforeEach
@@ -82,7 +90,10 @@ class WireQuestModuleIntegrationTest {
                         "stage_list", new ArrayList<>(List.of(
                                 J.map("learning_live_stages_id", LEARNING_STAGE,
                                         "quest_rank", 1, "quest_level", 10, "is_lock", false,
-                                        "is_clear", false, "gain_music_exp", 30, "page", 0)))))));
+                                        "is_clear", false, "gain_music_exp", 30, "page", 0)))),
+                J.map("learning_live_series_id", 40103201L, "music_id", 103201L,
+                        "earned_music_exp", 0, "music_exp_level", 0, "is_mastery", false,
+                        "stage_list", new ArrayList<>()))));
         catalogs.put("grade_live_catalog", new ArrayList<>(List.of(
                 J.map("quest_id", "10311", "current_rank", 0, "is_lock", false,
                         "is_try", false, "is_complete", false))));
@@ -109,8 +120,8 @@ class WireQuestModuleIntegrationTest {
                 new com.linklike.server.wire.WireCardMaster(defaults);
         WireCardMint mint = new WireCardMint(refs, new WireModels(mapper), cardMaster,
                 new com.linklike.server.wire.WireFanCatalog(cardMaster));
-        WireGrants grants = new WireGrants(mock(JdbcTemplate.class));
-        WireQuestModule module = new WireQuestModule(codec, services, master, shop, mint,
+        grants = spy(new WireGrants(mock(JdbcTemplate.class)));
+        module = new WireQuestModule(codec, services, master, shop, mint,
                 grants, defaults);
         router = new WireRouter(List.of(module), new RouteSnapshot(mapper));
 
@@ -249,6 +260,29 @@ class WireQuestModuleIntegrationTest {
     }
 
     @Test
+    void replayingADoneFinishKeepsTheOriginalResultAndDoesNotGrantAgain() {
+        player.put("ActiveQuest", "play:1:" + STANDARD_STAGE + ":103102:deck-1:live-1");
+        call("/v1/in_quest_live/set_finish",
+                J.map("quest_live_id", "live-1", "score", 250000, "play_report", "first"));
+        long stylePoint = player.longOf("StylePoint", 0);
+        Object beginnerBefore = WireServices.deepCopyJson(player.raw("beginner_missions"));
+
+        Map<String, Object> replay = call("/v1/in_quest_live/set_finish",
+                J.map("quest_live_id", "live-1", "score", 1, "play_report", "retry"));
+
+        assertEquals(true, replay.get("quest_result"));
+        assertEquals(stylePoint, player.longOf("StylePoint", 0));
+        assertEquals(beginnerBefore, player.raw("beginner_missions"));
+        String stored = String.valueOf(player.raw("ActiveQuest"));
+        assertTrue(stored.endsWith(":retry"));
+
+        Map<String, Object> result = call("/v1/out_quest_live/get_result",
+                J.map("quest_live_id", "live-1"));
+        assertEquals(true, result.get("quest_result"));
+        assertEquals(true, result.get("first_clear_flag"));
+    }
+
+    @Test
     void finishKeepsTheBestStarCountWhenTheNextRunIsWorse() {
         player.put("ActiveQuest", "play:1:" + STANDARD_STAGE + ":103102:deck-1:live-1");
         call("/v1/in_quest_live/set_finish",
@@ -343,6 +377,47 @@ class WireQuestModuleIntegrationTest {
         assertTrue(((Number) result.get("add_style_point")).longValue() > 0);
     }
 
+    @Test
+    void dataAccessFailuresWhileGrantingDropsAreNotSwallowed() {
+        player.put("quest_stage_states", new ArrayList<>(List.of(
+                J.map("stage_id", STANDARD_STAGE, "clear_status", 3, "is_lock", false))));
+        doThrow(new IllegalStateException("database offline"))
+                .when(grants).grantItem(any(), anyLong(), anyInt());
+
+        IllegalStateException error = assertThrows(IllegalStateException.class, () -> call(
+                "/v1/in_quest_live/skip_quest", J.map(
+                        "quest_live_type", 1, "stage_id", STANDARD_STAGE, "skip_count", 1)));
+        assertEquals("database offline", error.getMessage());
+    }
+
+    @Test
+    void unverifiedDropTypeIsSkippedInsteadOfFailingTheSettlement() throws Exception {
+        when(grants.item(987654L)).thenReturn(J.map("Id", 987654L, "Name", "unverified",
+                "ItemType", 2, "ItemCategory", 0));
+        Method grant = WireQuestModule.class.getDeclaredMethod(
+                "grantQuestDrops", PlayerContext.class, List.class);
+        grant.setAccessible(true);
+
+        grant.invoke(module, player, List.of(
+                J.map("item_id", 987654L, "item_num", 1)));
+
+        assertTrue(player.rowsSnapshot("Items").isEmpty());
+    }
+
+    @Test
+    void invalidDropQuantityStillFailsInsteadOfBeingSwallowed() throws Exception {
+        when(grants.item(987655L)).thenReturn(J.map("Id", 987655L, "Name", "valid",
+                "ItemType", 1, "ItemCategory", 1));
+        Method grant = WireQuestModule.class.getDeclaredMethod(
+                "grantQuestDrops", PlayerContext.class, List.class);
+        grant.setAccessible(true);
+
+        InvocationTargetException error = assertThrows(InvocationTargetException.class,
+                () -> grant.invoke(module, player, List.of(
+                        J.map("item_id", 987655L, "item_num", 0))));
+        assertTrue(error.getCause() instanceof IllegalArgumentException);
+    }
+
     // ------------------------------------------------------------------
     // 学习关
     // ------------------------------------------------------------------
@@ -353,8 +428,9 @@ class WireQuestModuleIntegrationTest {
                 "/v1/out_quest_live/music_learning/get_music_select", J.map());
 
         List<Map<String, Object>> music = J.rowsOr(result.get("music_list"));
-        assertEquals(1, music.size());
-        assertEquals(LEARNING_MUSIC, ((Number) music.get(0).get("music_id")).longValue());
+        assertEquals(2, music.size());
+        assertTrue(music.stream().anyMatch(row ->
+                J.longOr(row.get("music_id"), -1) == LEARNING_MUSIC));
         assertEquals(0L, ((Number) result.get("music_point")).longValue());
     }
 
@@ -407,6 +483,23 @@ class WireQuestModuleIntegrationTest {
                 call("/v1/out_quest_live/music_learning/get_result",
                         J.map("quest_live_id", "live-1")));
         assertEquals(409, error.status());
+    }
+
+    @Test
+    void musicReleaseReadsAndDebitsThePlayerWalletColumn() {
+        player.entity().musicPoint = 5L;
+
+        Map<String, Object> before = call(
+                "/v1/out_quest_live/music_learning/get_music_select", J.map());
+        assertEquals(5L, before.get("music_point"));
+
+        Map<String, Object> after = call(
+                "/v1/out_quest_live/music_learning/set_music",
+                J.map("music_id", 103201L));
+
+        assertEquals(4L, after.get("music_point"));
+        assertEquals(4L, player.entity().musicPoint);
+        assertNull(player.raw("MusicPoint"));
     }
 
     // ------------------------------------------------------------------

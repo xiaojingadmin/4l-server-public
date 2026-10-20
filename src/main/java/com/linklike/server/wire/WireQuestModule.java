@@ -1,5 +1,6 @@
 package com.linklike.server.wire;
 
+import com.linklike.server.domain.Player;
 import com.linklike.server.protocol.J;
 import com.linklike.server.protocol.WireCodec;
 import com.linklike.server.protocol.WireError;
@@ -82,7 +83,8 @@ public class WireQuestModule implements WireModule {
 
     /** 结算会改动的账号字段；落库失败时按 Python 的做法整体还原。 */
     private static final List<String> SETTLED_KEYS =
-            List.of("StylePoint", "learning_live_progress", "RhythmMusic");
+            List.of("StylePoint", "Items", "quest_stage_states",
+                    "learning_live_progress", "RhythmMusic", "beginner_missions");
 
     private final WireCodec codec;
     private final WireServices services;
@@ -903,10 +905,12 @@ public class WireQuestModule implements WireModule {
     private Map<String, Object> inSetFinish(WireRequest request) {
         PlayerContext player = request.requirePlayer();
         Map<String, Object> body = request.body();
-        QuestState state = requireQuest(player, body.get("quest_live_id"), Set.of("play"));
+        QuestState state = requireQuest(player, body.get("quest_live_id"),
+                Set.of("play", "done"));
+        boolean replay = "done".equals(state.kind);
 
         Object rawReport = body.get("play_report");
-        String report = "";
+        String report = replay ? state.playReport : "";
         if (rawReport instanceof String text) {
             report = text;
         } else if (rawReport != null && J.truthy(rawReport)) {
@@ -921,36 +925,40 @@ public class WireQuestModule implements WireModule {
             }
         }
 
-        int stars = questStars(state.stageId, score);
-        boolean won = stars > 0;
+        // 已结算的重放以落库结果为准，不能拿重发时的分数重新判定通关；只允许刷新
+        // report/score 这类展示字段，掉落、星级与发奖均保持首次结算的值。
+        int stars = replay ? 0 : questStars(state.stageId, score);
+        boolean won = replay ? state.questResult : stars > 0;
         int flags = won ? RESULT_WON : 0;
-        List<Map<String, Object>> drops = state.drops;
-        if ("done".equals(state.kind)) {
-            flags |= (state.firstClear ? RESULT_FIRST_CLEAR : 0)
-                    | (state.firstComplete ? RESULT_FIRST_COMPLETE : 0);
-        } else if (won) {
-            flags |= recordStageClear(player, state.stageId, stars);
-            drops = rollQuestDrops(state.stageId);
-            grantQuestDrops(player, drops);
+        List<Map<String, Object>> drops = new ArrayList<>();
+        if (replay && state.drops != null) {
+            drops.addAll(state.drops);
         }
-
+        long storedScore = score == null
+                ? (replay ? state.score : 0L) : score;
         Map<String, Object> before = snapshot(player, SETTLED_KEYS);
-        if (won && !"done".equals(state.kind)) {
-            addStylePoint(player, master.stageStylePoint(state.stageId));
-            if (state.liveType == QUEST_LEARNING) {
-                flags |= settleLearning(player, state.stageId, state.musicId);
-            }
-        }
         try {
+            if (replay) {
+                flags |= (state.firstClear ? RESULT_FIRST_CLEAR : 0)
+                        | (state.firstComplete ? RESULT_FIRST_COMPLETE : 0);
+            } else if (won) {
+                flags |= recordStageClear(player, state.stageId, stars);
+                drops = rollQuestDrops(state.stageId);
+                grantQuestDrops(player, drops);
+                addStylePoint(player, master.stageStylePoint(state.stageId));
+                if (state.liveType == QUEST_LEARNING) {
+                    flags |= settleLearning(player, state.stageId, state.musicId);
+                }
+            }
             writeQuest(player, request.store(), questToken("done", state.liveType,
                     state.stageId, state.musicId, state.deckId, state.questLiveId, flags,
-                    score == null ? 0L : score, drops, report));
+                    storedScore, drops, report));
         } catch (RuntimeException e) {
             restore(player, before);
             throw e;
         }
 
-        if (won) {
+        if (!replay && won) {
             int condition = 0;
             if (state.liveType == QUEST_STANDARD) {
                 condition = WireShop.BEGINNER_CONDITION_STANDARD_LIVE_CLEAR;
@@ -1001,23 +1009,23 @@ public class WireQuestModule implements WireModule {
         long styleBefore = player.longOf("StylePoint", 0L);
         List<Map<String, Object>> runs = new ArrayList<>();
         Map<String, long[]> totals = new LinkedHashMap<>();
-        for (int index = 0; index < count; index++) {
-            List<Map<String, Object>> drops = rollQuestDrops(stageId);
-            grantQuestDrops(player, drops);
-            runs.add(J.map("reward_list", drops));
-            for (Map<String, Object> drop : drops) {
-                long itemId = J.longOr(drop.get("item_id"), 0L);
-                long kind = J.longOr(drop.get("reward_type"), 0L);
-                totals.computeIfAbsent(itemId + ":" + kind,
-                        key -> new long[] {itemId, kind, 0L})[2] += J.longOr(
-                                drop.get("item_num"), 0L);
-            }
-            addStylePoint(player, master.stageStylePoint(stageId));
-            if (liveType == QUEST_LEARNING) {
-                settleLearning(player, stageId, musicId);
-            }
-        }
         try {
+            for (int index = 0; index < count; index++) {
+                List<Map<String, Object>> drops = rollQuestDrops(stageId);
+                grantQuestDrops(player, drops);
+                runs.add(J.map("reward_list", drops));
+                for (Map<String, Object> drop : drops) {
+                    long itemId = J.longOr(drop.get("item_id"), 0L);
+                    long kind = J.longOr(drop.get("reward_type"), 0L);
+                    totals.computeIfAbsent(itemId + ":" + kind,
+                            key -> new long[] {itemId, kind, 0L})[2] += J.longOr(
+                                    drop.get("item_num"), 0L);
+                }
+                addStylePoint(player, master.stageStylePoint(stageId));
+                if (liveType == QUEST_LEARNING) {
+                    settleLearning(player, stageId, musicId);
+                }
+            }
             request.store().save(player);
         } catch (RuntimeException e) {
             restore(player, before);
@@ -1102,7 +1110,7 @@ public class WireQuestModule implements WireModule {
     private Map<String, Object> musicSelect(WireRequest request) {
         PlayerContext player = request.requirePlayer();
         return J.map("music_list", learningList(player),
-                "music_point", player.longOf("MusicPoint", 0L),
+                "music_point", WireGrants.walletValue(player, "MusicPoint"),
                 "latest_music_id", player.intOf("LatestLearningMusicId", 0),
                 "character_bonus_list", new ArrayList<>());
     }
@@ -1120,34 +1128,42 @@ public class WireQuestModule implements WireModule {
         if (row == null) {
             throw WireError.notFound("Local learning live music not found");
         }
-        player.put("LatestLearningMusicId", musicId);
+        Map<String, Object> before = snapshot(player, List.of("LatestLearningMusicId",
+                "learning_live_progress", "beginner_missions"));
+        try {
+            player.put("LatestLearningMusicId", musicId);
 
-        Map<String, Object> release = musicRelease(musicId);
-        Object seriesId = row.get("learning_live_series_id");
-        List<Map<String, Object>> progress = WireServices.rows(player, "learning_live_progress");
-        boolean known = false;
-        for (Map<String, Object> item : progress) {
-            if (Objects.equals(J.str(item.get("learning_live_series_id")), J.str(seriesId))) {
-                known = true;
-                break;
+            Map<String, Object> release = musicRelease(musicId);
+            Object seriesId = row.get("learning_live_series_id");
+            List<Map<String, Object>> progress = WireServices.rows(player,
+                    "learning_live_progress");
+            boolean known = false;
+            for (Map<String, Object> item : progress) {
+                if (Objects.equals(J.str(item.get("learning_live_series_id")), J.str(seriesId))) {
+                    known = true;
+                    break;
+                }
             }
-        }
-        if (release != null && !known) {
-            long cost = J.longOr(release.get("MusicPoint"), 0L);
-            long have = player.longOf("MusicPoint", 0L);
-            if (have < cost) {
-                throw WireError.badRequest("Not enough music point to release this music");
+            if (release != null && !known) {
+                long cost = J.longOr(release.get("MusicPoint"), 0L);
+                long have = WireGrants.walletValue(player, "MusicPoint");
+                if (have < cost) {
+                    throw WireError.badRequest("Not enough music point to release this music");
+                }
+                WireGrants.setWallet(player, "MusicPoint", have - cost);
+                progress.add(J.map("learning_live_series_id", seriesId, "music_id", musicId,
+                        "earned_music_exp", 0, "music_exp_level", 0, "is_mastery", false,
+                        "stage_list", new ArrayList<>()));
+                player.put("learning_live_progress", progress);
+                shop.advance(player, WireShop.BEGINNER_CONDITION_MUSIC_RELEASE);
             }
-            WireGrants.setWallet(player, "MusicPoint", have - cost);
-            progress.add(J.map("learning_live_series_id", seriesId, "music_id", musicId,
-                    "earned_music_exp", 0, "music_exp_level", 0, "is_mastery", false,
-                    "stage_list", new ArrayList<>()));
-            player.put("learning_live_progress", progress);
-            shop.advance(player, WireShop.BEGINNER_CONDITION_MUSIC_RELEASE);
+            request.store().save(player);
+        } catch (RuntimeException e) {
+            restore(player, before);
+            throw e;
         }
-        request.store().save(player);
         return J.map("music_info", learningRow(player, musicId),
-                "music_point", player.longOf("MusicPoint", 0L));
+                "music_point", WireGrants.walletValue(player, "MusicPoint"));
     }
 
     private Map<String, Object> learningResult(WireRequest request) {
@@ -1739,8 +1755,13 @@ public class WireQuestModule implements WireModule {
             try {
                 grants.grantItem(player, J.longOr(drop.get("item_id"), 0L),
                         (int) J.longOr(drop.get("item_num"), 0L));
-            } catch (RuntimeException ignored) {
+            } catch (WireGrants.UnverifiedRewardException ignored) {
                 // 本地没有核实的发放路径就跳过这一条，其余照发。
+            } catch (WireError error) {
+                if (error.status() != 501) {
+                    throw error;
+                }
+                // 与 Python 的「不可核实奖励」一致：只跳过这一条，数据访问故障仍然上抛。
             }
         }
     }
@@ -1768,17 +1789,30 @@ public class WireQuestModule implements WireModule {
             Object value = player.raw(key);
             out.put(key, value == null ? null : WireServices.deepCopyJson(value));
         }
+        Player entity = player.entity();
+        out.put("__jewelFree", entity.jewelFree);
+        out.put("__jewelPaid", entity.jewelPaid);
+        out.put("__musicPoint", entity.musicPoint);
+        out.put("__stickerPointNum", entity.stickerPointNum);
         return out;
     }
 
     private static void restore(PlayerContext player, Map<String, Object> before) {
         for (Map.Entry<String, Object> entry : before.entrySet()) {
+            if (entry.getKey().startsWith("__")) {
+                continue;
+            }
             if (entry.getValue() == null) {
                 player.remove(entry.getKey());
             } else {
                 player.put(entry.getKey(), entry.getValue());
             }
         }
+        Player entity = player.entity();
+        entity.jewelFree = (Long) before.get("__jewelFree");
+        entity.jewelPaid = (Long) before.get("__jewelPaid");
+        entity.musicPoint = (Long) before.get("__musicPoint");
+        entity.stickerPointNum = (Long) before.get("__stickerPointNum");
     }
 
     // ------------------------------------------------------------------

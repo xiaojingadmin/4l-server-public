@@ -1,6 +1,7 @@
 package com.linklike.server.wire;
 
 import com.linklike.server.protocol.J;
+import com.linklike.server.protocol.WireError;
 import com.linklike.server.service.PlayerContext;
 import java.util.ArrayList;
 import java.util.List;
@@ -166,19 +167,19 @@ public class WireGrants {
     public Map<String, Object> receivableItem(long itemId) {
         Map<String, Object> item = item(itemId);
         if (item == null) {
-            throw new IllegalArgumentException("Unknown item " + itemId);
+            throw new UnverifiedRewardException("Unknown item " + itemId);
         }
         int kind = J.intOr(item.get("ItemType"), 0);
         if (WALLET_ITEMS.containsKey((int) itemId)) {
             return item;
         }
         if (!INVENTORY_TYPES.contains(kind)) {
-            throw new IllegalArgumentException(String.format(
+            throw new UnverifiedRewardException(String.format(
                     "%s (ItemType %d) cannot be granted: no verified inventory path",
                     nameOf(item, itemId), kind));
         }
         if (kind == ITEM_TYPE_RESOURCE && J.intOr(item.get("ItemCategory"), 0) == 0) {
-            throw new IllegalArgumentException(String.format(
+            throw new UnverifiedRewardException(String.format(
                     "%s is a client-side resource without a local wallet", nameOf(item, itemId)));
         }
         return item;
@@ -200,8 +201,7 @@ public class WireGrants {
         }
         String wallet = WALLET_ITEMS.get((int) itemId);
         if (wallet != null) {
-            long value = walletValue(player, wallet) + num;
-            setWallet(player, wallet, value);
+            long value = addWallet(player, wallet, num);
             return J.map("ItemId", itemId, "ItemType", item.get("ItemType"),
                     "ItemNum", value, "Wallet", wallet);
         }
@@ -286,6 +286,21 @@ public class WireGrants {
         }
     }
 
+    /** 增加余额并拒绝 long 溢出；钱包只接受非负增量。 */
+    public static long addWallet(PlayerContext player, String key, long delta) {
+        if (delta < 0) {
+            throw new IllegalArgumentException("wallet delta must be >= 0");
+        }
+        long value;
+        try {
+            value = Math.addExact(walletValue(player, key), delta);
+        } catch (ArithmeticException e) {
+            throw WireError.badRequest("Wallet value overflow for " + key);
+        }
+        setWallet(player, key, value);
+        return value;
+    }
+
     // ------------------------------------------------------------------
     // 内部
     // ------------------------------------------------------------------
@@ -293,6 +308,13 @@ public class WireGrants {
     private static String nameOf(Map<String, Object> item, long itemId) {
         String name = J.nonEmpty(item.get("Name"));
         return name == null ? String.valueOf(itemId) : name;
+    }
+
+    /** 本地没有可核实发放路径；调用方可逐条跳过，其余参数/数据错误不应被吞掉。 */
+    public static class UnverifiedRewardException extends IllegalArgumentException {
+        public UnverifiedRewardException(String message) {
+            super(message);
+        }
     }
 
     /**

@@ -139,6 +139,17 @@ class WireMissionRewardTest {
                 .status());
     }
 
+    @Test
+    void walletOverflowIsRejectedWithoutWrappingTheBalance() {
+        player.entity().musicPoint = Long.MAX_VALUE;
+
+        WireError error = assertThrows(WireError.class, () -> shop.grantReward(
+                player, J.map("ItemType", 3, "ItemId", 3009000, "Num", 1)));
+
+        assertEquals(400, error.status());
+        assertEquals(Long.MAX_VALUE, player.entity().musicPoint);
+    }
+
     // ------------------------------------------------------------------
     // 关卡任务进度（transition_contents_id -> 账号状态）
     // ------------------------------------------------------------------
