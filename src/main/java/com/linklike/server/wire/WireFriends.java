@@ -12,8 +12,8 @@ import java.util.Map;
  * {@code FRIEND_STATUS_*} 常量与 {@code _follow_ids} / {@code _friend_ids} /
  * {@code _outgoing_requests} / {@code friend_request_status}。
  *
- * <p>只包含 {@code /v1/profile/get_info} 需要的部分；好友列表、申请与关注等写接口
- * （{@code wire_services.py} 的其余部分）还没移植，相关路径仍是显式 501。
+ * <p>这里只放 {@code /v1/profile/get_info} 与 {@link WireSocialModule} 共用的状态判定；
+ * 好友 / 关注的读写接口在 {@link WireSocialModule}。
  */
 public final class WireFriends {
 

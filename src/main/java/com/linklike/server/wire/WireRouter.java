@@ -40,14 +40,17 @@ public class WireRouter {
 
     private final Map<String, WireHandler> routes = new LinkedHashMap<>();
 
+    /** 仍由 {@link RouteSnapshot} 兜底成 501 的路径（尚未移植的接口）。 */
+    private final Set<String> pending = new LinkedHashSet<>();
+
     public WireRouter(List<WireModule> modules, RouteSnapshot snapshot) {
         for (WireModule module : modules) {
             module.register(this);
         }
         int implemented = routes.size();
-        int pending = registerPending(snapshot);
-        log.info("已注册 {} 条 /v1 路由（已实现 {}，显式 501 {}），Python 版支持 {} 条",
-                routes.size(), implemented, pending, snapshot.paths().size());
+        int added = registerPending(snapshot);
+        log.info("已注册 {} 条 /v1 路由（已实现 {}，快照兜底 501 {}），Python 版支持 {} 条",
+                routes.size(), implemented, added, snapshot.paths().size());
         verifyCoverage(snapshot);
     }
 
@@ -111,6 +114,11 @@ public class WireRouter {
         });
     }
 
+    /** 尚未实现的路径（显式注册为 501 的不算，它们有真实 handler）。 */
+    public Set<String> pending() {
+        return Collections.unmodifiableSet(pending);
+    }
+
     public Set<String> paths() {
         return Collections.unmodifiableSet(routes.keySet());
     }
@@ -129,9 +137,11 @@ public class WireRouter {
         for (String path : snapshot.paths()) {
             // 与 register 一致地套用别名，否则别名的两种拼写会在表里各占一条、其中一条永远
             // 命中不到，启动日志里的条数也会虚高。
-            if (routes.putIfAbsent(canonical(path), request -> {
+            String key = canonical(path);
+            if (routes.putIfAbsent(key, request -> {
                 throw WireError.unimplemented();
             }) == null) {
+                pending.add(key);
                 added++;
             }
         }

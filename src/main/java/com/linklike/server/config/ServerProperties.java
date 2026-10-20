@@ -35,6 +35,12 @@ public class ServerProperties {
      */
     private String clientDefaultsDir = "";
 
+    /** 本地关注上限（Python {@code CONFIG follow_limit}，默认 1000），不是游戏规则。 */
+    private int followLimit = 1000;
+
+    /** 本地粉丝上限（Python {@code CONFIG follower_limit}，默认 1000），不是游戏规则。 */
+    private int followerLimit = 1000;
+
     private boolean logRequests = true;
 
     private String logDir = "build/server-profiles/5.1.0/logs";
@@ -103,6 +109,22 @@ public class ServerProperties {
 
     public void setLogDir(String logDir) {
         this.logDir = logDir;
+    }
+
+    public int getFollowLimit() {
+        return followLimit;
+    }
+
+    public void setFollowLimit(int followLimit) {
+        this.followLimit = followLimit;
+    }
+
+    public int getFollowerLimit() {
+        return followerLimit;
+    }
+
+    public void setFollowerLimit(int followerLimit) {
+        this.followerLimit = followerLimit;
     }
 
     public OfficialApi getOfficialApi() {

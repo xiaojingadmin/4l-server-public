@@ -58,7 +58,7 @@ public class WireController {
     @RequestMapping(value = "/v1/**",
             method = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT,
                     RequestMethod.PATCH, RequestMethod.DELETE})
-    public ResponseEntity<Map<String, Object>> handle(HttpServletRequest http) {
+    public ResponseEntity<Object> handle(HttpServletRequest http) {
         Map<String, String> headers = lowercaseHeaders(http);
         String method = http.getMethod();
         String rawPath = http.getRequestURI();
@@ -66,7 +66,7 @@ public class WireController {
 
         int bodyBytes = 0;
         Map<String, Object> body = new LinkedHashMap<>();
-        Map<String, Object> response = new LinkedHashMap<>();
+        Object response = new LinkedHashMap<String, Object>();
         Map<String, String> responseHeaders = new LinkedHashMap<>();
         int status = 200;
         // Python 在方法检查之前就记录该路径是否有 handler，错误响应里也保留这个信息。

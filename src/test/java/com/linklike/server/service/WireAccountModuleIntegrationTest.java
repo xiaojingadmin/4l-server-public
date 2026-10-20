@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -223,11 +226,40 @@ class WireAccountModuleIntegrationTest {
         assertTrue(J.rowsOr(result.get("items")).isEmpty());
     }
 
+    @Test
+    void presentListPublishesTotalCountAndSyncsPresentBoxCount() {
+        // Python wire_services.py:1600-1607：get_list 会把 PresentBoxCount 纠成行数并落库。
+        // 这里同时验证「列表形状」与「读接口顺手写库」这个唯一分支。
+        player.put("presents", new ArrayList<>(List.of(
+                J.map("DPresentBoxesId", "p-1", "ItemType", 1, "ItemId", 1006001L, "Num", 2),
+                J.map("DPresentBoxesId", "p-2", "ItemType", 1, "ItemId", 1006002L, "Num", 1))));
+        player.entity().presentBoxCount = 99;
+
+        Map<String, Object> result = call("/v1/present_box/get_list", Map.of("page", 1));
+
+        assertEquals(2, J.intOr(result.get("total_count"), -1));
+        assertEquals(1, J.intOr(result.get("page"), -1));
+        assertEquals(2, J.rowsOr(result.get("items")).size());
+        assertEquals(2, player.entity().presentBoxCount);
+        verify(store).save(player);
+    }
+
+    @Test
+    void presentListDoesNotWriteWhenCountAlreadyMatches() {
+        player.put("presents", new ArrayList<>(List.of(
+                J.map("DPresentBoxesId", "p-1", "ItemType", 1, "ItemId", 1006001L, "Num", 2))));
+        player.entity().presentBoxCount = 1;
+
+        call("/v1/present_box/get_list", Map.of("page", 1));
+
+        verify(store, never()).save(any());
+    }
+
     private Map<String, Object> call(String path, Map<String, Object> body) {
         WireHandler handler = router.resolve(path);
         assertNotNull(handler, path + " 未注册");
-        return handler.handle(new WireRequest(path, body, Map.of(), player, store, mapper,
-                new ServerProperties()));
+        return asMap(handler.handle(new WireRequest(path, body, Map.of(), player, store, mapper,
+                new ServerProperties())));
     }
 
     private static Map<String, Object> findMission(List<Map<String, Object>> groups, int id) {
@@ -239,5 +271,10 @@ class WireAccountModuleIntegrationTest {
             }
         }
         return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Map<String, Object> asMap(Object value) {
+        return (Map<String, Object>) value;
     }
 }

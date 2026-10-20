@@ -45,8 +45,11 @@ sha256sum -c data/MANIFEST.sha256
 两种方式启动时都会自动初始化表结构（Flyway），并在 `master_items` 表为空时从随仓库的
 `master_items_5.1.0.json`（939 行物品主表）写入种子数据。
 
-> H2 模式的限制：只自动导入 `master_items`；卡片成长、抽卡、商店结算等尚未迁移的领域
-> 接口仍按 501 处理，和 Python 版「缺 master 表」的行为一致。
+> H2 模式的限制：只自动导入 `master_items`；卡片成长、抽卡、商店结算等领域还依赖运行时
+> 导入的 catalog（`data/catalog/`），缺这些数据时接口按 501 拒绝结算，与 Python 版
+> 「缺 master 表」的行为一致。
+>
+> 迁移进度与仍是显式 501 的写接口清单见 [`docs/migration-gap.md`](docs/migration-gap.md)。
 
 ---
 
@@ -85,7 +88,7 @@ java -jar target/linklike-server-5.1.0.jar
 java -jar target/linklike-server-5.1.0.jar --spring.profiles.active=h2
 ```
 
-首次启动会注册 309 条路由（95 条已实现 + 214 条显式 501），日志里可据此确认数据加载正常。
+首次启动会注册 309 条路由（309 条都有 handler，其中 32 条按设计返回 501），日志里可据此确认数据加载正常。
 
 ---
 

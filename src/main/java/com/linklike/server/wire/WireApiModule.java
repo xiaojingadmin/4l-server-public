@@ -44,14 +44,17 @@ public class WireApiModule implements WireModule {
     private final WireState state;
     private final WireLoginBonus loginBonus;
     private final RefCatalogStore catalogs;
+    private final WireFanLevel.Catalog fanCatalog;
 
     public WireApiModule(WireCodec codec, WireCatalog catalog, WireState state,
-                         WireLoginBonus loginBonus, RefCatalogStore catalogs) {
+                         WireLoginBonus loginBonus, RefCatalogStore catalogs,
+                         WireFanLevel.Catalog fanCatalog) {
         this.codec = codec;
         this.catalog = catalog;
         this.state = state;
         this.loginBonus = loginBonus;
         this.catalogs = catalogs;
+        this.fanCatalog = fanCatalog;
     }
 
     @Override
@@ -140,7 +143,7 @@ public class WireApiModule implements WireModule {
             actor = target;
             rejectBanned(actor);
             // 初始发放早于这个账号注册时，下次登录补上（只补一次，见 WireInitial）。
-            if (WireInitial.grant(actor, catalog)) {
+            if (WireInitial.grant(actor, catalog, fanCatalog)) {
                 store.save(actor);
             }
         } else if (request.player() == null) {
@@ -228,7 +231,7 @@ public class WireApiModule implements WireModule {
         player.entity().playerName = name.strip();
         player.entity().registrationComplete = true;
         player.entity().temporary = false;
-        WireInitial.grant(player, catalog);
+        WireInitial.grant(player, catalog, fanCatalog);
         request.store().save(player);
         if (request.path().endsWith("setuserdata")) {
             Map<String, Object> out = new LinkedHashMap<>();
