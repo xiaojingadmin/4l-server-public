@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -188,6 +189,22 @@ class WireGachaModuleIntegrationTest {
         assertEquals(1L, ((Number) points.get("user_guarantee_point_num_after")).longValue());
         assertEquals(1, player.rowsSnapshot("gacha_points").size());
         assertEquals(1, player.rowsSnapshot("gacha_receipts").size());
+    }
+
+    @Test
+    void beginnerGachaProgressIsAlreadyPresentWhenThePurchaseIsSaved() {
+        AtomicReference<Object> atSave = new AtomicReference<>();
+        doAnswer(call -> {
+            PlayerContext saved = call.getArgument(0);
+            atSave.set(WireServices.deepCopyJson(saved.raw("beginner_missions")));
+            return null;
+        }).when(store).save(any());
+
+        call("/v1/gacha/set_purchase",
+                J.map("gacha_series_id", POOL, "gacha_set_purchase_type", 1),
+                Map.of("x-idempotency-key", "progress-save"));
+
+        assertEquals(1, J.intOr(beginnerMission(atSave.get(), 900201).get("achieved_num"), 0));
     }
 
     @Test
@@ -362,6 +379,24 @@ class WireGachaModuleIntegrationTest {
     }
 
     @Test
+    void beginnerTicketProgressIsAlreadyPresentWhenTheExchangeIsSaved() {
+        player.put("select_ticket_balances", new ArrayList<>(List.of(
+                J.map("select_ticket_series_id", 1020002, "user_select_ticket_num", 1))));
+        AtomicReference<Object> atSave = new AtomicReference<>();
+        doAnswer(call -> {
+            PlayerContext saved = call.getArgument(0);
+            atSave.set(WireServices.deepCopyJson(saved.raw("beginner_missions")));
+            return null;
+        }).when(store).save(any());
+
+        call("/v1/gacha/set_select_ticket_exchange",
+                J.map("select_ticket_exchange_rate_id", 1020002001L),
+                Map.of("x-idempotency-key", "ticket-progress-save"));
+
+        assertEquals(1, J.intOr(beginnerMission(atSave.get(), 900202).get("achieved_num"), 0));
+    }
+
+    @Test
     void selectTicketExchangeRejectsADuplicateCardAsCoinsAndMaterial() {
         player.put("select_ticket_balances", new ArrayList<>(List.of(
                 J.map("select_ticket_series_id", 1020002, "user_select_ticket_num", 2))));
@@ -438,6 +473,17 @@ class WireGachaModuleIntegrationTest {
         assertNotNull(handler, path + " 未注册");
         return asMap(handler.handle(new WireRequest(path, body, headers, player, store, mapper,
                 new ServerProperties())));
+    }
+
+    private static Map<String, Object> beginnerMission(Object groups, int missionId) {
+        for (Map<String, Object> group : J.rowsOr(groups)) {
+            for (Map<String, Object> row : J.rowsOr(group.get("mission_list"))) {
+                if (J.intOr(row.get("mission_id"), -1) == missionId) {
+                    return row;
+                }
+            }
+        }
+        throw new AssertionError("缺少新手任务 " + missionId);
     }
 
     @SuppressWarnings("unchecked")

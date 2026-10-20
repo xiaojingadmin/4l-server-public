@@ -51,7 +51,7 @@ public class WireShopModule implements WireModule {
 
     /** 结算可能改写的账号键；失败回滚按这张表走。 */
     private static final List<String> SETTLED_KEYS = List.of(
-            "Items", "Cards", "Stickers", "StickerPointNum", "PetalCoinNum",
+            "Items", "Cards", "Stickers", "PetalCoinNum",
             "shop_period_states", "item_exchange_states", "sisca_store_states",
             "sticker_exchange_states", "petal_exchanges", "shop_receipts",
             "FanLevelDetails", "MemberFanLevels", "FanLevels", "FanLevel");
@@ -286,17 +286,18 @@ public class WireShopModule implements WireModule {
                     throw WireError.badRequest("Sticker already owned");
                 }
             }
-            long points = player.longOf("StickerPointNum", 0L);
+            long points = WireGrants.walletValue(player, "StickerPointNum");
             int cost = intOf(rate.get("MaterialItemNum"));
             if (points < cost) {
                 throw WireError.badRequest("Not enough sticker points");
             }
-            player.put("StickerPointNum", points - cost);
+            WireGrants.setWallet(player, "StickerPointNum", points - cost);
             grantSticker(player, product);
             updateStickerState(player, ident);
             return commit(player, request, key, fingerprint,
                     "/v1/sticker_exchange/set_purchase",
-                    J.map("sticker_point_num", player.raw("StickerPointNum")));
+                    J.map("sticker_point_num",
+                            WireGrants.walletValue(player, "StickerPointNum")));
         } catch (RuntimeException e) {
             restore(player, before);
             throw e;
@@ -815,6 +816,7 @@ public class WireShopModule implements WireModule {
                 "fingerprint", fingerprint,
                 "path", path,
                 "response_body", WireServices.deepCopyJson(response)));
+        request.store().recordIdempotency(player.id(), key, path, fingerprint, response);
         request.store().save(player);
         return response;
     }
@@ -828,6 +830,8 @@ public class WireShopModule implements WireModule {
         out.put("__jewelFree", player.entity().jewelFree);
         out.put("__jewelPaid", player.entity().jewelPaid);
         out.put("__jewelPaidGoogle", player.entity().jewelPaidGoogle);
+        out.put("__musicPoint", player.entity().musicPoint);
+        out.put("__stickerPointNum", player.entity().stickerPointNum);
         return out;
     }
 
@@ -843,6 +847,8 @@ public class WireShopModule implements WireModule {
         player.entity().jewelFree = (Long) before.get("__jewelFree");
         player.entity().jewelPaid = (Long) before.get("__jewelPaid");
         player.entity().jewelPaidGoogle = (Long) before.get("__jewelPaidGoogle");
+        player.entity().musicPoint = (Long) before.get("__musicPoint");
+        player.entity().stickerPointNum = (Long) before.get("__stickerPointNum");
     }
 
     // ------------------------------------------------------------------

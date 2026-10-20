@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -101,6 +102,10 @@ public class WireController {
         } catch (WireError e) {
             status = e.status();
             response = e.payload();
+        } catch (OptimisticLockingFailureException e) {
+            status = 409;
+            response = ErrorCodes.payload(409,
+                    "Player state changed concurrently; retry the request", null);
         } catch (RuntimeException e) {
             status = 500;
             response = ErrorCodes.payload(500, String.valueOf(e.getMessage()), null);

@@ -21,7 +21,9 @@ Python 版快照（`wire_api.SUPPORTED`）共 **315** 条路径，去掉 6 条�
 `achieved_num` / `is_achieved` 已按 `capture_import.SPECS` 的 reset 规则归零，
 所以它是**任务定义**而不是某个账号的进度快照。`WireCatalog.seedMissionGroups()` 在启动时
 把它灌进 `ref_catalogs`（`catalog_key=mission_groups`，键为 `mission_type`），
-`/v1/mission/get_list` 再按账号自己的 `service_missions` 覆盖进度。
+`/v1/mission/get_list` 再从账号当前状态即时派生进度并覆盖目录。派生只发生在本次请求的
+副本里，不写回 `service_missions`，因此 GET 不会与其它写入争抢玩家行；已有
+`service_missions` 行仍会作为派生草稿的起点保留。
 
 `/v1/step_up_beginner_mission/set_reward` 据此按核实过的定义结算：只接受「已达成且未领取」
 的任务，奖励逐条走 `grantReward`，任一奖励不可核实则整体失败、状态不变，返回
@@ -31,9 +33,25 @@ Python 版快照（`wire_api.SUPPORTED`）共 **315** 条路径，去掉 6 条�
 `3001002` 体力券）。`WireShop.catalogItem()` 因此在商店目录查不到时回退到完整的
 5.1.0 主数据 `master_items_5.1.0.json`（939 条），否则这些奖励会被误判成「定义缺失」。
 
+### 钱包口径
+
+`JewelFree` / `JewelPaid` / `MusicPoint` / `StickerPointNum` 统一以 `players` 表的整型列
+为唯一权威来源，全部通过 `WireGrants.walletValue/setWallet` 读写；不再向
+`player_state` 另写同名键。点数是整数单位，不涉及分/主单位换算或舍入；累加使用
+`Math.addExact`，溢出时返回 400 而不是回绕。奖励、商店购买、学习曲解放与展示接口因此
+读取的是同一份余额。
+
+### 并发与幂等
+
+`players.version` 使用 JPA 乐观锁；旧快照落库时返回 409，不再静默覆盖另一请求。
+`x-idempotency-key` 除写入账号回执 JSON 外，还会写入带
+`(player_id, idem_key)` 主键的 `idempotency_keys` 表，由数据库唯一约束裁决并发同键请求。
+`in_quest_live/set_finish` 允许对 `done` 状态重放：沿用首次结算的胜负、首通标志与掉落，
+只刷新 report/score，并跳过第二次发奖与新手任务推进。
+
 ### 关卡任务进度（`mission/get_list`）
 
-`mission/get_list` 不再原样回目录里的 `achieved_num=0`，而是按账号真实状态派生：
+`mission/get_list` 不再原样回目录里的 `achieved_num=0`，而是在读取时按账号真实状态派生：
 
 - **计数器按 `(transition_contents_id, mission_id 前 6 位)` 分组**，每组只有一个计数器。
   这条规则用官方账号导出的 90 条任务逐条验证过（50 条可派生，全部与官方

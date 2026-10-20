@@ -1,6 +1,7 @@
 package com.linklike.server.wire;
 
 import com.linklike.server.protocol.J;
+import com.linklike.server.protocol.WireError;
 import com.linklike.server.service.PlayerContext;
 import java.util.ArrayList;
 import java.util.List;
@@ -200,8 +201,7 @@ public class WireGrants {
         }
         String wallet = WALLET_ITEMS.get((int) itemId);
         if (wallet != null) {
-            long value = walletValue(player, wallet) + num;
-            setWallet(player, wallet, value);
+            long value = addWallet(player, wallet, num);
             return J.map("ItemId", itemId, "ItemType", item.get("ItemType"),
                     "ItemNum", value, "Wallet", wallet);
         }
@@ -284,6 +284,21 @@ public class WireGrants {
                 player.entity().stickerPointNum = value;
                 break;
         }
+    }
+
+    /** 增加余额并拒绝 long 溢出；钱包只接受非负增量。 */
+    public static long addWallet(PlayerContext player, String key, long delta) {
+        if (delta < 0) {
+            throw new IllegalArgumentException("wallet delta must be >= 0");
+        }
+        long value;
+        try {
+            value = Math.addExact(walletValue(player, key), delta);
+        } catch (ArithmeticException e) {
+            throw WireError.badRequest("Wallet value overflow for " + key);
+        }
+        setWallet(player, key, value);
+        return value;
     }
 
     // ------------------------------------------------------------------

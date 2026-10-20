@@ -160,12 +160,12 @@ public class WireMissionModule implements WireModule {
 
     private Map<String, Object> serviceMissions(WireRequest request) {
         PlayerContext player = request.requirePlayer();
-        // 纯读：任务进度由同步流程写进 service_missions，读接口只做 overlay，
-        // 与 Python 的 /v1/mission/get_list 一致（不在 GET 上产生写操作）。
+        // 纯读：基于账号快照派生一份进度草稿再 overlay；不写回 service_missions，
+        // 因而不在 GET 上产生数据库写入，也不会与并发请求互相覆盖。
         return J.map(
                 "mission_list", WireServices.overlayNested(
                         services.refs("mission_groups"),
-                        WireServices.rows(player, "service_missions"), "mission_type",
+                        shop.derivedServiceMissions(player), "mission_type",
                         "mission_list", "mission_id",
                         Set.of("achieved_num", "is_achieved"), Set.of()),
                 "common_mission_info", J.map(

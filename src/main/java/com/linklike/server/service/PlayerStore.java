@@ -9,6 +9,8 @@ import com.linklike.server.protocol.WireError;
 import com.linklike.server.repository.PlayerRepository;
 import com.linklike.server.repository.PlayerStateRepository;
 import com.linklike.server.repository.SessionRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.HexFormat;
@@ -17,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,13 +44,18 @@ public class PlayerStore {
     private final PlayerRepository players;
     private final SessionRepository sessions;
     private final PlayerStateRepository states;
+    private final JdbcTemplate jdbc;
+    private final EntityManager entities;
     private final ObjectMapper mapper;
 
     public PlayerStore(PlayerRepository players, SessionRepository sessions,
-                       PlayerStateRepository states, ObjectMapper mapper) {
+                       PlayerStateRepository states, JdbcTemplate jdbc,
+                       EntityManager entities, ObjectMapper mapper) {
         this.players = players;
         this.sessions = sessions;
         this.states = states;
+        this.jdbc = jdbc;
+        this.entities = entities;
         this.mapper = mapper;
     }
 
@@ -150,14 +160,44 @@ public class PlayerStore {
      */
     @Transactional
     public void save(PlayerContext context) {
-        players.save(context.entity());
-        for (String key : context.loadedKeys()) {
-            Object value = context.rawState().get(key);
-            if (value == null) {
-                states.deleteOne(context.id(), key);
-            } else {
-                states.save(new PlayerState(context.id(), key, serialize(value)));
+        try {
+            Player managed = players.save(context.entity());
+            // state-only 变更不会让 Hibernate 自动 UPDATE players；强制递增版本，
+            // 让同一账号的并发 JSON 状态写入也能被乐观锁识别。
+            entities.lock(managed, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+            for (String key : context.loadedKeys()) {
+                Object value = context.rawState().get(key);
+                if (value == null) {
+                    states.deleteOne(context.id(), key);
+                } else {
+                    states.save(new PlayerState(context.id(), key, serialize(value)));
+                }
             }
+            players.flush();
+            context.entity().version = managed.version;
+        } catch (OptimisticLockingFailureException e) {
+            throw WireError.conflict(
+                    "Player state changed concurrently; retry the request");
+        }
+    }
+
+    /**
+     * 在独立表中登记幂等键，供并发请求做数据库级唯一性判定。
+     *
+     * <p>收据 JSON 仍用于重放响应；这张表只负责让两个同时到达的同键请求在唯一约束上
+     * 分出胜负，避免它们都在各自快照里“没查到回执”后重复结算。
+     */
+    @Transactional
+    public void recordIdempotency(String playerId, String key, String route,
+                                  String fingerprint, Object response) {
+        try {
+            jdbc.update("INSERT INTO idempotency_keys "
+                            + "(player_id, idem_key, route, request_hash, response, created_at) "
+                            + "VALUES (?, ?, ?, ?, ?, ?)",
+                    playerId, key, route, fingerprint, serialize(response),
+                    Instant.now().getEpochSecond());
+        } catch (DataIntegrityViolationException e) {
+            throw WireError.conflict("Idempotency key already used");
         }
     }
 
