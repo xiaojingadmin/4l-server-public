@@ -13,6 +13,8 @@ cp.txt
 build/server-profiles/
 build/asset-cache/
 build/custom-cdn/
+build/apk-local/
+build/ipa-local/
 logs/
 *.log
 
@@ -45,6 +47,9 @@ data/linklike*
 capture/
 *.pcap
 *.pcapng
+*.apk
+*.ipa
+*.xapk
 *.pem
 *.key
 *.p12
@@ -52,6 +57,8 @@ capture/
 *.keystore
 
 # ---- 开发临时文件 ----
+__pycache__/
+*.py[cod]
 # 移植过程中的比对脚本、离线核对工具与中间产物
 scratch/
 
