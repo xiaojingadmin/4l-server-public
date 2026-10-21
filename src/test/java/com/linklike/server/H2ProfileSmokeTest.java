@@ -14,6 +14,7 @@ import com.linklike.server.service.LegacyWalletMigration;
 import com.linklike.server.web.WireGateway;
 import com.linklike.server.wire.WireGrants;
 import com.linklike.server.wire.WireHandler;
+import com.linklike.server.wire.WireInitial;
 import com.linklike.server.wire.WireRequest;
 import com.linklike.server.wire.WireRouter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -114,6 +115,41 @@ class H2ProfileSmokeTest {
         System.out.println("TERMS RESPONSE " + terms.getStatusCode() + " " + terms.getBody());
         assertEquals(HttpStatus.OK, terms.getStatusCode());
         assertTrue(terms.getBody().contains("terms"));
+    }
+
+    @Test
+    void unregisteredPathReturns404InsteadOf500() {
+        ResponseEntity<Map> response = rest.getForEntity("/version", Map.class);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("00500_10404", response.getBody().get("error_code"));
+        assertEquals("Not found", response.getBody().get("message"));
+    }
+
+    @Test
+    void registerSetNewUserGrantsInitialCardsAcrossCharacters() {
+        String token = "register-new-user-token";
+        PlayerContext created = store.createGuest("Guest", token);
+
+        gateway.dispatch("/v1/register/approveterms", Map.of(),
+                Map.of("authorization", "Bearer " + token));
+        gateway.dispatch("/v1/register/setnewuser", J.map("name", "Atlas"),
+                Map.of("authorization", "Bearer " + token));
+
+        PlayerContext reloaded = store.loadById(created.id());
+        assertNotNull(reloaded);
+        assertTrue(reloaded.entity().registrationComplete);
+        assertTrue(reloaded.entity().initialGrantDone);
+        assertEquals(WireInitial.STAMINA, reloaded.entity().staminaMax);
+
+        List<Map<String, Object>> cards = reloaded.rowsSnapshot("Cards");
+        assertFalse(cards.isEmpty());
+        for (Map<String, Object> card : cards) {
+            assertTrue(card.get("MemberFanLevel") instanceof Number,
+                    "初始卡缺少 MemberFanLevel: " + card);
+        }
+        assertFalse(reloaded.rowsSnapshot("MemberFanLevels").isEmpty());
     }
 
     @Test
