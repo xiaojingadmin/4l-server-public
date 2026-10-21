@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 /**
  * 把业务异常转成官方 {@code SchoolException} 形状的错误体。
@@ -25,6 +27,17 @@ public class WireExceptionHandler {
     @ExceptionHandler(WireError.class)
     public ResponseEntity<Map<String, Object>> handleWireError(WireError error) {
         return ResponseEntity.status(error.status()).body(error.payload());
+    }
+
+    /**
+     * 未注册的路径不是服务端故障：Spring 找不到 handler 时会落到静态资源处理器并抛
+     * {@link NoResourceFoundException}。必须显式映射成 404，否则下面的兜底会把它当成
+     * 未预期异常返回 500，并把内部资源路径泄露给客户端。
+     */
+    @ExceptionHandler({NoResourceFoundException.class, NoHandlerFoundException.class})
+    public ResponseEntity<Map<String, Object>> handleNotFound(Exception error) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ErrorCodes.payload(404, "Not found", null));
     }
 
     @ExceptionHandler(Exception.class)

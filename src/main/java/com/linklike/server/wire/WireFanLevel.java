@@ -233,7 +233,10 @@ public final class WireFanLevel {
             // 都算「不一样」，所以等级 0 也要写进去。用 instanceof Number 而不是容错解析，
             // 是为了让字符串 "1" 与整数 1 依旧算不同（Python 的 1 != '1' 为真）。
             Object current = card.get("MemberFanLevel");
-            boolean same = current instanceof Number number && number.doubleValue() == known;
+            // known 为 null 表示该角色还没有 MemberFanLevels 行：这时不能拆箱比较，
+            // 直接视为「不一致」，由下面的 known != null 分支跳过写入。
+            boolean same = known != null && current instanceof Number number
+                    && number.doubleValue() == known;
             if (known != null && !same) {
                 Map<String, Object> copy = new LinkedHashMap<>(card);
                 copy.put("MemberFanLevel", known);
