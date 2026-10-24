@@ -102,8 +102,13 @@ java -jar target/linklike-server-5.1.0.jar --spring.profiles.active=h2
 
 ### APK / IPA 地址补丁 Web（浏览器本地）
 
-仓库附带独立的浏览器端补丁页面。选择原始 5.1.0 APK 或 IPA 后，地址替换和重新打包都在
-当前浏览器内完成，文件不会上传到服务器：
+仓库附带独立的浏览器端补丁页面，并通过 GitHub Pages 自动部署。推送到 `main` 后，
+`.github/workflows/deploy-patch-web.yml` 会发布 `tools/client_patch_web/`；首次使用请在
+仓库 Settings → Pages → Build and deployment 中选择 **GitHub Actions**，然后打开 Actions
+输出的 Page URL。选择原始 5.1.0 APK 或 IPA 后，地址替换和重新打包都在当前浏览器内完成，
+文件不会上传到服务器。
+
+也可以本地启动：
 
 ```bash
 python3 tools/client_patch_web/server.py --host 0.0.0.0 --port 8090

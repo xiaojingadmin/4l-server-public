@@ -7,6 +7,17 @@
 
 ## 启动静态页面
 
+### GitHub Pages（推荐）
+
+仓库已包含 GitHub Actions 工作流 `.github/workflows/deploy-patch-web.yml`。将代码推送到
+`main` 后会自动把本目录部署到 GitHub Pages；也可以在 Actions 页面手动运行
+`Deploy APK IPA patcher`。首次使用时，在仓库 Settings → Pages → Build and deployment
+中将 Source 设为 **GitHub Actions**。
+
+部署完成后直接打开 Actions 输出的 Page URL，即可在浏览器内补丁 APK/IPA，文件不会上传。
+
+### 本地启动
+
 仓库附带一个只提供静态文件的轻量服务器：
 
 ```bash
