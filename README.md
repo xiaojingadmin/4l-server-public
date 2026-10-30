@@ -104,7 +104,7 @@ java -jar target/linklike-server-5.1.0.jar --spring.profiles.active=h2
 python3 tools/client_patch_web/server.py --host 0.0.0.0 --port 8090
 ```
 
-这个工具只提供静态页面，不接收上传，也不需要在服务器上安装 Android 或 iOS 签名工具。生成的文件未签名：APK 需要使用 `apksigner` 重签，IPA 需要使用自己的 Apple 证书重签。完整说明见 [`tools/client_patch_web/README.md`](tools/client_patch_web/README.md)。
+这个工具只提供静态页面，不接收上传，也不需要在服务器上安装 Android 或 iOS 签名工具。页面不会预填地址，接口地址和资源地址都必须使用 HTTPS（以 `https://` 开头）。生成的文件未签名：APK 需要使用 `apksigner` 重签，IPA 需要使用自己的 Apple 证书重签。完整说明见 [`tools/client_patch_web/README.md`](tools/client_patch_web/README.md)。
 
 ## 配置
 
