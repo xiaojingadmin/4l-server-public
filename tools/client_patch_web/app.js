@@ -119,6 +119,12 @@ async function runPatch() {
   let apiOrigin;
   let assetOrigin;
   try {
+    if (!apiInput.value.trim() || !assetInput.value.trim()) {
+      throw new Error('请填写接口地址和资源地址。');
+    }
+    if (!/^https:\/\//i.test(apiInput.value.trim()) || !/^https:\/\//i.test(assetInput.value.trim())) {
+      throw new Error('接口地址和资源地址都必须使用 HTTPS（以 https:// 开头）。');
+    }
     apiOrigin = normalizeOrigin(apiInput.value);
     assetOrigin = normalizeOrigin(assetInput.value);
   } catch (error) {
@@ -211,3 +217,4 @@ drop.addEventListener('drop', (ev) => {
   if (!busy) choose(ev.dataTransfer.files[0]);
 });
 submit.addEventListener('click', runPatch);
+
