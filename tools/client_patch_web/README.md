@@ -39,7 +39,7 @@ python3 -m http.server 8090 --directory tools/client_patch_web
 3. 重新写出 ZIP：未修改条目直接复制原压缩数据，修改条目写入新内容；APK 会移除旧 `META-INF` v1 签名条目，并按 16 KiB 对齐未压缩的 `.so`。
 4. 通过浏览器 `Blob` 下载 `<原名>-patched.apk` 或 `<原名>-patched.ipa`。
 
-页面默认地址：
+页面不会预填地址。接口地址和资源地址都必须使用 HTTPS（以 `https://` 开头），空值或 `http://` 地址会被拒绝。
 
 - API：`https://linklike.lovelive-series.cn`
 - 资源：`https://assets-link-like.lovelive-series.cn`
